@@ -1,0 +1,125 @@
+/* Paleta retro cálida */
+:root {
+    --fondo: #f4e9d8;       /* beige claro */
+    --panel: #e0c8a7;       /* beige medio */
+    --menu: #c7a785;        /* marrón claro */
+    --boton: #6b4f36;       /* marrón oscuro */
+    --texto: #3b2a1a;       /* color de texto */
+}
+
+body {
+    background-color: var(--fondo);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+/* ----- MENÚ LATERAL ----- */
+.sidebar {
+    background-color: var(--menu);
+    min-height: 100vh;
+    color: var(--texto);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+    text-align: center;
+    margin: 25px 0;
+    font-weight: 600;
+}
+
+.sidebar a {
+    color: var(--texto);
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+    font-weight: 500;
+}
+
+.sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ----- CONTENIDO PRINCIPAL ----- */
+.main-content {
+    background-color: var(--panel);
+    padding: 40px;
+    min-height: 100vh;
+}
+
+.hero {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: var(--texto);
+    font-weight: 700;
+}
+
+.hero .eslogan {
+    font-style: italic;
+    color: #5c4633;
+    margin-bottom: 25px;
+}
+
+.hero .imagen {
+    background-color: #d8c4a6;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5c4633;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.btn-catalogo {
+    background-color: var(--boton);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-catalogo:hover {
+    background-color: #5a3e2b;
+}
+
+.info-tienda {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-tienda h2 {
+    color: var(--texto);
+    margin-bottom: 20px;
+}
+
+.info-tienda p {
+    color: #4b3a29;
+    line-height: 1.6;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+}
