@@ -1,125 +1,173 @@
-/* Paleta retro cálida */
 :root {
-    --fondo: #f4e9d8;       /* beige claro */
-    --panel: #e0c8a7;       /* beige medio */
-    --menu: #c7a785;        /* marrón claro */
-    --boton: #6b4f36;       /* marrón oscuro */
-    --texto: #3b2a1a;       /* color de texto */
+  --fondo: #f0e3c3;
+  --panel: #e6cfa5;
+  --menu:  #c7a785;
+  --boton: #6b4f36;
+  --texto: #3b2a1a;
 }
 
-body {
-    background-color: var(--fondo);
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
+/* Fondo, fuente y cursor personalizado */
+html, body {
+  background-color: var(--fondo) !important;
+  font-family: 'Raleway', sans-serif;
+  margin: 0;
+  color: var(--texto);
+
+  /* 🎧 Cursor personalizado de vinilo */
+  cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur116.cur'), auto;
 }
 
-/* ----- MENÚ LATERAL ----- */
+/* Cambiar cursor al pasar sobre botones y enlaces */
+button:hover, a:hover, .btn-catalogo:hover {
+  cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur122.cur'), pointer;
+}
+
+/* Botón hamburguesa */
+.btn-hamburguesa {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: var(--boton);
+  border: none;
+  border-radius: 6px;
+  width: 45px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+.btn-hamburguesa:hover { background-color: #5a3e2b; }
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  width: 25px;
+  height: 25px;
+}
+
+/* Sidebar */
 .sidebar {
-    background-color: var(--menu);
-    min-height: 100vh;
-    color: var(--texto);
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  background-color: var(--menu) !important;
+  color: var(--texto);
+  width: 250px;
 }
 
-.sidebar h3 {
-    text-align: center;
-    margin: 25px 0;
-    font-weight: 600;
+.logo-container { width: 100%; margin-bottom: 8px; }
+.sidebar-logo {
+  max-width: 90px;
+  height: auto;
+  display: block;
+  margin-left: 4px;
+  border: none;
+  object-fit: contain;
 }
 
-.sidebar a {
-    color: var(--texto);
-    text-decoration: none;
-    display: block;
-    padding: 10px 20px;
-    border-radius: 6px;
-    transition: background-color 0.3s;
-    font-weight: 500;
+.sidebar .offcanvas-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--texto);
+  margin-left: 4px;
 }
 
-.sidebar a:hover {
-    background-color: rgba(255, 255, 255, 0.25);
+.sidebar .nav-link {
+  color: var(--texto);
+  font-weight: 500;
+  padding: 10px 0;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+.sidebar .nav-link:hover {
+  background-color: rgba(255,255,255,0.3);
+  padding-left: 15px;
 }
 
-/* ----- CONTENIDO PRINCIPAL ----- */
+/* Contenido principal */
 .main-content {
-    background-color: var(--panel);
-    padding: 40px;
-    min-height: 100vh;
+  background-color: var(--panel);
+  padding: 60px 20px;
+  border-radius: 12px;
+  margin-top: 60px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+/* Hero */
 .hero {
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 40px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.hero h1 {
-    font-size: 2.5rem;
-    color: var(--texto);
-    font-weight: 700;
+/* Título principal */
+.titulo-principal {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  letter-spacing: 2px;
+  color: var(--texto);
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
-.hero .eslogan {
-    font-style: italic;
-    color: #5c4633;
-    margin-bottom: 25px;
+/* Eslogan */
+.eslogan {
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #5a3e2b;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+  margin-bottom: 25px;
 }
 
-.hero .imagen {
-    background-color: #d8c4a6;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #5c4633;
-    font-size: 1.2rem;
-    border-radius: 8px;
-    margin-bottom: 25px;
+/* Imagen principal más pequeña */
+.imagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imagen-principal {
+  max-width: 250px;
+  height: auto;
+  border-radius: 10px;
+  border: none;
+  box-shadow: none;
 }
 
+/* Precio */
+.precio {
+  background-color: rgba(107, 79, 54, 0.2);
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+.precio-texto {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+/* Botón catálogo */
 .btn-catalogo {
-    background-color: var(--boton);
-    color: #fff;
-    border: none;
-    padding: 12px 28px;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    font-weight: 500;
+  background-color: var(--boton);
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-family: 'Raleway', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
 .btn-catalogo:hover {
-    background-color: #5a3e2b;
+  background-color: #5a3e2b;
+  transform: scale(1.03);
 }
 
+/* Info tienda */
 .info-tienda {
-    background-color: rgba(255, 255, 255, 0.6);
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.info-tienda h2 {
-    color: var(--texto);
-    margin-bottom: 20px;
-}
-
-.info-tienda p {
-    color: #4b3a29;
-    line-height: 1.6;
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-    .sidebar {
-        min-height: auto;
-    }
-
-    .main-content {
-        padding: 20px;
-    }
-}
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
