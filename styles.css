@@ -15,13 +15,13 @@ html, body {
   margin: 0;
   color: var(--texto);
 
-  /* 🎯 Cursor estilo rústico */
-  cursor: url('https://cur.cursors-4u.net/others/oth-5/oth455.cur'), auto;
+  /* 🪵 Cursor de madera */
+  cursor: url('https://cur.cursors-4u.net/others/oth-6/oth530.cur'), auto;
 }
 
-/* Cursor al pasar sobre botones/enlaces */
+/* ✋ Cursor hover en botones y enlaces */
 button:hover, a:hover, .btn-catalogo:hover {
-  cursor: url('https://cur.cursors-4u.net/others/oth-5/oth466.cur'), pointer;
+  cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur104.cur'), pointer;
 }
 
 /* Botón hamburguesa */
