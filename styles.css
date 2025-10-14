@@ -1,12 +1,12 @@
 :root {
-  --fondo: #f4e8d2;                         /* Beige claro */
-  --panel: rgba(255, 255, 255, 0.8);        /* Fondo semi-transparente del panel */
-  --menu: rgba(160, 120, 80, 0.9);          /* Marrón claro rústico */
-  --boton: #5b3c20;                         /* Marrón medio para botones */
-  --texto: #2d1b0d;                         /* Marrón oscuro */
+  --fondo: #f4e8d2;
+  --panel: rgba(255, 255, 255, 0.8);
+  --menu: rgba(160, 120, 80, 0.9);
+  --boton: #5b3c20;
+  --texto: #2d1b0d;
 }
 
-/* Fondo general con textura de madera */
+/* Fondo general */
 html, body {
   background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/wood_pattern.png');
   background-size: cover;
@@ -14,12 +14,14 @@ html, body {
   font-family: 'Raleway', sans-serif;
   margin: 0;
   color: var(--texto);
-  cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur116.cur'), auto;
+
+  /* 🎯 Cursor estilo rústico */
+  cursor: url('https://cur.cursors-4u.net/others/oth-5/oth455.cur'), auto;
 }
 
-/* Cambiar cursor en botones y enlaces */
+/* Cursor al pasar sobre botones/enlaces */
 button:hover, a:hover, .btn-catalogo:hover {
-  cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur122.cur'), pointer;
+  cursor: url('https://cur.cursors-4u.net/others/oth-5/oth466.cur'), pointer;
 }
 
 /* Botón hamburguesa */
