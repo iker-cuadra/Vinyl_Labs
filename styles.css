@@ -1,12 +1,12 @@
 :root {
-  --fondo: #f4e8d2;       /* beige claro */
-  --panel: rgba(255, 255, 255, 0.8);
-  --menu: rgba(72, 44, 23, 0.95);  /* marrón madera oscuro */
-  --boton: #5b3c20;       /* marrón intermedio */
-  --texto: #2d1b0d;       /* marrón oscuro */
+  --fondo: #f4e8d2;                         /* Beige claro */
+  --panel: rgba(255, 255, 255, 0.8);        /* Fondo semi-transparente del panel */
+  --menu: rgba(160, 120, 80, 0.9);          /* Marrón claro rústico */
+  --boton: #5b3c20;                         /* Marrón medio para botones */
+  --texto: #2d1b0d;                         /* Marrón oscuro */
 }
 
-/* Fondo de madera */
+/* Fondo general con textura de madera */
 html, body {
   background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/wood_pattern.png');
   background-size: cover;
@@ -17,6 +17,7 @@ html, body {
   cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur116.cur'), auto;
 }
 
+/* Cambiar cursor en botones y enlaces */
 button:hover, a:hover, .btn-catalogo:hover {
   cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur122.cur'), pointer;
 }
@@ -71,7 +72,7 @@ button:hover, a:hover, .btn-catalogo:hover {
   transition: 0.3s;
 }
 .sidebar .nav-link:hover {
-  background-color: rgba(255,255,255,0.15);
+  background-color: rgba(255,255,255,0.25);
   padding-left: 15px;
 }
 
