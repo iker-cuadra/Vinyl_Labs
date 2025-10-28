@@ -21,11 +21,40 @@ button:hover, a:hover, .btn-catalogo:hover {
   cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur104.cur'), pointer;
 }
 
+/* === HEADER === */
+.main-header {
+  background-color: var(--menu);
+  color: #fff;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  max-width: 60px;
+  height: auto;
+}
+
+.header-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  margin: 0;
+  color: #fff;
+  text-transform: uppercase;
+}
+
 /* Botón hamburguesa */
 .btn-hamburguesa {
-  position: fixed;
-  top: 15px;
-  left: 15px;
   background-color: var(--boton);
   border: none;
   border-radius: 6px;
@@ -34,7 +63,6 @@ button:hover, a:hover, .btn-catalogo:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1050;
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 .btn-hamburguesa:hover { background-color: #3d2714; }
@@ -51,6 +79,8 @@ button:hover, a:hover, .btn-catalogo:hover {
   color: #fff;
   width: 250px;
   backdrop-filter: blur(4px);
+  z-index: 2000; /* tapa el header */
+  box-shadow: 4px 0 15px rgba(0,0,0,0.4);
 }
 
 .logo-container { width: 100%; margin-bottom: 8px; }
@@ -80,7 +110,7 @@ button:hover, a:hover, .btn-catalogo:hover {
   background-color: var(--panel);
   padding: 60px 20px;
   border-radius: 12px;
-  margin-top: 60px;
+  margin-top: 120px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   backdrop-filter: blur(6px);
 }
@@ -95,7 +125,6 @@ button:hover, a:hover, .btn-catalogo:hover {
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-/* Título principal */
 .titulo-principal {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 4rem;
@@ -105,7 +134,6 @@ button:hover, a:hover, .btn-catalogo:hover {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
 }
 
-/* Eslogan */
 .eslogan {
   font-style: italic;
   font-weight: 700;
@@ -130,7 +158,10 @@ button:hover, a:hover, .btn-catalogo:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
+<<<<<<< HEAD
 /* Título del disco */
+=======
+>>>>>>> i1
 .titulo-disco {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2rem;
@@ -141,6 +172,34 @@ button:hover, a:hover, .btn-catalogo:hover {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
 }
 
+<<<<<<< HEAD
+=======
+/* Historia del grupo */
+.info-historia {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.info-historia h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  color: var(--texto);
+  text-transform: uppercase;
+}
+
+.info-historia p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: var(--texto);
+  text-align: justify;
+}
+
+>>>>>>> i1
 /* Precio */
 .precio {
   background-color: rgba(91, 60, 32, 0.2);
@@ -269,6 +328,8 @@ button:hover, a:hover, .btn-catalogo:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .header-logo { max-width: 50px; }
+  .header-title { font-size: 1.6rem; }
   .titulo-principal { font-size: 3rem; }
   .imagen-principal { max-width: 200px; }
   .footer { text-align: center; }
