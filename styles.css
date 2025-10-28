@@ -365,4 +365,27 @@ button:hover, a:hover, .btn-catalogo:hover {
 .btn-play i {
   font-size: 2.5rem;
 }
+/* Texto historia desplegable */
+.texto-historia {
+  max-height: 200px;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.btn-leer-mas {
+  background-color: var(--boton);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-leer-mas:hover {
+  background-color: #3d2714;
+  cursor: pointer;
+}
+
 

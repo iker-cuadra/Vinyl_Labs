@@ -72,12 +72,9 @@
 
       <div class="imagen mb-3 position-relative">
         <img src="Imagenes/beatles1.jpg" alt="Vinilo destacado" class="imagen-principal">
-
-        <!-- Botón Play -->
         <button class="btn-play" id="playButton" aria-label="Reproducir">
           <i class="bi bi-play-fill"></i>
         </button>
-
         <h2 class="titulo-disco">Abbey Road</h2>
       </div>
 
@@ -88,14 +85,33 @@
       <button class="btn-catalogo">Ver Catálogo</button>
     </section>
 
+    <!-- Historia del grupo -->
     <section class="info-historia mb-5">
       <h2>Historia del grupo</h2>
-      <p>
-        The Beatles, una banda de rock inglesa formada en Liverpool durante los años 1960, se convirtió en el grupo más influyente de la música popular occidental, revolucionando la industria musical y marcando profundamente la cultura popular y social de la década de 1960.
-      </p>
-      <p>
-        John Lennon fue asesinado en 1980 y George Harrison falleció de cáncer en 2001, mientras que Paul McCartney y Ringo Starr siguen activos musicalmente.
-      </p>
+      <div class="texto-historia" id="textoHistoria">
+        <p>
+          The Beatles, una banda de rock inglesa formada en Liverpool durante los años 1960, se convirtió en el grupo más influyente de la música popular occidental, revolucionando la industria musical y marcando profundamente la cultura popular y social de la década de 1960. Compuesta fundamentalmente por John Lennon, Paul McCartney, George Harrison y Ringo Starr, la banda se disolvió oficialmente en 1970 tras una exitosa carrera que abarcó desde el skiffle y el rock and roll hasta géneros como el rock psicodélico, el pop y la música clásica.
+        </p>
+        <p>
+          La historia del grupo se remonta a 1956, cuando John Lennon fundó The Quarry Men, una banda de skiffle, junto a compañeros de colegio.
+          En 1957, Paul McCartney se unió al grupo tras conocer a Lennon en una presentación de The Quarry Men.
+          George Harrison, con apenas catorce años, se incorporó poco después, convirtiéndose en el guitarrista líder.
+          La formación inicial incluyó a Stuart Sutcliffe en el bajo y Pete Best en la batería, pero ambos fueron reemplazados: Sutcliffe se fue en 1961 y Best fue despedido en 1962 para dar paso a Ringo Starr, quien se unió al grupo ese mismo año.
+        </p>
+        <p>
+          Tras ser descubiertos por Brian Epstein, quien se convirtió en su manager, y con la producción de George Martin, los Beatles lanzaron su primer sencillo, «Love Me Do», en 1962, marcando el inicio de su éxito comercial.
+          A partir de 1964, la banda alcanzó una popularidad mundial con la «beatlemanía», consolidándose como una fuerza cultural global.
+        </p>
+        <p>
+          Durante su período de estudio, crearon álbumes innovadores como Sgt. Pepper's Lonely Hearts Club Band (1967), considerado una obra maestra y un pilar del rock psicodélico.
+          Aunque dejaron de actuar en vivo en 1966 para centrarse en la grabación, su influencia continuó creciendo, y tras su disolución en 1970, todos sus miembros prosiguieron carreras individuales.
+        </p>
+        <p>
+          John Lennon fue asesinado en 1980 y George Harrison falleció de cáncer en 2001, mientras que Paul McCartney y Ringo Starr siguen activos musicalmente.
+          Aunque la banda se disolvió hace más de cinco décadas, su música sigue siendo ampliamente popular, y se les considera el grupo con más números uno en las listas británicas y el más vendido en los Estados Unidos.
+        </p>
+      </div>
+      <button class="btn-leer-mas mt-2" id="btnLeerMas">Leer más</button>
     </section>
 
     <section class="info-tienda">
@@ -149,34 +165,24 @@
     </div>
   </footer>
 
-  <!-- 🎧 Audio de prueba público -->
+  <!-- Audio -->
   <audio id="abbeyRoadAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Script botón hamburguesa -->
   <script>
+    // Botón hamburguesa
     const offcanvasEl = document.getElementById('menuLateral');
     const btnHamb = document.getElementById('btnHamburguesa');
+    offcanvasEl.addEventListener('show.bs.offcanvas', () => { btnHamb.classList.add('active'); });
+    offcanvasEl.addEventListener('hidden.bs.offcanvas', () => { btnHamb.classList.remove('active'); });
 
-    offcanvasEl.addEventListener('show.bs.offcanvas', () => {
-      btnHamb.classList.add('active');
-    });
-
-    offcanvasEl.addEventListener('hidden.bs.offcanvas', () => {
-      btnHamb.classList.remove('active');
-    });
-  </script>
-
-  <!-- Script botón play -->
-  <script>
+    // Audio Play
     const playButton = document.getElementById('playButton');
     const audio = document.getElementById('abbeyRoadAudio');
     let isPlaying = false;
-
     audio.volume = 1.0;
-
     playButton.addEventListener('click', () => {
       if (!isPlaying) {
         audio.play().catch(err => console.log(err));
@@ -188,10 +194,26 @@
         isPlaying = false;
       }
     });
-
     audio.addEventListener('ended', () => {
       playButton.innerHTML = '<i class="bi bi-play-fill"></i>';
       isPlaying = false;
+    });
+
+    // Leer más / Leer menos
+    const textoHistoria = document.getElementById('textoHistoria');
+    const btnLeerMas = document.getElementById('btnLeerMas');
+    let abierto = false;
+
+    btnLeerMas.addEventListener('click', () => {
+      if (!abierto) {
+        textoHistoria.style.maxHeight = '1000px';
+        btnLeerMas.textContent = 'Leer menos';
+        abierto = true;
+      } else {
+        textoHistoria.style.maxHeight = '200px';
+        btnLeerMas.textContent = 'Leer más';
+        abierto = false;
+      }
     });
   </script>
 </body>
