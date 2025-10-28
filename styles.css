@@ -335,3 +335,34 @@ button:hover, a:hover, .btn-catalogo:hover {
   .footer { text-align: center; }
   .social-icons a { margin: 0 0.4rem; }
 }
+/* Botón de play sobre la imagen */
+.btn-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(91, 60, 32, 0.8);
+  border: none;
+  color: white;
+  font-size: 3rem;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  transition: background-color 0.3s, transform 0.2s;
+  z-index: 5;
+}
+
+.btn-play:hover {
+  background-color: rgba(91, 60, 32, 1);
+  transform: translate(-50%, -50%) scale(1.1);
+  cursor: pointer;
+}
+
+.btn-play i {
+  font-size: 2.5rem;
+}
+
