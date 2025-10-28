@@ -149,6 +149,7 @@ button:hover, a:hover, .btn-catalogo:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative; /* ← añadido para centrar el botón correctamente */
 }
 .imagen-principal {
   max-width: 250px;
@@ -158,10 +159,7 @@ button:hover, a:hover, .btn-catalogo:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
-<<<<<<< HEAD
 /* Título del disco */
-=======
->>>>>>> i1
 .titulo-disco {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2rem;
@@ -172,8 +170,6 @@ button:hover, a:hover, .btn-catalogo:hover {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
 }
 
-<<<<<<< HEAD
-=======
 /* Historia del grupo */
 .info-historia {
   background-color: rgba(255, 255, 255, 0.8);
@@ -199,7 +195,6 @@ button:hover, a:hover, .btn-catalogo:hover {
   text-align: justify;
 }
 
->>>>>>> i1
 /* Precio */
 .precio {
   background-color: rgba(91, 60, 32, 0.2);
@@ -335,12 +330,9 @@ button:hover, a:hover, .btn-catalogo:hover {
   .footer { text-align: center; }
   .social-icons a { margin: 0 0.4rem; }
 }
-/* Botón de play sobre la imagen */
+
+/* === Botón de play sobre la imagen === */
 .btn-play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-color: rgba(91, 60, 32, 0.8);
   border: none;
   color: white;
@@ -365,6 +357,7 @@ button:hover, a:hover, .btn-catalogo:hover {
 .btn-play i {
   font-size: 2.5rem;
 }
+
 /* Texto historia desplegable */
 .texto-historia {
   max-height: 200px;
@@ -387,5 +380,3 @@ button:hover, a:hover, .btn-catalogo:hover {
   background-color: #3d2714;
   cursor: pointer;
 }
-
-
