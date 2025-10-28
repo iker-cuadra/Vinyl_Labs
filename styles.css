@@ -14,12 +14,9 @@ html, body {
   font-family: 'Raleway', sans-serif;
   margin: 0;
   color: var(--texto);
-
-  /* 🪵 Cursor de madera */
   cursor: url('https://cur.cursors-4u.net/others/oth-6/oth530.cur'), auto;
 }
 
-/* ✋ Cursor hover en botones y enlaces */
 button:hover, a:hover, .btn-catalogo:hover {
   cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur104.cur'), pointer;
 }
@@ -121,6 +118,7 @@ button:hover, a:hover, .btn-catalogo:hover {
 /* Imagen principal */
 .imagen {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -130,6 +128,17 @@ button:hover, a:hover, .btn-catalogo:hover {
   border-radius: 10px;
   border: 4px solid #6b4f36;
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* Título del disco */
+.titulo-disco {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: var(--texto);
+  text-transform: uppercase;
+  margin-top: 0.8rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
 }
 
 /* Precio */
@@ -173,8 +182,95 @@ button:hover, a:hover, .btn-catalogo:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* --- Footer --- */
+.footer {
+  background-color: var(--menu);
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  backdrop-filter: blur(6px);
+  border-top: 3px solid var(--boton);
+}
+
+.footer-logo {
+  max-width: 130px;
+  filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.4));
+}
+
+.footer-titulo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+  color: #fff;
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 0.2rem 0;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--fondo);
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-right: 0.6rem;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: var(--fondo);
+}
+
+.footer-form input,
+.footer-form textarea {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.footer-form input::placeholder,
+.footer-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-form input:focus,
+.footer-form textarea:focus {
+  outline: none;
+  border-color: var(--fondo);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-enviar {
+  background-color: var(--boton);
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn-enviar:hover {
+  background-color: #3d2714;
+}
+
+.footer-copy {
+  opacity: 0.8;
+  font-size: 0.85rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .titulo-principal { font-size: 3rem; }
   .imagen-principal { max-width: 200px; }
+  .footer { text-align: center; }
+  .social-icons a { margin: 0 0.4rem; }
 }
