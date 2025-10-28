@@ -120,7 +120,7 @@
           Aunque la banda se disolvió hace más de cinco décadas, su música sigue siendo ampliamente popular, y se les considera el grupo con más números uno en las listas británicas y el más vendido en los Estados Unidos.
         </p>
       </div>
-      <button class="btn-leer-mas mt-2" id="btnLeerMas">Leer más</button>
+      <button class="btn-leer-mas mt-2" id="btnLeerMas" aria-expanded="false" aria-controls="textoHistoria">Leer más</button>
     </section>
 
     <section class="info-tienda">
@@ -179,7 +179,7 @@
     </div>
   </footer>
 
-  <!-- Reproductor de audio (público para no requerir carpetas) -->
+  <!-- Audio público (para no requerir carpetas locales) -->
   <audio id="abbeyRoadAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
   <!-- Bootstrap JS -->
@@ -199,8 +199,9 @@
     });
   </script>
 
-  <!-- Script para reproducir audio + centrar botón en la imagen -->
+  <!-- Scripts: Play/Pause audio y Leer más/Menos -->
   <script>
+    // --- Play/Pause ---
     const playButton = document.getElementById('playButton');
     const audio = document.getElementById('abbeyRoadAudio');
     const img = document.querySelector('.imagen-principal');
@@ -210,23 +211,19 @@
     audio.volume = 1.0;
 
     function centerPlayButton() {
-      // Asegura posicionamiento relativo del contenedor
       if (getComputedStyle(imagenCont).position === 'static') {
         imagenCont.style.position = 'relative';
       }
-      // Coordenadas del centro de la imagen respecto al contenedor .imagen
       const imgRect = img.getBoundingClientRect();
       const contRect = imagenCont.getBoundingClientRect();
       const centerX = imgRect.left - contRect.left + imgRect.width / 2;
       const centerY = imgRect.top  - contRect.top  + imgRect.height / 2;
-
       playButton.style.position = 'absolute';
       playButton.style.left = centerX + 'px';
       playButton.style.top  = centerY + 'px';
       playButton.style.transform = 'translate(-50%, -50%)';
     }
 
-    // Centrar al cargar la imagen y al redimensionar
     if (img.complete) {
       centerPlayButton();
     } else {
@@ -234,7 +231,6 @@
     }
     window.addEventListener('resize', centerPlayButton);
 
-    // Toggle play/pause
     playButton.addEventListener('click', () => {
       if (!isPlaying) {
         audio.play().then(() => {
@@ -251,6 +247,44 @@
     audio.addEventListener('ended', () => {
       playButton.innerHTML = '<i class="bi bi-play-fill"></i>';
       isPlaying = false;
+    });
+
+    // --- Leer más / Leer menos (FUNCIONA con alturas dinámicas) ---
+    const textoHistoria = document.getElementById('textoHistoria');
+    const btnLeerMas = document.getElementById('btnLeerMas');
+    let abierto = false;
+
+    function colapsar() {
+      textoHistoria.style.maxHeight = '200px';
+      btnLeerMas.textContent = 'Leer más';
+      btnLeerMas.setAttribute('aria-expanded', 'false');
+      abierto = false;
+    }
+
+    function expandir() {
+      // Ajusta a la altura real del contenido
+      textoHistoria.style.maxHeight = textoHistoria.scrollHeight + 'px';
+      btnLeerMas.textContent = 'Leer menos';
+      btnLeerMas.setAttribute('aria-expanded', 'true');
+      abierto = true;
+    }
+
+    // Estado inicial
+    colapsar();
+
+    btnLeerMas.addEventListener('click', () => {
+      if (abierto) {
+        colapsar();
+      } else {
+        expandir();
+      }
+    });
+
+    // Si cambia el tamaño de ventana y está abierto, recalcula la altura
+    window.addEventListener('resize', () => {
+      if (abierto) {
+        textoHistoria.style.maxHeight = textoHistoria.scrollHeight + 'px';
+      }
     });
   </script>
 </body>

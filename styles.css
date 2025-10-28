@@ -149,7 +149,7 @@ button:hover, a:hover, .btn-catalogo:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative; /* ← añadido para centrar el botón correctamente */
+  position: relative; /* para centrar el botón sobre la imagen */
 }
 .imagen-principal {
   max-width: 250px;
@@ -358,10 +358,10 @@ button:hover, a:hover, .btn-catalogo:hover {
   font-size: 2.5rem;
 }
 
-/* Texto historia desplegable */
+/* === Texto historia desplegable === */
 .texto-historia {
-  max-height: 200px;
-  overflow: hidden;
+  max-height: 200px;           /* altura inicial recortada */
+  overflow: hidden;            /* oculta el exceso */
   transition: max-height 0.5s ease;
 }
 
