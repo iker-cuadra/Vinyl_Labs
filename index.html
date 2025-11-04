@@ -1,31 +1,34 @@
+html:
 <!DOCTYPE html>
 <html lang="es">
+ 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vinyl Lab</title>
-
+ 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&family=Bebas+Neue&display=swap%22
+    rel="stylesheet">
+ 
   <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+ 
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+ 
   <!-- Estilos -->
-  <link rel="stylesheet" href="styles.css"/>
-
+  <link rel="stylesheet" href="styles.css" />
+ 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
 <text y='0.9em' font-size='400'>💿</text>
 </svg>">
 </head>
-
+ 
 <body>
-
+ 
   <!-- Header -->
   <header class="main-header">
     <div class="container d-flex align-items-center justify-content-between">
@@ -34,21 +37,15 @@
         <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2">
         <h1 class="header-title">Vinyl Lab</h1>
       </div>
-
+ 
       <!-- Botón hamburguesa -->
-      <button
-        class="btn btn-hamburguesa"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#menuLateral"
-        aria-controls="menuLateral"
-        aria-label="Abrir menú"
-        id="btnHamburguesa">
+      <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
+        aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
   </header>
-
+ 
   <!-- Menú lateral (offcanvas) -->
   <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
     <div class="offcanvas-header flex-column align-items-start w-100">
@@ -56,7 +53,7 @@
         <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
       </div>
     </div>
-
+ 
     <div class="offcanvas-body">
       <nav class="nav flex-column">
         <a class="nav-link" href="#">Inicio</a>
@@ -66,60 +63,106 @@
       </nav>
     </div>
   </div>
-
+ 
   <!-- Contenido principal -->
   <main class="main-content container py-5">
     <section class="hero text-center mb-5">
       <h1 class="titulo-principal mb-3">Vinyl Lab</h1>
       <p class="eslogan mb-4">"El sonido del pasado, con la calidez del presente"</p>
-
+ 
       <!-- Imagen principal + Título del disco -->
-      <div class="imagen mb-3">
+      <div class="imagen mb-3 position-relative">
         <img src="Imagenes/beatles1.jpg" alt="Vinilo destacado" class="imagen-principal">
+ 
+        <!-- Botón de play -->
+        <button class="btn-play" id="playButton" aria-label="Reproducir">
+          <i class="bi bi-play-fill"></i>
+        </button>
+ 
         <h2 class="titulo-disco">Abbey Road</h2>
       </div>
-
+ 
       <!-- Contenedor del precio -->
       <div class="precio mb-4">
         <span class="precio-texto">224,99 €</span>
       </div>
-
+ 
       <!-- Botón principal -->
       <button class="btn-catalogo">Ver Catálogo</button>
     </section>
-
+ 
+    <!-- Carrusel 3D de discos -->
+    <section class="galeria-discos text-center my-5">
+      <h2 class="mb-4">Explora nuestra colección</h2>
+ 
+      <div class="carousel3d">
+        <div class="carousel3d-content">
+          <div class="carousel3d-item">
+            <img src="Imagenes/beatles1.jpg" alt="Abbey Road - The Beatles">
+          </div>
+          <div class="carousel3d-item">
+            <img src="Imagenes/Pink-Floyd.webp" alt="The Dark Side of the Moon - Pink Floyd">
+          </div>
+          <div class="carousel3d-item">
+            <img src="Imagenes/Queen.webp" alt="A Night at the Opera - Queen">
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+ 
     <!-- Historia del grupo -->
     <section class="info-historia mb-5">
       <h2>Historia del grupo</h2>
-      <p>
-        The Beatles, una banda de rock inglesa formada en Liverpool durante los años 1960, se convirtió en el grupo más influyente de la música popular occidental, revolucionando la industria musical y marcando profundamente la cultura popular y social de la década de 1960. Compuesta fundamentalmente por John Lennon, Paul McCartney, George Harrison y Ringo Starr, la banda se disolvió oficialmente en 1970 tras una exitosa carrera que abarcó desde el skiffle y el rock and roll hasta géneros como el rock psicodélico, el pop y la música clásica.
-      </p>
-      <p>
-        La historia del grupo se remonta a 1956, cuando John Lennon fundó The Quarry Men, una banda de skiffle, junto a compañeros de colegio.
-        En 1957, Paul McCartney se unió al grupo tras conocer a Lennon en una presentación de The Quarry Men.
-        George Harrison, con apenas catorce años, se incorporó poco después, convirtiéndose en el guitarrista líder.
-        La formación inicial incluyó a Stuart Sutcliffe en el bajo y Pete Best en la batería, pero ambos fueron reemplazados: Sutcliffe se fue en 1961 y Best fue despedido en 1962 para dar paso a Ringo Starr, quien se unió al grupo ese mismo año.
-      </p>
-      <p>
-        Tras ser descubiertos por Brian Epstein, quien se convirtió en su manager, y con la producción de George Martin, los Beatles lanzaron su primer sencillo, «Love Me Do», en 1962, marcando el inicio de su éxito comercial.
-        A partir de 1964, la banda alcanzó una popularidad mundial con la «beatlemanía», consolidándose como una fuerza cultural global.
-      </p>
-      <p>
-        Durante su período de estudio, crearon álbumes innovadores como Sgt. Pepper's Lonely Hearts Club Band (1967), considerado una obra maestra y un pilar del rock psicodélico.
-        Aunque dejaron de actuar en vivo en 1966 para centrarse en la grabación, su influencia continuó creciendo, y tras su disolución en 1970, todos sus miembros prosiguieron carreras individuales.
-      </p>
-      <p>
-        John Lennon fue asesinado en 1980 y George Harrison falleció de cáncer en 2001, mientras que Paul McCartney y Ringo Starr siguen activos musicalmente.
-        Aunque la banda se disolvió hace más de cinco décadas, su música sigue siendo ampliamente popular, y se les considera el grupo con más números uno en las listas británicas y el más vendido en los Estados Unidos.
-      </p>
+      <div class="texto-historia" id="textoHistoria">
+        <p>
+          The Beatles, una banda de rock inglesa formada en Liverpool durante los años 1960, se convirtió en el grupo
+          más influyente de la música popular occidental, revolucionando la industria musical y marcando profundamente
+          la cultura popular y social de la década de 1960. Compuesta fundamentalmente por John Lennon, Paul McCartney,
+          George Harrison y Ringo Starr, la banda se disolvió oficialmente en 1970 tras una exitosa carrera que abarcó
+          desde el skiffle y el rock and roll hasta géneros como el rock psicodélico, el pop y la música clásica.
+        </p>
+        <p>
+          La historia del grupo se remonta a 1956, cuando John Lennon fundó The Quarry Men, una banda de skiffle, junto
+          a compañeros de colegio.
+          En 1957, Paul McCartney se unió al grupo tras conocer a Lennon en una presentación de The Quarry Men.
+          George Harrison, con apenas catorce años, se incorporó poco después, convirtiéndose en el guitarrista líder.
+          La formación inicial incluyó a Stuart Sutcliffe en el bajo y Pete Best en la batería, pero ambos fueron
+          reemplazados: Sutcliffe se fue en 1961 y Best fue despedido en 1962 para dar paso a Ringo Starr, quien se unió
+          al grupo ese mismo año.
+        </p>
+        <p>
+          Tras ser descubiertos por Brian Epstein, quien se convirtió en su manager, y con la producción de George
+          Martin, los Beatles lanzaron su primer sencillo, «Love Me Do», en 1962, marcando el inicio de su éxito
+          comercial.
+          A partir de 1964, la banda alcanzó una popularidad mundial con la «beatlemanía», consolidándose como una
+          fuerza cultural global.
+        </p>
+        <p>
+          Durante su período de estudio, crearon álbumes innovadores como Sgt. Pepper's Lonely Hearts Club Band (1967),
+          considerado una obra maestra y un pilar del rock psicodélico.
+          Aunque dejaron de actuar en vivo en 1966 para centrarse en la grabación, su influencia continuó creciendo, y
+          tras su disolución en 1970, todos sus miembros prosiguieron carreras individuales.
+        </p>
+        <p>
+          John Lennon fue asesinado en 1980 y George Harrison falleció de cáncer en 2001, mientras que Paul McCartney y
+          Ringo Starr siguen activos musicalmente.
+          Aunque la banda se disolvió hace más de cinco décadas, su música sigue siendo ampliamente popular, y se les
+          considera el grupo con más números uno en las listas británicas y el más vendido en los Estados Unidos.
+        </p>
+      </div>
+      <button class="btn-leer-mas mt-2" id="btnLeerMas" aria-expanded="false" aria-controls="textoHistoria">Leer
+        más</button>
     </section>
-
+ 
     <section class="info-tienda">
       <h2>Sobre Nuestra Tienda</h2>
-      <p>Somos una tienda especializada en vinilos dedicada a quienes disfrutan de la música en su forma más auténtica. Creemos que cada disco cuenta una historia, y por eso seleccionamos cuidadosamente nuestro catálogo con clásicos inolvidables, ediciones especiales y nuevos lanzamientos que celebran el sonido analógico.</p>
+      <p>Somos una tienda especializada en vinilos dedicada a quienes disfrutan de la música en su forma más auténtica.
+        Creemos que cada disco cuenta una historia, y por eso seleccionamos cuidadosamente nuestro catálogo con clásicos
+        inolvidables, ediciones especiales y nuevos lanzamientos que celebran el sonido analógico.</p>
     </section>
   </main>
-
+ 
   <!-- Footer -->
   <footer class="footer mt-5 pt-5 pb-4">
     <div class="container">
@@ -129,7 +172,7 @@
           <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="footer-logo mb-2">
           <p class="footer-text">El sonido del pasado, con la calidez del presente.</p>
         </div>
-
+ 
         <!-- Enlaces -->
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Enlaces</h5>
@@ -140,7 +183,7 @@
             <li><a href="#">Contacto</a></li>
           </ul>
         </div>
-
+ 
         <!-- Redes sociales -->
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Síguenos</h5>
@@ -151,7 +194,7 @@
             <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
           </div>
         </div>
-
+ 
         <!-- Formulario -->
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Contáctanos</h5>
@@ -163,28 +206,162 @@
           </form>
         </div>
       </div>
-
+ 
+      <!-- Zona legal del sitio -->
+      <div class="footer-legal text-center mt-4 pt-3 border-top">
+        <h6 class="footer-titulo mb-2">Información Legal</h6>
+        <p class="footer-text small mb-2">
+          Vinyl Lab cumple con la normativa vigente sobre protección de datos personales (Reglamento (UE) 2016/679 -
+          RGPD, y la Ley Orgánica 3/2018 - LOPDGDD), así como con la Ley 34/2002 de Servicios de la Sociedad de la
+          Información y Comercio Electrónico (LSSI-CE).
+        </p>
+        <div class="footer-legal-links">
+          <a href="aviso-legal.html" class="footer-legal-link">Aviso Legal</a> |
+          <a href="politica-privacidad.html" class="footer-legal-link">Política de Privacidad</a> |
+          <a href="politica-cookies.html" class="footer-legal-link">Política de Cookies</a> |
+          <a href="condiciones-uso.html" class="footer-legal-link">Condiciones de Uso</a>
+        </div>
+      </div>
+ 
+      <!-- Banner de cookies -->
+      <div id="cookie-banner" class="cookie-banner">
+        <p>Usamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia.
+          <a href="politica-cookies.html">Más información</a>.
+        </p>
+        <button id="accept-cookies" class="btn btn-aceptar-cookies">Aceptar</button>
+      </div>
+ 
+ 
       <div class="text-center mt-4 border-top pt-3 small footer-copy">
         &copy; 2025 Vinyl Lab — Todos los derechos reservados.
       </div>
     </div>
   </footer>
-
+ 
+  <!-- Audio público (para no requerir carpetas locales) -->
+  <audio id="abbeyRoadAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+ 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+ 
   <!-- Botón hamburguesa activo -->
   <script>
     const offcanvasEl = document.getElementById('menuLateral');
     const btnHamb = document.getElementById('btnHamburguesa');
-
+ 
     offcanvasEl.addEventListener('show.bs.offcanvas', () => {
       btnHamb.classList.add('active');
     });
-
+ 
     offcanvasEl.addEventListener('hidden.bs.offcanvas', () => {
       btnHamb.classList.remove('active');
     });
   </script>
+ 
+  <!-- Scripts: Play/Pause audio y Leer más/Menos -->
+  <script>
+    // --- Play/Pause ---
+    const playButton = document.getElementById('playButton');
+    const audio = document.getElementById('abbeyRoadAudio');
+    const img = document.querySelector('.imagen-principal');
+    const imagenCont = document.querySelector('.imagen');
+    let isPlaying = false;
+ 
+    audio.volume = 1.0;
+ 
+    function centerPlayButton() {
+      if (getComputedStyle(imagenCont).position === 'static') {
+        imagenCont.style.position = 'relative';
+      }
+      const imgRect = img.getBoundingClientRect();
+      const contRect = imagenCont.getBoundingClientRect();
+      const centerX = imgRect.left - contRect.left + imgRect.width / 2;
+      const centerY = imgRect.top - contRect.top + imgRect.height / 2;
+      playButton.style.position = 'absolute';
+      playButton.style.left = centerX + 'px';
+      playButton.style.top = centerY + 'px';
+      playButton.style.transform = 'translate(-50%, -50%)';
+    }
+ 
+    if (img.complete) {
+      centerPlayButton();
+    } else {
+      img.addEventListener('load', centerPlayButton);
+    }
+    window.addEventListener('resize', centerPlayButton);
+ 
+    playButton.addEventListener('click', () => {
+      if (!isPlaying) {
+        audio.play().then(() => {
+          playButton.innerHTML = '<i class="bi bi-pause-fill"></i>';
+          isPlaying = true;
+        }).catch(err => console.log(err));
+      } else {
+        audio.pause();
+        playButton.innerHTML = '<i class="bi bi-play-fill"></i>';
+        isPlaying = false;
+      }
+    });
+ 
+    audio.addEventListener('ended', () => {
+      playButton.innerHTML = '<i class="bi bi-play-fill"></i>';
+      isPlaying = false;
+    });
+ 
+    // --- Leer más / Leer menos (FUNCIONA con alturas dinámicas) ---
+    const textoHistoria = document.getElementById('textoHistoria');
+    const btnLeerMas = document.getElementById('btnLeerMas');
+    let abierto = false;
+ 
+    function colapsar() {
+      textoHistoria.style.maxHeight = '200px';
+      btnLeerMas.textContent = 'Leer más';
+      btnLeerMas.setAttribute('aria-expanded', 'false');
+      abierto = false;
+    }
+ 
+    function expandir() {
+      // Ajusta a la altura real del contenido
+      textoHistoria.style.maxHeight = textoHistoria.scrollHeight + 'px';
+      btnLeerMas.textContent = 'Leer menos';
+      btnLeerMas.setAttribute('aria-expanded', 'true');
+      abierto = true;
+    }
+ 
+    // Estado inicial
+    colapsar();
+ 
+    btnLeerMas.addEventListener('click', () => {
+      if (abierto) {
+        colapsar();
+      } else {
+        expandir();
+      }
+    });
+ 
+    // Si cambia el tamaño de ventana y está abierto, recalcula la altura
+    window.addEventListener('resize', () => {
+      if (abierto) {
+        textoHistoria.style.maxHeight = textoHistoria.scrollHeight + 'px';
+      }
+    });
+  </script>
+  <script>
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookies = document.getElementById('accept-cookies');
+ 
+    // Mostrar banner si no se ha aceptado previamente
+    if (!localStorage.getItem('cookies-accepted')) {
+      cookieBanner.style.display = 'flex';
+    }
+ 
+    // Al hacer clic en "Aceptar"
+    acceptCookies.addEventListener('click', () => {
+      localStorage.setItem('cookies-accepted', 'true');
+      cookieBanner.style.display = 'none';
+    });
+  </script>
+ 
 </body>
+ 
 </html>
