@@ -5,9 +5,10 @@
   --boton: #5b3c20;
   --texto: #2d1b0d;
 }
-
+ 
 /* Fondo general */
-html, body {
+html,
+body {
   background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/wood_pattern.png');
   background-size: cover;
   background-attachment: fixed;
@@ -16,11 +17,13 @@ html, body {
   color: var(--texto);
   cursor: url('https://cur.cursors-4u.net/others/oth-6/oth530.cur'), auto;
 }
-
-button:hover, a:hover, .btn-catalogo:hover {
+ 
+button:hover,
+a:hover,
+.btn-catalogo:hover {
   cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur104.cur'), pointer;
 }
-
+ 
 /* === HEADER === */
 .main-header {
   background-color: var(--menu);
@@ -31,19 +34,19 @@ button:hover, a:hover, .btn-catalogo:hover {
   left: 0;
   width: 100%;
   z-index: 1100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
+ 
 .header-left {
   display: flex;
   align-items: center;
 }
-
+ 
 .header-logo {
   max-width: 60px;
   height: auto;
 }
-
+ 
 .header-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2rem;
@@ -52,7 +55,7 @@ button:hover, a:hover, .btn-catalogo:hover {
   color: #fff;
   text-transform: uppercase;
 }
-
+ 
 /* Botón hamburguesa */
 .btn-hamburguesa {
   background-color: var(--boton);
@@ -63,27 +66,35 @@ button:hover, a:hover, .btn-catalogo:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
-.btn-hamburguesa:hover { background-color: #3d2714; }
-
+ 
+.btn-hamburguesa:hover {
+  background-color: #3d2714;
+}
+ 
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
   width: 25px;
   height: 25px;
 }
-
+ 
 /* Sidebar */
 .sidebar {
   background-color: var(--menu) !important;
   color: #fff;
   width: 250px;
   backdrop-filter: blur(4px);
-  z-index: 2000; /* tapa el header */
-  box-shadow: 4px 0 15px rgba(0,0,0,0.4);
+  z-index: 2000;
+  /* tapa el header */
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.4);
 }
-
-.logo-container { width: 100%; margin-bottom: 8px; }
+ 
+.logo-container {
+  width: 100%;
+  margin-bottom: 8px;
+}
+ 
 .sidebar-logo {
   max-width: 100px;
   height: auto;
@@ -92,7 +103,7 @@ button:hover, a:hover, .btn-catalogo:hover {
   border: none;
   object-fit: contain;
 }
-
+ 
 .sidebar .nav-link {
   color: #fff;
   font-weight: 500;
@@ -100,21 +111,22 @@ button:hover, a:hover, .btn-catalogo:hover {
   border-radius: 4px;
   transition: 0.3s;
 }
+ 
 .sidebar .nav-link:hover {
-  background-color: rgba(255,255,255,0.25);
+  background-color: rgba(255, 255, 255, 0.25);
   padding-left: 15px;
 }
-
+ 
 /* Contenido principal */
 .main-content {
   background-color: var(--panel);
   padding: 60px 20px;
   border-radius: 12px;
   margin-top: 120px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
 }
-
+ 
 /* Hero */
 .hero {
   background-color: rgba(255, 255, 255, 0.7);
@@ -122,44 +134,43 @@ button:hover, a:hover, .btn-catalogo:hover {
   padding: 40px;
   text-align: center;
   margin-bottom: 40px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
-
+ 
 .titulo-principal {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 4rem;
   letter-spacing: 2px;
   color: var(--texto);
   text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
-
+ 
 .eslogan {
   font-style: italic;
   font-weight: 700;
   font-size: 1.4rem;
   color: #3a2414;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   margin-bottom: 25px;
 }
-
+ 
 /* Imagen principal */
 .imagen {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative; /* para centrar el botón sobre la imagen */
 }
+ 
 .imagen-principal {
   max-width: 250px;
   height: auto;
   border-radius: 10px;
   border: 4px solid #6b4f36;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* Título del disco */
 .titulo-disco {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2rem;
@@ -167,9 +178,9 @@ button:hover, a:hover, .btn-catalogo:hover {
   color: var(--texto);
   text-transform: uppercase;
   margin-top: 0.8rem;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
-
+ 
 /* Historia del grupo */
 .info-historia {
   background-color: rgba(255, 255, 255, 0.8);
@@ -177,7 +188,7 @@ button:hover, a:hover, .btn-catalogo:hover {
   padding: 30px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-
+ 
 .info-historia h2 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2rem;
@@ -186,7 +197,7 @@ button:hover, a:hover, .btn-catalogo:hover {
   color: var(--texto);
   text-transform: uppercase;
 }
-
+ 
 .info-historia p {
   font-size: 1rem;
   line-height: 1.6;
@@ -194,7 +205,7 @@ button:hover, a:hover, .btn-catalogo:hover {
   color: var(--texto);
   text-align: justify;
 }
-
+ 
 /* Precio */
 .precio {
   background-color: rgba(91, 60, 32, 0.2);
@@ -203,12 +214,13 @@ button:hover, a:hover, .btn-catalogo:hover {
   border-radius: 8px;
   margin-top: 10px;
 }
+ 
 .precio-texto {
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--texto);
 }
-
+ 
 /* Botón catálogo */
 .btn-catalogo {
   background-color: var(--boton);
@@ -221,13 +233,14 @@ button:hover, a:hover, .btn-catalogo:hover {
   letter-spacing: 0.5px;
   font-family: 'Raleway', sans-serif;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
+ 
 .btn-catalogo:hover {
   background-color: #3d2714;
   transform: scale(1.03);
 }
-
+ 
 /* Info tienda */
 .info-tienda {
   background-color: rgba(255, 255, 255, 0.8);
@@ -236,7 +249,7 @@ button:hover, a:hover, .btn-catalogo:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* === FOOTER REESTILIZADO DE VINYL LAB === */
+/* --- Footer --- */
 .footer {
   position: relative;
   background: radial-gradient(circle at top left, #3d2714, #000);
@@ -275,25 +288,11 @@ button:hover, a:hover, .btn-catalogo:hover {
   z-index: 2;
 }
 
-/* --- Logo + texto --- */
 .footer-logo {
-  max-width: 160px;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
-  transition: transform 0.4s ease, filter 0.4s ease;
-}
-.footer-logo:hover {
-  transform: scale(1.1) rotate(-3deg);
-  filter: drop-shadow(0 0 20px #f4e8d2);
+  max-width: 130px;
+  filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.4));
 }
 
-.footer-text {
-  font-size: 1rem;
-  line-height: 1.6;
-  opacity: 0.9;
-  font-style: italic;
-}
-
-/* --- Títulos --- */
 .footer-titulo {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.9rem;
@@ -303,18 +302,12 @@ button:hover, a:hover, .btn-catalogo:hover {
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   position: relative;
 }
-.footer-titulo::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: var(--fondo);
-  margin-top: 5px;
-  border-radius: 2px;
-  box-shadow: 0 0 6px var(--fondo);
+
+.footer-text {
+  font-size: 0.9rem;
+  opacity: 0.9;
 }
 
-/* --- Enlaces --- */
 .footer-links a {
   color: #fff;
   text-decoration: none;
@@ -325,17 +318,13 @@ button:hover, a:hover, .btn-catalogo:hover {
   transition: all 0.3s ease;
   position: relative;
 }
+
 .footer-links a:hover {
   color: var(--fondo);
   transform: translateX(6px);
   text-shadow: 0 0 8px var(--fondo);
 }
 
-/* --- Redes sociales --- */
-.social-icons {
-  display: flex;
-  gap: 0.8rem;
-}
 .social-icons a {
   color: #fff;
   font-size: 1.8rem;
@@ -358,32 +347,24 @@ button:hover, a:hover, .btn-catalogo:hover {
   opacity: 0;
   transition: opacity 0.4s ease;
 }
-.social-icons a:hover::before {
-  opacity: 0.4;
-}
+
 .social-icons a:hover {
   border-color: var(--fondo);
   color: var(--fondo);
-  transform: scale(1.15) rotate(10deg);
-  box-shadow: 0 0 15px var(--fondo);
 }
 
-/* --- Formulario --- */
-.footer-form {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 12px;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-}
 .footer-form input,
 .footer-form textarea {
   background: rgba(255, 255, 255, 0.15);
   border: none;
   color: #fff;
-  border-radius: 8px;
-  transition: all 0.3s ease;
 }
+
+.footer-form input::placeholder,
+.footer-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .footer-form input:focus,
 .footer-form textarea:focus {
   background: rgba(255, 255, 255, 0.25);
@@ -394,7 +375,7 @@ button:hover, a:hover, .btn-catalogo:hover {
 .footer-form textarea::placeholder {
   color: rgba(255,255,255,0.8);
 }
-
+ 
 .btn-enviar {
   background: var(--fondo);
   color: var(--texto);
@@ -483,7 +464,248 @@ button:hover, a:hover, .btn-catalogo:hover {
   transition: background-color 0.3s ease;
 }
 
+.btn-enviar:hover {
+  background-color: #3d2714;
+}
+
+.footer-copy {
+  opacity: 0.8;
+  font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-logo { max-width: 50px; }
+  .header-title { font-size: 1.6rem; }
+  .titulo-principal { font-size: 3rem; }
+  .imagen-principal { max-width: 200px; }
+  .footer { text-align: center; }
+  .social-icons a { margin: 0 0.4rem; }
+}
+ 
+/* === Botón de play sobre la imagen === */
+.btn-play {
+  background-color: rgba(91, 60, 32, 0.8);
+  border: none;
+  color: white;
+  font-size: 3rem;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s, transform 0.2s;
+  z-index: 5;
+}
+ 
+.btn-play:hover {
+  background-color: rgba(91, 60, 32, 1);
+  transform: translate(-50%, -50%) scale(1.1);
+  cursor: pointer;
+}
+ 
+.btn-play i {
+  font-size: 2.5rem;
+}
+ 
+/* === Texto historia desplegable === */
+.texto-historia {
+  max-height: 200px;
+  /* altura inicial recortada */
+  overflow: hidden;
+  /* oculta el exceso */
+  transition: max-height 0.5s ease;
+}
+ 
+.btn-leer-mas {
+  background-color: var(--boton);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+ 
 .btn-leer-mas:hover {
   background-color: #3d2714;
   cursor: pointer;
+}
+ 
+/* === Carrusel 3D Vinyl Lab === */
+ 
+.galeria-discos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+ 
+ 
+.carousel3d {
+  position: relative;
+  margin: 60px auto;
+  width: 240px;
+  height: 260px;
+  perspective: 900px;
+  z-index: 5;
+}
+ 
+.carousel3d-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: translateZ(-200px) rotateY(0);
+  animation: carousel3d 10s infinite cubic-bezier(1, 0.015, 0.295, 1.225) forwards;
+}
+ 
+.carousel3d-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 260px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+ 
+/* Rotación de los paneles */
+.carousel3d-item:nth-child(1) {
+  transform: rotateY(0deg) translateZ(200px);
+}
+ 
+.carousel3d-item:nth-child(2) {
+  transform: rotateY(120deg) translateZ(200px);
+}
+ 
+.carousel3d-item:nth-child(3) {
+  transform: rotateY(240deg) translateZ(200px);
+}
+ 
+/* Imágenes dentro del carrusel */
+.carousel3d-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+ 
+.carousel3d-item img:hover {
+  transform: scale(1.1);
+}
+ 
+/* Animación 3D */
+@keyframes carousel3d {
+ 
+  0%,
+  17.5% {
+    transform: translateZ(-200px) rotateY(0);
+  }
+ 
+  27.5%,
+  45% {
+    transform: translateZ(-200px) rotateY(-120deg);
+  }
+ 
+  55%,
+  72.5% {
+    transform: translateZ(-200px) rotateY(-240deg);
+  }
+ 
+  82.5%,
+  100% {
+    transform: translateZ(-200px) rotateY(-360deg);
+  }
+}
+ 
+/* Título del carrusel */
+.galeria-discos h2 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2rem;
+  color: #222;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+}
+ 
+/* Pausa al pasar el ratón */
+.carousel3d:hover .carousel3d-content {
+  animation-play-state: paused;
+}
+ 
+ 
+/* Título del carrusel */
+.galeria-discos h2 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2rem;
+  color: #222;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+}
+ 
+/* --- Zona legal del footer --- */
+.footer-legal {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px 10px;
+}
+ 
+.footer-legal-links {
+  margin-top: 8px;
+}
+ 
+.footer-legal-link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  margin: 0 6px;
+  transition: color 0.3s;
+}
+ 
+.footer-legal-link:hover {
+  color: var(--fondo);
+  text-decoration: underline;
+}
+ 
+/* --- Banner de cookies --- */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(45, 27, 13, 0.95);
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+  z-index: 9999;
+  display: none;
+  /* se muestra solo si no se ha aceptado */
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+ 
+.cookie-banner a {
+  color: var(--fondo);
+  text-decoration: underline;
+}
+ 
+.btn-aceptar-cookies {
+  background-color: var(--boton);
+  color: white;
+  border: none;
+  padding: 6px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+ 
+.btn-aceptar-cookies:hover {
+  background-color: #3d2714;
 }
