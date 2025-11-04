@@ -68,66 +68,74 @@
   </div>
 
   <!-- Contenido principal -->
-  <main class="main-content container py-5">
-    <section class="hero text-center mb-5">
-      <h1 class="titulo-principal mb-3">Vinyl Lab</h1>
-      <p class="eslogan mb-4">"El sonido del pasado, con la calidez del presente"</p>
-
-      <!-- Imagen principal + Título del disco -->
-      <div class="imagen mb-3 position-relative">
+ <main class="main-content container py-5">
+  <section class="hero d-flex flex-column flex-lg-row align-items-center justify-content-between mb-5 gap-5">
+    
+    <!-- Lado Izquierdo: Imagen + Play + Precio -->
+    <div class="hero-left text-center text-lg-start position-relative">
+      <div class="imagen position-relative d-inline-block mb-3">
         <img src="Imagenes/beatles1.jpg" alt="Vinilo destacado" class="imagen-principal">
-        
-        <!-- Botón de play -->
         <button class="btn-play" id="playButton" aria-label="Reproducir">
           <i class="bi bi-play-fill"></i>
         </button>
-
-        <h2 class="titulo-disco">Abbey Road</h2>
       </div>
 
-      <!-- Contenedor del precio -->
-      <div class="precio mb-4">
+      <h2 class="titulo-disco mt-3">Abbey Road</h2>
+      <div class="precio my-3">
         <span class="precio-texto">224,99 €</span>
       </div>
+    </div>
 
-      <!-- Botón principal -->
+    <!-- Lado Derecho: Texto + Botón -->
+    <div class="hero-right text-center text-lg-start">
+      <h1 class="titulo-principal mb-3">Vinyl Lab</h1>
+      <p class="eslogan mb-4">"El sonido del pasado, con la calidez del presente"</p>
+      <p class="hero-desc mb-4">
+        Sumérgete en la experiencia del sonido auténtico. En Vinyl Lab te traemos vinilos cuidadosamente seleccionados para coleccionistas y amantes de la buena música.
+      </p>
       <button class="btn-catalogo">Ver Catálogo</button>
-    </section>
+    </div>
+  </section>
 
-    <!-- Historia del grupo -->
-    <section class="info-historia mb-5">
-      <h2>Historia del grupo</h2>
-      <div class="texto-historia" id="textoHistoria">
+  <!-- Historia del grupo -->
+  <section class="info-historia mb-5">
+    <h2>Historia del grupo</h2>
+    <div class="texto-historia" id="textoHistoria">
+      <p>
+        The Beatles, una banda de rock inglesa formada en Liverpool durante los años 1960, se convirtió en el grupo más influyente de la música popular occidental, revolucionando la industria musical y marcando profundamente la cultura popular y social de la década de 1960...
+      </p>
+      <p>
+        La historia del grupo se remonta a 1956, cuando John Lennon fundó The Quarry Men, una banda de skiffle, junto a compañeros de colegio...
+      </p>
+      <p>
+        Tras ser descubiertos por Brian Epstein y con la producción de George Martin, los Beatles lanzaron su primer sencillo «Love Me Do»...
+      </p>
+      <p>
+        Durante su período de estudio, crearon álbumes innovadores como Sgt. Pepper's Lonely Hearts Club Band...
+      </p>
+      <p>
+        John Lennon fue asesinado en 1980 y George Harrison falleció de cáncer en 2001...
+      </p>
+    </div>
+    <button class="btn-leer-mas mt-3" id="btnLeerMas" aria-expanded="false" aria-controls="textoHistoria">Leer más</button>
+  </section>
+
+  <!-- Info Tienda -->
+  <section class="info-tienda">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <img src="https://cdn.pixabay.com/photo/2016/11/21/15/55/vinyl-1845276_1280.jpg" alt="Vinyl store" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-lg-6">
+        <h2>Sobre Nuestra Tienda</h2>
         <p>
-          The Beatles, una banda de rock inglesa formada en Liverpool durante los años 1960, se convirtió en el grupo más influyente de la música popular occidental, revolucionando la industria musical y marcando profundamente la cultura popular y social de la década de 1960. Compuesta fundamentalmente por John Lennon, Paul McCartney, George Harrison y Ringo Starr, la banda se disolvió oficialmente en 1970 tras una exitosa carrera que abarcó desde el skiffle y el rock and roll hasta géneros como el rock psicodélico, el pop y la música clásica.
-        </p>
-        <p>
-          La historia del grupo se remonta a 1956, cuando John Lennon fundó The Quarry Men, una banda de skiffle, junto a compañeros de colegio.
-          En 1957, Paul McCartney se unió al grupo tras conocer a Lennon en una presentación de The Quarry Men.
-          George Harrison, con apenas catorce años, se incorporó poco después, convirtiéndose en el guitarrista líder.
-          La formación inicial incluyó a Stuart Sutcliffe en el bajo y Pete Best en la batería, pero ambos fueron reemplazados: Sutcliffe se fue en 1961 y Best fue despedido en 1962 para dar paso a Ringo Starr, quien se unió al grupo ese mismo año.
-        </p>
-        <p>
-          Tras ser descubiertos por Brian Epstein, quien se convirtió en su manager, y con la producción de George Martin, los Beatles lanzaron su primer sencillo, «Love Me Do», en 1962, marcando el inicio de su éxito comercial.
-          A partir de 1964, la banda alcanzó una popularidad mundial con la «beatlemanía», consolidándose como una fuerza cultural global.
-        </p>
-        <p>
-          Durante su período de estudio, crearon álbumes innovadores como Sgt. Pepper's Lonely Hearts Club Band (1967), considerado una obra maestra y un pilar del rock psicodélico.
-          Aunque dejaron de actuar en vivo en 1966 para centrarse en la grabación, su influencia continuó creciendo, y tras su disolución en 1970, todos sus miembros prosiguieron carreras individuales.
-        </p>
-        <p>
-          John Lennon fue asesinado en 1980 y George Harrison falleció de cáncer en 2001, mientras que Paul McCartney y Ringo Starr siguen activos musicalmente.
-          Aunque la banda se disolvió hace más de cinco décadas, su música sigue siendo ampliamente popular, y se les considera el grupo con más números uno en las listas británicas y el más vendido en los Estados Unidos.
+          Somos una tienda especializada en vinilos dedicada a quienes disfrutan de la música en su forma más auténtica. Creemos que cada disco cuenta una historia, y por eso seleccionamos cuidadosamente nuestro catálogo con clásicos inolvidables, ediciones especiales y nuevos lanzamientos que celebran el sonido analógico.
         </p>
       </div>
-      <button class="btn-leer-mas mt-2" id="btnLeerMas" aria-expanded="false" aria-controls="textoHistoria">Leer más</button>
-    </section>
+    </div>
+  </section>
+</main>
 
-    <section class="info-tienda">
-      <h2>Sobre Nuestra Tienda</h2>
-      <p>Somos una tienda especializada en vinilos dedicada a quienes disfrutan de la música en su forma más auténtica. Creemos que cada disco cuenta una historia, y por eso seleccionamos cuidadosamente nuestro catálogo con clásicos inolvidables, ediciones especiales y nuevos lanzamientos que celebran el sonido analógico.</p>
-    </section>
-  </main>
 
   <!-- Footer -->
   <footer class="footer mt-5 pt-5 pb-4">
