@@ -236,100 +236,207 @@ button:hover, a:hover, .btn-catalogo:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* --- Footer --- */
+/* === FOOTER REESTILIZADO DE VINYL LAB === */
 .footer {
-  background-color: var(--menu);
+  position: relative;
+  background: radial-gradient(circle at top left, #3d2714, #000);
   color: #fff;
   font-family: 'Raleway', sans-serif;
-  backdrop-filter: blur(6px);
-  border-top: 3px solid var(--boton);
+  overflow: hidden;
+  padding: 80px 0 50px 0;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8);
 }
 
+/* efecto neón sutil */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  background: conic-gradient(
+    from 45deg,
+    rgba(255, 255, 255, 0.1),
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: spin 20s linear infinite;
+  z-index: 0;
+  opacity: 0.4;
+}
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.footer .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* --- Logo + texto --- */
 .footer-logo {
-  max-width: 130px;
-  filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.4));
+  max-width: 160px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
-
-.footer-titulo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  letter-spacing: 1px;
-  margin-bottom: 0.8rem;
-  color: #fff;
+.footer-logo:hover {
+  transform: scale(1.1) rotate(-3deg);
+  filter: drop-shadow(0 0 20px #f4e8d2);
 }
 
 .footer-text {
-  font-size: 0.9rem;
+  font-size: 1rem;
+  line-height: 1.6;
   opacity: 0.9;
+  font-style: italic;
 }
 
+/* --- Títulos --- */
+.footer-titulo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem;
+  letter-spacing: 1.5px;
+  color: var(--fondo);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+.footer-titulo::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--fondo);
+  margin-top: 5px;
+  border-radius: 2px;
+  box-shadow: 0 0 6px var(--fondo);
+}
+
+/* --- Enlaces --- */
 .footer-links a {
   color: #fff;
   text-decoration: none;
   display: block;
-  padding: 0.2rem 0;
-  transition: color 0.3s;
+  padding: 0.3rem 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
 }
-
 .footer-links a:hover {
   color: var(--fondo);
+  transform: translateX(6px);
+  text-shadow: 0 0 8px var(--fondo);
 }
 
+/* --- Redes sociales --- */
+.social-icons {
+  display: flex;
+  gap: 0.8rem;
+}
 .social-icons a {
   color: #fff;
-  font-size: 1.5rem;
-  margin-right: 0.6rem;
-  transition: color 0.3s;
+  font-size: 1.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
-
+.social-icons a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, var(--fondo), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.social-icons a:hover::before {
+  opacity: 0.4;
+}
 .social-icons a:hover {
+  border-color: var(--fondo);
   color: var(--fondo);
+  transform: scale(1.15) rotate(10deg);
+  box-shadow: 0 0 15px var(--fondo);
 }
 
+/* --- Formulario --- */
+.footer-form {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
 .footer-form input,
 .footer-form textarea {
-  background-color: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
   color: #fff;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
-
-.footer-form input::placeholder,
-.footer-form textarea::placeholder {
-  color: rgba(255, 255, 255, 0.8);
-}
-
 .footer-form input:focus,
 .footer-form textarea:focus {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 10px var(--fondo);
   outline: none;
-  border-color: var(--fondo);
-  background-color: rgba(255, 255, 255, 0.2);
+}
+.footer-form input::placeholder,
+.footer-form textarea::placeholder {
+  color: rgba(255,255,255,0.8);
 }
 
 .btn-enviar {
-  background-color: var(--boton);
-  color: #fff;
-  border: none;
-  transition: background-color 0.3s;
+  background: var(--fondo);
+  color: var(--texto);
+  font-weight: 700;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
 }
-
 .btn-enviar:hover {
-  background-color: #3d2714;
+  background: #fff;
+  color: var(--boton);
+  transform: translateY(-3px);
+  box-shadow: 0 0 12px var(--fondo);
 }
 
+/* --- Copy --- */
 .footer-copy {
-  opacity: 0.8;
-  font-size: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  margin-top: 60px;
+  padding-top: 15px;
+  font-size: 0.9rem;
+  opacity: 0.85;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
-/* Responsive */
+/* --- Responsive --- */
 @media (max-width: 768px) {
-  .header-logo { max-width: 50px; }
-  .header-title { font-size: 1.6rem; }
-  .titulo-principal { font-size: 3rem; }
-  .imagen-principal { max-width: 200px; }
-  .footer { text-align: center; }
-  .social-icons a { margin: 0 0.4rem; }
+  .footer {
+    text-align: center;
+  }
+  .social-icons {
+    justify-content: center;
+  }
+  .footer-titulo::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .footer-form {
+    margin-top: 20px;
+  }
 }
+
 
 /* === Botón de play sobre la imagen === */
 .btn-play {
