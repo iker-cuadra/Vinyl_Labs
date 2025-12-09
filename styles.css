@@ -709,3 +709,19 @@ a:hover,
 .btn-aceptar-cookies:hover {
   background-color: #3d2714;
 }
+.btn-login-custom {
+  background-color: var(--boton);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: 'Raleway', sans-serif;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-login-custom:hover {
+  background-color: #3d2714;
+  transform: scale(1.05);
+}
