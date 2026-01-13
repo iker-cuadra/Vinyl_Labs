@@ -2,24 +2,32 @@
 session_start();
 require 'conexion.php';
 
-$nombre = $_POST['nombre'] ?? '';
-$pass = $_POST['pass'] ?? '';
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nombre = $_POST['nombre'] ?? '';
+    $pass = $_POST['pass'] ?? '';
 
-// Sanitizar entradas
-$nombre = $conn->real_escape_string($nombre);
-$pass = $conn->real_escape_string($pass);
+    $nombre = $conn->real_escape_string($nombre);
+    $pass = $conn->real_escape_string($pass);
 
-// Consulta
-$sql = "SELECT * FROM usuarios WHERE nombre='$nombre' AND pass='$pass'";
-$resultado = $conn->query($sql);
+    $sql = "SELECT * FROM usuarios WHERE nombre='$nombre' AND pass='$pass'";
+    $resultado = $conn->query($sql);
 
-if ($resultado && $resultado->num_rows === 1) {
-    $_SESSION['usuario'] = $nombre;
-    header("Location: index.html");
-    exit();
+    if ($resultado && $resultado->num_rows === 1) {
+        $_SESSION['usuario'] = $nombre;
+        $conn->close();
+        header("Location: index.php");
+        exit;
+    } else {
+        $conn->close();
+        echo "<script>
+            alert('Usuario o contraseña incorrectos.');
+            window.location.href = 'login.html';
+        </script>";
+        exit;
+    }
 } else {
-    echo "<script>alert('Nombre de usuario o contraseña incorrectos'); window.location.href='login.html';</script>";
+    http_response_code(405);
+    echo "Método no permitido";
+    exit;
 }
-
-$conn->close();
 ?>
