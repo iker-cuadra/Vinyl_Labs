@@ -2,24 +2,38 @@
 session_start();
 require 'conexion.php';
 
-$nombre = $_POST['nombre'] ?? '';
-$pass = $_POST['pass'] ?? '';
+$usuario = $_POST['nombre'] ?? '';
+$pass    = $_POST['pass'] ?? '';
 
-// Sanitizar entradas
-$nombre = $conn->real_escape_string($nombre);
-$pass = $conn->real_escape_string($pass);
+// Consulta preparada
+$stmt = $conn->prepare(
+    "SELECT usuario, rol FROM usuarios WHERE usuario = ? AND password = ?"
+);
 
-// Consulta
-$sql = "SELECT * FROM usuarios WHERE nombre='$nombre' AND pass='$pass'";
-$resultado = $conn->query($sql);
+$stmt->bind_param("ss", $usuario, $pass);
+$stmt->execute();
+$resultado = $stmt->get_result();
 
-if ($resultado && $resultado->num_rows === 1) {
-    $_SESSION['usuario'] = $nombre;
-    header("Location: index.html");
-    exit();
+if ($resultado->num_rows === 1) {
+
+    $datos = $resultado->fetch_assoc();
+
+    // Guardar datos en sesión
+    $_SESSION['usuario'] = $datos['usuario'];
+    $_SESSION['rol']     = $datos['rol'];
+
+    // Redirigir a index.php (NO html)
+    header("Location: index.php");
+    exit;
+
 } else {
-    echo "<script>alert('Nombre de usuario o contraseña incorrectos'); window.location.href='login.html';</script>";
+
+    echo "<script>
+        alert('Usuario o contraseña incorrectos');
+        window.location.href='login.html';
+    </script>";
 }
 
+$stmt->close();
 $conn->close();
 ?>

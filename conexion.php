@@ -1,14 +1,11 @@
 <?php
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 $host = "localhost";
-$usuario = "root";         // Ajusta según tu config
-$contrasena = "";          // Ajusta según tu config
-$base_datos = "login_vinyl";
-$puerto = 3307;            // ⚠️ Reemplaza con tu puerto real
+$usuario = "root";
+$contrasena = "";
+$base_datos = "vinyl_lab";
 
-$conn = new mysqli($host, $usuario, $contrasena, $base_datos, $puerto);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
-}
+$conn = new mysqli($host, $usuario, $contrasena, $base_datos);
+$conn->set_charset("utf8mb4");
 ?>
