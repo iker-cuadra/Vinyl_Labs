@@ -2,38 +2,32 @@
 session_start();
 require 'conexion.php';
 
-$usuario = $_POST['nombre'] ?? '';
-$pass    = $_POST['pass'] ?? '';
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nombre = $_POST['nombre'] ?? '';
+    $pass = $_POST['pass'] ?? '';
 
-// Consulta preparada
-$stmt = $conn->prepare(
-    "SELECT usuario, rol FROM usuarios WHERE usuario = ? AND password = ?"
-);
+    $nombre = $conn->real_escape_string($nombre);
+    $pass = $conn->real_escape_string($pass);
 
-$stmt->bind_param("ss", $usuario, $pass);
-$stmt->execute();
-$resultado = $stmt->get_result();
+    $sql = "SELECT * FROM usuarios WHERE nombre='$nombre' AND pass='$pass'";
+    $resultado = $conn->query($sql);
 
-if ($resultado->num_rows === 1) {
-
-    $datos = $resultado->fetch_assoc();
-
-    // Guardar datos en sesión
-    $_SESSION['usuario'] = $datos['usuario'];
-    $_SESSION['rol']     = $datos['rol'];
-
-    // Redirigir a index.php (NO html)
-    header("Location: index.php");
-    exit;
-
+    if ($resultado && $resultado->num_rows === 1) {
+        $_SESSION['usuario'] = $nombre;
+        $conn->close();
+        header("Location: index.php");
+        exit;
+    } else {
+        $conn->close();
+        echo "<script>
+            alert('Usuario o contraseña incorrectos.');
+            window.location.href = 'login.html';
+        </script>";
+        exit;
+    }
 } else {
-
-    echo "<script>
-        alert('Usuario o contraseña incorrectos');
-        window.location.href='login.html';
-    </script>";
+    http_response_code(405);
+    echo "Método no permitido";
+    exit;
 }
-
-$stmt->close();
-$conn->close();
 ?>
