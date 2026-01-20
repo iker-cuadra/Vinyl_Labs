@@ -84,31 +84,6 @@ session_start();
 </head>
 
 <body>
-<<<<<<< HEAD:index.html
-
-  <!-- Header -->
-  <header class="main-header">
-    <div class="container d-flex align-items-center justify-content-between">
-      <!-- Logo + título -->
-      <div class="header-left d-flex align-items-center">
-        <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2">
-        <h1 class="header-title">Vinyl Lab</h1>
-      </div>
-
-      <!-- Contenedor botón login + hamburguesa -->
-      <div class="d-flex align-items-center gap-2">
-        <!-- ✅ Botón "Iniciar sesión" -->
-        <a href="login.html" class="btn-login-custom">Iniciar sesión</a>
-
-        <!-- Botón hamburguesa -->
-        <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
-          aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-    </div>
-  </header>
-=======
 
   <!-- HEADER -->
   <header class="main-header">
@@ -137,7 +112,6 @@ session_start();
     </div>
   </header>
 
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
 
   <!-- Menú lateral (offcanvas) -->
   <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
@@ -146,10 +120,6 @@ session_start();
         <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
       </div>
     </div>
-<<<<<<< HEAD:index.html
-
-=======
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     <div class="offcanvas-body">
       <nav class="nav flex-column">
         <a class="nav-link" href="index.php">Inicio</a>
@@ -164,9 +134,6 @@ session_start();
     </div>
   </div>
 
-<<<<<<< HEAD:index.html
-  <!-- Contenido principal -->
-=======
   <!-- 🎯 NUEVO: Splash / bienvenida encima de todo -->
   <section class="splash-full">
     <h1 class="titulo-splash">Vinyl Lab</h1>
@@ -175,7 +142,6 @@ session_start();
   </section>
 
   <!-- CONTENIDO PRINCIPAL ORIGINAL COMPLETO -->
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
   <main class="main-content container py-5">
     <section class="hero d-flex flex-column flex-lg-row align-items-center justify-content-between mb-5 gap-5">
 
@@ -209,10 +175,6 @@ session_start();
     <!-- Carrusel 3D de discos -->
     <section class="galeria-discos text-center my-5">
       <h2 class="mb-4">Explora nuestra colección</h2>
-<<<<<<< HEAD:index.html
-
-=======
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
       <div class="carousel3d">
         <div class="carousel3d-content">
           <div class="carousel3d-item"><img src="Imagenes/beatles1.jpg" alt="Abbey Road - The Beatles"></div>
@@ -223,67 +185,10 @@ session_start();
       </div>
     </section>
 
-<<<<<<< HEAD:index.html
-
-=======
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     <!-- Historia del grupo -->
     <section class="info-historia mb-5">
       <h2>Historia del grupo</h2>
       <div class="texto-historia" id="textoHistoria">
-<<<<<<< HEAD:index.html
-        <p>
-          <strong>The Beatles</strong>, una banda de rock inglesa formada en <strong>Liverpool</strong> durante los años
-          1960, se convirtió en el grupo más influyente de la música popular occidental, revolucionando la industria
-          musical y marcando profundamente la cultura popular y social de la década.
-          Compuesta por <strong>John Lennon, Paul McCartney, George Harrison</strong> y <strong>Ringo Starr</strong>, la
-          banda se disolvió oficialmente en 1970 tras una exitosa carrera que abarcó desde el <em>skiffle</em> y el
-          <em>rock and roll</em> hasta géneros como el rock psicodélico, el pop y la música clásica.
-        </p>
-
-        <p>
-          La historia del grupo se remonta a <strong>1956</strong>, cuando <strong>John Lennon</strong> fundó <em>The
-            Quarry Men</em>, una banda de <em>skiffle</em> junto a compañeros de colegio.
-          En <strong>1957</strong>, <strong>Paul McCartney</strong> se unió al grupo tras conocer a Lennon en una
-          presentación, y poco después, <strong>George Harrison</strong>, con apenas catorce años, se incorporó como
-          guitarrista líder.
-        </p>
-
-        <p>
-          La formación inicial también contó con <strong>Stuart Sutcliffe</strong> en el bajo y <strong>Pete
-            Best</strong> en la batería, pero ambos fueron reemplazados: Sutcliffe se marchó en 1961 y Best fue
-          sustituido en 1962 por <strong>Ringo Starr</strong>, completando así la formación clásica del grupo.
-        </p>
-
-        <p>
-          Tras ser descubiertos por <strong>Brian Epstein</strong>, quien se convirtió en su mánager, y bajo la
-          producción de <strong>George Martin</strong>, los Beatles lanzaron su primer sencillo, <em>“Love Me Do”</em>,
-          en <strong>1962</strong>, marcando el inicio de su éxito comercial.
-          A partir de <strong>1964</strong>, la banda alcanzó una popularidad mundial sin precedentes con la
-          <em>beatlemanía</em>, consolidándose como una fuerza cultural global.
-        </p>
-
-        <p>
-          Durante su período de experimentación en estudio, crearon álbumes innovadores como <em>Sgt. Pepper’s Lonely
-            Hearts Club Band</em> (<strong>1967</strong>), considerado una obra maestra y un pilar del rock psicodélico.
-          Aunque dejaron de actuar en vivo en <strong>1966</strong> para centrarse en la grabación, su influencia
-          continuó creciendo.
-        </p>
-
-        <p>
-          Tras su disolución en <strong>1970</strong>, todos sus miembros prosiguieron carreras individuales.
-          <strong>John Lennon</strong> fue asesinado en 1980 y <strong>George Harrison</strong> falleció de cáncer en
-          2001, mientras que <strong>Paul McCartney</strong> y <strong>Ringo Starr</strong> continúan activos
-          musicalmente.
-        </p>
-
-        <p>
-          Aunque la banda se disolvió hace más de cinco décadas, su música sigue siendo ampliamente popular, y se les
-          considera el grupo con más números uno en las listas británicas y el más vendido en los Estados Unidos.
-        </p>
-      </div>
-
-=======
         <p><strong>The Beatles</strong>, una banda de rock inglesa formada en <strong>Liverpool</strong> durante los
           años 1960, se convirtió en el grupo más influyente de la música popular occidental...</p>
         <p>La historia del grupo se remonta a <strong>1956</strong>, cuando <strong>John Lennon</strong> fundó <em>The
@@ -294,7 +199,6 @@ session_start();
         <p>Tras su disolución en <strong>1970</strong>...</p>
         <p>Aunque la banda se disolvió hace más de cinco décadas...</p>
       </div>
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
       <button class="btn-leer-mas mt-3" id="btnLeerMas" aria-expanded="false" aria-controls="textoHistoria">Leer
         más</button>
     </section>
@@ -350,11 +254,7 @@ session_start();
           </div>
         </div>
 
-<<<<<<< HEAD:index.html
-        <!-- Formulario -->
-=======
         <!-- Formulario de contacto -->
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Contáctanos</h5>
           <form class="footer-form">
@@ -366,10 +266,6 @@ session_start();
         </div>
       </div>
 
-<<<<<<< HEAD:index.html
-      <!-- Zona legal del sitio -->
-=======
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
       <div class="footer-legal text-center mt-4 pt-3 border-top">
         <h6 class="footer-titulo mb-2">Información Legal</h6>
         <p class="footer-text small mb-2">
@@ -385,10 +281,6 @@ session_start();
         </div>
       </div>
 
-<<<<<<< HEAD:index.html
-      <!-- Banner de cookies -->
-=======
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
       <div id="cookie-banner" class="cookie-banner">
         <p>Usamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia.
           <a href="politica-cookies.html">Más información</a>.
@@ -396,10 +288,6 @@ session_start();
         <button id="accept-cookies" class="btn btn-aceptar-cookies">Aceptar</button>
       </div>
 
-<<<<<<< HEAD:index.html
-
-=======
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
       <div class="text-center mt-4 border-top pt-3 small footer-copy">
         &copy; 2025 Vinyl Lab — Todos los derechos reservados.
       </div>
@@ -420,10 +308,7 @@ session_start();
     offcanvasEl.addEventListener('show.bs.offcanvas', () => {
       btnHamb.classList.add('active');
     });
-<<<<<<< HEAD:index.html
 
-=======
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     offcanvasEl.addEventListener('hidden.bs.offcanvas', () => {
       btnHamb.classList.remove('active');
     });
@@ -476,16 +361,10 @@ session_start();
     audio.addEventListener('ended', () => {
       playButton.innerHTML = '<i class="bi bi-play-fill"></i>';
       isPlaying = false;
-<<<<<<< HEAD:index.html
     });
 
-    // --- Leer más / Leer menos (FUNCIONA con alturas dinámicas) ---
-=======
-    }
+    // --- Leer más / Leer menos (FUNCIONA con alturas dinámicas) ---    
 
-    );
-
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     const textoHistoria = document.getElementById('textoHistoria');
     const btnLeerMas = document.getElementById('btnLeerMas');
     let abierto = false;
@@ -504,10 +383,6 @@ session_start();
       abierto = true;
     }
 
-<<<<<<< HEAD:index.html
-    // Estado inicial
-=======
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     colapsar();
 
     btnLeerMas.addEventListener('click', () => {
@@ -518,10 +393,6 @@ session_start();
       }
     });
 
-<<<<<<< HEAD:index.html
-    // Si cambia el tamaño de ventana y está abierto, recalcula la altura
-=======
->>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     window.addEventListener('resize', () => {
       if (abierto) {
         textoHistoria.style.maxHeight = textoHistoria.scrollHeight + 'px';
