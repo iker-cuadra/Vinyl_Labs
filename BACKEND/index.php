@@ -20,7 +20,7 @@ session_start();
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <!-- Estilos -->
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="../styles.css" />
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,
@@ -90,7 +90,7 @@ session_start();
     <div class="container-fluid d-flex align-items-center justify-content-between py-2 px-4">
       <!-- Logo + título -->
       <div class="d-flex align-items-center">
-        <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2" style="height: 50px;">
+        <img src="../Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2" style="height: 50px;">
         <h1 class="header-title mb-0">Vinyl Lab</h1>
       </div>
 
