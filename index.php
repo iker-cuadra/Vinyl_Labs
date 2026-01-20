@@ -1,4 +1,6 @@
-html:
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -25,9 +27,64 @@ html:
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
 <text y='0.9em' font-size='400'>💿</text>
 </svg>">
+
+  <style>
+    /* === CONTENEDOR DE BIENVENIDA / SPLASH === */
+    .splash-full {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      /* Utiliza el fondo de madera ya presente */
+      background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/wood_pattern.png');
+      background-size: cover;
+      background-attachment: fixed;
+      padding: 0 20px;
+      color: #fff;
+    }
+
+    .splash-full .titulo-splash {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: var(--boton);
+      text-transform: uppercase;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      margin: 0;
+    }
+
+    .splash-full .subtitulo-splash {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.6rem;
+      margin-top: 1rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .splash-full .btn-catalogo {
+      background-color: var(--boton);
+      color: #fff;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-top: 2rem;
+    }
+
+    .splash-full .btn-catalogo:hover {
+      background-color: #3d2714;
+      transform: scale(1.03);
+    }
+  </style>
 </head>
 
 <body>
+<<<<<<< HEAD:index.html
 
   <!-- Header -->
   <header class="main-header">
@@ -51,6 +108,36 @@ html:
       </div>
     </div>
   </header>
+=======
+
+  <!-- HEADER -->
+  <header class="main-header">
+    <div class="container-fluid d-flex align-items-center justify-content-between py-2 px-4">
+      <!-- Logo + título -->
+      <div class="d-flex align-items-center">
+        <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2" style="height: 50px;">
+        <h1 class="header-title mb-0">Vinyl Lab</h1>
+      </div>
+
+      <!-- Botones de usuario -->
+      <div class="d-flex align-items-center gap-2">
+        <?php if (isset($_SESSION['usuario'])): ?>
+          <a href="gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
+          <a href="logout.php" class="btn-login-custom">Cerrar sesión</a>
+        <?php else: ?>
+          <a href="login.html" class="btn-login-custom">Iniciar sesión</a>
+        <?php endif; ?>
+
+        <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
+          aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
 
   <!-- Menú lateral (offcanvas) -->
   <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
@@ -59,18 +146,36 @@ html:
         <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
       </div>
     </div>
+<<<<<<< HEAD:index.html
 
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     <div class="offcanvas-body">
       <nav class="nav flex-column">
-        <a class="nav-link" href="#">Inicio</a>
-        <a class="nav-link" href="#">Catálogo</a>
+        <a class="nav-link" href="index.php">Inicio</a>
+        <a class="nav-link" href="catalogo.php">Catálogo</a>
         <a class="nav-link" href="#">Ofertas</a>
         <a class="nav-link" href="#">Contacto</a>
+        <?php if (isset($_SESSION['usuario'])): ?>
+          <a href="gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
+        <?php endif; ?>
+
       </nav>
     </div>
   </div>
 
+<<<<<<< HEAD:index.html
   <!-- Contenido principal -->
+=======
+  <!-- 🎯 NUEVO: Splash / bienvenida encima de todo -->
+  <section class="splash-full">
+    <h1 class="titulo-splash">Vinyl Lab</h1>
+    <p class="subtitulo-splash">"El sonido del pasado, con la calidez del presente"</p>
+    <a href="catalogo.php" class="btn-catalogo">Ver Catálogo</a>
+  </section>
+
+  <!-- CONTENIDO PRINCIPAL ORIGINAL COMPLETO -->
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
   <main class="main-content container py-5">
     <section class="hero d-flex flex-column flex-lg-row align-items-center justify-content-between mb-5 gap-5">
 
@@ -83,7 +188,7 @@ html:
           </button>
         </div>
 
-        <h2 class="titulo-disco mt-3">Abbey Road</h2>
+        <h2 class="titulo-disco mt-3"></h2>
         <div class="precio my-3">
           <span class="precio-texto">224,99 €</span>
         </div>
@@ -91,40 +196,42 @@ html:
 
       <!-- Lado Derecho: Texto + Botón -->
       <div class="hero-right text-center text-lg-start">
-        <h1 class="titulo-principal mb-3">Vinyl Lab</h1>
-        <p class="eslogan mb-4">"El sonido del pasado, con la calidez del presente"</p>
+        <h1 class="titulo-principal mb-3">Abbey Road</h1>
+        <p class="eslogan mb-4"></p>
         <p class="hero-desc mb-4">
           Sumérgete en la experiencia del sonido auténtico. En Vinyl Lab te traemos vinilos cuidadosamente seleccionados
           para coleccionistas y amantes de la buena música.
         </p>
-        <button class="btn-catalogo">Ver Catálogo</button>
+        <button class="btn-catalogo">Comprar</button>
       </div>
     </section>
 
     <!-- Carrusel 3D de discos -->
     <section class="galeria-discos text-center my-5">
       <h2 class="mb-4">Explora nuestra colección</h2>
+<<<<<<< HEAD:index.html
 
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
       <div class="carousel3d">
         <div class="carousel3d-content">
-          <div class="carousel3d-item">
-            <img src="Imagenes/beatles1.jpg" alt="Abbey Road - The Beatles">
+          <div class="carousel3d-item"><img src="Imagenes/beatles1.jpg" alt="Abbey Road - The Beatles"></div>
+          <div class="carousel3d-item"><img src="Imagenes/pinkfloyd.png" alt="The Dark Side of the Moon - Pink Floyd">
           </div>
-          <div class="carousel3d-item">
-            <img src="Imagenes/pinkfloyd.png" alt="The Dark Side of the Moon - Pink Floyd">
-          </div>
-          <div class="carousel3d-item">
-            <img src="Imagenes/queen.png" alt="A Night at the Opera - Queen">
-          </div>
+          <div class="carousel3d-item"><img src="Imagenes/queen.png" alt="A Night at the Opera - Queen"></div>
         </div>
       </div>
     </section>
 
+<<<<<<< HEAD:index.html
 
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     <!-- Historia del grupo -->
     <section class="info-historia mb-5">
       <h2>Historia del grupo</h2>
       <div class="texto-historia" id="textoHistoria">
+<<<<<<< HEAD:index.html
         <p>
           <strong>The Beatles</strong>, una banda de rock inglesa formada en <strong>Liverpool</strong> durante los años
           1960, se convirtió en el grupo más influyente de la música popular occidental, revolucionando la industria
@@ -176,6 +283,18 @@ html:
         </p>
       </div>
 
+=======
+        <p><strong>The Beatles</strong>, una banda de rock inglesa formada en <strong>Liverpool</strong> durante los
+          años 1960, se convirtió en el grupo más influyente de la música popular occidental...</p>
+        <p>La historia del grupo se remonta a <strong>1956</strong>, cuando <strong>John Lennon</strong> fundó <em>The
+            Quarry Men</em>...</p>
+        <p>La formación inicial también contó con <strong>Stuart Sutcliffe</strong> en el bajo...</p>
+        <p>Tras ser descubiertos por <strong>Brian Epstein</strong>...</p>
+        <p>Durante su período de experimentación en estudio...</p>
+        <p>Tras su disolución en <strong>1970</strong>...</p>
+        <p>Aunque la banda se disolvió hace más de cinco décadas...</p>
+      </div>
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
       <button class="btn-leer-mas mt-3" id="btnLeerMas" aria-expanded="false" aria-controls="textoHistoria">Leer
         más</button>
     </section>
@@ -199,8 +318,7 @@ html:
     </section>
   </main>
 
-
-  <!-- Footer -->
+  <!-- Footer (sin modificaciones) -->
   <footer class="footer mt-5 pt-5 pb-4">
     <div class="container">
       <div class="row gy-4">
@@ -214,8 +332,8 @@ html:
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Enlaces</h5>
           <ul class="list-unstyled footer-links">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Catálogo</a></li>
+            <li><a href="inicio.php">Inicio</a></li>
+            <li><a href="catalogo.php">Catálogo</a></li>
             <li><a href="#">Ofertas</a></li>
             <li><a href="#">Contacto</a></li>
           </ul>
@@ -232,7 +350,11 @@ html:
           </div>
         </div>
 
+<<<<<<< HEAD:index.html
         <!-- Formulario -->
+=======
+        <!-- Formulario de contacto -->
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Contáctanos</h5>
           <form class="footer-form">
@@ -244,7 +366,10 @@ html:
         </div>
       </div>
 
+<<<<<<< HEAD:index.html
       <!-- Zona legal del sitio -->
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
       <div class="footer-legal text-center mt-4 pt-3 border-top">
         <h6 class="footer-titulo mb-2">Información Legal</h6>
         <p class="footer-text small mb-2">
@@ -260,7 +385,10 @@ html:
         </div>
       </div>
 
+<<<<<<< HEAD:index.html
       <!-- Banner de cookies -->
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
       <div id="cookie-banner" class="cookie-banner">
         <p>Usamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia.
           <a href="politica-cookies.html">Más información</a>.
@@ -268,7 +396,10 @@ html:
         <button id="accept-cookies" class="btn btn-aceptar-cookies">Aceptar</button>
       </div>
 
+<<<<<<< HEAD:index.html
 
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
       <div class="text-center mt-4 border-top pt-3 small footer-copy">
         &copy; 2025 Vinyl Lab — Todos los derechos reservados.
       </div>
@@ -289,7 +420,10 @@ html:
     offcanvasEl.addEventListener('show.bs.offcanvas', () => {
       btnHamb.classList.add('active');
     });
+<<<<<<< HEAD:index.html
 
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     offcanvasEl.addEventListener('hidden.bs.offcanvas', () => {
       btnHamb.classList.remove('active');
     });
@@ -297,7 +431,6 @@ html:
 
   <!-- Scripts: Play/Pause audio y Leer más/Menos -->
   <script>
-    // --- Play/Pause ---
     const playButton = document.getElementById('playButton');
     const audio = document.getElementById('abbeyRoadAudio');
     const img = document.querySelector('.imagen-principal');
@@ -343,9 +476,16 @@ html:
     audio.addEventListener('ended', () => {
       playButton.innerHTML = '<i class="bi bi-play-fill"></i>';
       isPlaying = false;
+<<<<<<< HEAD:index.html
     });
 
     // --- Leer más / Leer menos (FUNCIONA con alturas dinámicas) ---
+=======
+    }
+
+    );
+
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     const textoHistoria = document.getElementById('textoHistoria');
     const btnLeerMas = document.getElementById('btnLeerMas');
     let abierto = false;
@@ -358,14 +498,16 @@ html:
     }
 
     function expandir() {
-      // Ajusta a la altura real del contenido
       textoHistoria.style.maxHeight = textoHistoria.scrollHeight + 'px';
       btnLeerMas.textContent = 'Leer menos';
       btnLeerMas.setAttribute('aria-expanded', 'true');
       abierto = true;
     }
 
+<<<<<<< HEAD:index.html
     // Estado inicial
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     colapsar();
 
     btnLeerMas.addEventListener('click', () => {
@@ -376,7 +518,10 @@ html:
       }
     });
 
+<<<<<<< HEAD:index.html
     // Si cambia el tamaño de ventana y está abierto, recalcula la altura
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
     window.addEventListener('resize', () => {
       if (abierto) {
         textoHistoria.style.maxHeight = textoHistoria.scrollHeight + 'px';
