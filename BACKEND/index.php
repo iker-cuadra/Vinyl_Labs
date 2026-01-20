@@ -1,0 +1,533 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinyl Lab</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&family=Bebas+Neue&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="../styles.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+<text y='0.9em' font-size='400'>💿</text>
+</svg>">
+
+  <style>
+    /* === CONTENEDOR DE BIENVENIDA / SPLASH === */
+    .splash-full {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      /* Utiliza el fondo de madera ya presente */
+      background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/wood_pattern.png');
+      background-size: cover;
+      background-attachment: fixed;
+      padding: 0 20px;
+      color: #fff;
+    }
+
+    .splash-full .titulo-splash {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: var(--boton);
+      text-transform: uppercase;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      margin: 0;
+    }
+
+    .splash-full .subtitulo-splash {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.6rem;
+      margin-top: 1rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .splash-full .btn-catalogo {
+      background-color: var(--boton);
+      color: #fff;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-top: 2rem;
+    }
+
+    .splash-full .btn-catalogo:hover {
+      background-color: #3d2714;
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+
+<body>
+<<<<<<< HEAD:index.html
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container d-flex align-items-center justify-content-between">
+      <!-- Logo + título -->
+      <div class="header-left d-flex align-items-center">
+        <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2">
+        <h1 class="header-title">Vinyl Lab</h1>
+      </div>
+
+      <!-- Contenedor botón login + hamburguesa -->
+      <div class="d-flex align-items-center gap-2">
+        <!-- ✅ Botón "Iniciar sesión" -->
+        <a href="login.html" class="btn-login-custom">Iniciar sesión</a>
+
+        <!-- Botón hamburguesa -->
+        <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
+          aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+=======
+
+  <!-- HEADER -->
+  <header class="main-header">
+    <div class="container-fluid d-flex align-items-center justify-content-between py-2 px-4">
+      <!-- Logo + título -->
+      <div class="d-flex align-items-center">
+        <img src="../Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2" style="height: 50px;">
+        <h1 class="header-title mb-0">Vinyl Lab</h1>
+      </div>
+
+      <!-- Botones de usuario -->
+      <div class="d-flex align-items-center gap-2">
+        <?php if (isset($_SESSION['usuario'])): ?>
+          <a href="gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
+          <a href="logout.php" class="btn-login-custom">Cerrar sesión</a>
+        <?php else: ?>
+          <a href="login.html" class="btn-login-custom">Iniciar sesión</a>
+        <?php endif; ?>
+
+        <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
+          aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+
+  <!-- Menú lateral (offcanvas) -->
+  <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
+    <div class="offcanvas-header flex-column align-items-start w-100">
+      <div class="logo-container">
+        <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
+      </div>
+    </div>
+<<<<<<< HEAD:index.html
+
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+    <div class="offcanvas-body">
+      <nav class="nav flex-column">
+        <a class="nav-link" href="index.php">Inicio</a>
+        <a class="nav-link" href="catalogo.php">Catálogo</a>
+        <a class="nav-link" href="#">Ofertas</a>
+        <a class="nav-link" href="#">Contacto</a>
+        <?php if (isset($_SESSION['usuario'])): ?>
+          <a href="gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
+        <?php endif; ?>
+
+      </nav>
+    </div>
+  </div>
+
+<<<<<<< HEAD:index.html
+  <!-- Contenido principal -->
+=======
+  <!-- 🎯 NUEVO: Splash / bienvenida encima de todo -->
+  <section class="splash-full">
+    <h1 class="titulo-splash">Vinyl Lab</h1>
+    <p class="subtitulo-splash">"El sonido del pasado, con la calidez del presente"</p>
+    <a href="catalogo.php" class="btn-catalogo">Ver Catálogo</a>
+  </section>
+
+  <!-- CONTENIDO PRINCIPAL ORIGINAL COMPLETO -->
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+  <main class="main-content container py-5">
+    <section class="hero d-flex flex-column flex-lg-row align-items-center justify-content-between mb-5 gap-5">
+
+      <!-- Lado Izquierdo: Imagen + Play + Precio -->
+      <div class="hero-left text-center text-lg-start position-relative">
+        <div class="imagen position-relative d-inline-block mb-3">
+          <img src="Imagenes/beatles1.jpg" alt="Vinilo destacado" class="imagen-principal">
+          <button class="btn-play" id="playButton" aria-label="Reproducir">
+            <i class="bi bi-play-fill"></i>
+          </button>
+        </div>
+
+        <h2 class="titulo-disco mt-3"></h2>
+        <div class="precio my-3">
+          <span class="precio-texto">224,99 €</span>
+        </div>
+      </div>
+
+      <!-- Lado Derecho: Texto + Botón -->
+      <div class="hero-right text-center text-lg-start">
+        <h1 class="titulo-principal mb-3">Abbey Road</h1>
+        <p class="eslogan mb-4"></p>
+        <p class="hero-desc mb-4">
+          Sumérgete en la experiencia del sonido auténtico. En Vinyl Lab te traemos vinilos cuidadosamente seleccionados
+          para coleccionistas y amantes de la buena música.
+        </p>
+        <button class="btn-catalogo">Comprar</button>
+      </div>
+    </section>
+
+    <!-- Carrusel 3D de discos -->
+    <section class="galeria-discos text-center my-5">
+      <h2 class="mb-4">Explora nuestra colección</h2>
+<<<<<<< HEAD:index.html
+
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+      <div class="carousel3d">
+        <div class="carousel3d-content">
+          <div class="carousel3d-item"><img src="Imagenes/beatles1.jpg" alt="Abbey Road - The Beatles"></div>
+          <div class="carousel3d-item"><img src="Imagenes/pinkfloyd.png" alt="The Dark Side of the Moon - Pink Floyd">
+          </div>
+          <div class="carousel3d-item"><img src="Imagenes/queen.png" alt="A Night at the Opera - Queen"></div>
+        </div>
+      </div>
+    </section>
+
+<<<<<<< HEAD:index.html
+
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+    <!-- Historia del grupo -->
+    <section class="info-historia mb-5">
+      <h2>Historia del grupo</h2>
+      <div class="texto-historia" id="textoHistoria">
+<<<<<<< HEAD:index.html
+        <p>
+          <strong>The Beatles</strong>, una banda de rock inglesa formada en <strong>Liverpool</strong> durante los años
+          1960, se convirtió en el grupo más influyente de la música popular occidental, revolucionando la industria
+          musical y marcando profundamente la cultura popular y social de la década.
+          Compuesta por <strong>John Lennon, Paul McCartney, George Harrison</strong> y <strong>Ringo Starr</strong>, la
+          banda se disolvió oficialmente en 1970 tras una exitosa carrera que abarcó desde el <em>skiffle</em> y el
+          <em>rock and roll</em> hasta géneros como el rock psicodélico, el pop y la música clásica.
+        </p>
+
+        <p>
+          La historia del grupo se remonta a <strong>1956</strong>, cuando <strong>John Lennon</strong> fundó <em>The
+            Quarry Men</em>, una banda de <em>skiffle</em> junto a compañeros de colegio.
+          En <strong>1957</strong>, <strong>Paul McCartney</strong> se unió al grupo tras conocer a Lennon en una
+          presentación, y poco después, <strong>George Harrison</strong>, con apenas catorce años, se incorporó como
+          guitarrista líder.
+        </p>
+
+        <p>
+          La formación inicial también contó con <strong>Stuart Sutcliffe</strong> en el bajo y <strong>Pete
+            Best</strong> en la batería, pero ambos fueron reemplazados: Sutcliffe se marchó en 1961 y Best fue
+          sustituido en 1962 por <strong>Ringo Starr</strong>, completando así la formación clásica del grupo.
+        </p>
+
+        <p>
+          Tras ser descubiertos por <strong>Brian Epstein</strong>, quien se convirtió en su mánager, y bajo la
+          producción de <strong>George Martin</strong>, los Beatles lanzaron su primer sencillo, <em>“Love Me Do”</em>,
+          en <strong>1962</strong>, marcando el inicio de su éxito comercial.
+          A partir de <strong>1964</strong>, la banda alcanzó una popularidad mundial sin precedentes con la
+          <em>beatlemanía</em>, consolidándose como una fuerza cultural global.
+        </p>
+
+        <p>
+          Durante su período de experimentación en estudio, crearon álbumes innovadores como <em>Sgt. Pepper’s Lonely
+            Hearts Club Band</em> (<strong>1967</strong>), considerado una obra maestra y un pilar del rock psicodélico.
+          Aunque dejaron de actuar en vivo en <strong>1966</strong> para centrarse en la grabación, su influencia
+          continuó creciendo.
+        </p>
+
+        <p>
+          Tras su disolución en <strong>1970</strong>, todos sus miembros prosiguieron carreras individuales.
+          <strong>John Lennon</strong> fue asesinado en 1980 y <strong>George Harrison</strong> falleció de cáncer en
+          2001, mientras que <strong>Paul McCartney</strong> y <strong>Ringo Starr</strong> continúan activos
+          musicalmente.
+        </p>
+
+        <p>
+          Aunque la banda se disolvió hace más de cinco décadas, su música sigue siendo ampliamente popular, y se les
+          considera el grupo con más números uno en las listas británicas y el más vendido en los Estados Unidos.
+        </p>
+      </div>
+
+=======
+        <p><strong>The Beatles</strong>, una banda de rock inglesa formada en <strong>Liverpool</strong> durante los
+          años 1960, se convirtió en el grupo más influyente de la música popular occidental...</p>
+        <p>La historia del grupo se remonta a <strong>1956</strong>, cuando <strong>John Lennon</strong> fundó <em>The
+            Quarry Men</em>...</p>
+        <p>La formación inicial también contó con <strong>Stuart Sutcliffe</strong> en el bajo...</p>
+        <p>Tras ser descubiertos por <strong>Brian Epstein</strong>...</p>
+        <p>Durante su período de experimentación en estudio...</p>
+        <p>Tras su disolución en <strong>1970</strong>...</p>
+        <p>Aunque la banda se disolvió hace más de cinco décadas...</p>
+      </div>
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+      <button class="btn-leer-mas mt-3" id="btnLeerMas" aria-expanded="false" aria-controls="textoHistoria">Leer
+        más</button>
+    </section>
+
+    <!-- Info Tienda -->
+    <section class="info-tienda">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <img src="Imagenes/vinylstore1.png" alt="Vinyl store" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-lg-6">
+          <h2>Sobre Nuestra Tienda</h2>
+          <p>
+            Somos una tienda especializada en vinilos dedicada a quienes disfrutan de la música en su forma más
+            auténtica. Creemos que cada disco cuenta una historia, y por eso seleccionamos cuidadosamente nuestro
+            catálogo con clásicos inolvidables, ediciones especiales y nuevos lanzamientos que celebran el sonido
+            analógico.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (sin modificaciones) -->
+  <footer class="footer mt-5 pt-5 pb-4">
+    <div class="container">
+      <div class="row gy-4">
+        <!-- Logo -->
+        <div class="col-md-3 text-center text-md-start">
+          <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="footer-logo mb-2">
+          <p class="footer-text">El sonido del pasado, con la calidez del presente.</p>
+        </div>
+
+        <!-- Enlaces -->
+        <div class="col-md-3 text-center text-md-start">
+          <h5 class="footer-titulo">Enlaces</h5>
+          <ul class="list-unstyled footer-links">
+            <li><a href="inicio.php">Inicio</a></li>
+            <li><a href="catalogo.php">Catálogo</a></li>
+            <li><a href="#">Ofertas</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Redes sociales -->
+        <div class="col-md-3 text-center text-md-start">
+          <h5 class="footer-titulo">Síguenos</h5>
+          <div class="social-icons">
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+<<<<<<< HEAD:index.html
+        <!-- Formulario -->
+=======
+        <!-- Formulario de contacto -->
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+        <div class="col-md-3 text-center text-md-start">
+          <h5 class="footer-titulo">Contáctanos</h5>
+          <form class="footer-form">
+            <input type="text" class="form-control mb-2" placeholder="Tu nombre" required>
+            <input type="email" class="form-control mb-2" placeholder="Tu email" required>
+            <textarea class="form-control mb-2" rows="2" placeholder="Mensaje" required></textarea>
+            <button type="submit" class="btn btn-enviar w-100">Enviar</button>
+          </form>
+        </div>
+      </div>
+
+<<<<<<< HEAD:index.html
+      <!-- Zona legal del sitio -->
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+      <div class="footer-legal text-center mt-4 pt-3 border-top">
+        <h6 class="footer-titulo mb-2">Información Legal</h6>
+        <p class="footer-text small mb-2">
+          Vinyl Lab cumple con la normativa vigente sobre protección de datos personales (Reglamento (UE) 2016/679 -
+          RGPD, y la Ley Orgánica 3/2018 - LOPDGDD), así como con la Ley 34/2002 de Servicios de la Sociedad de la
+          Información y Comercio Electrónico (LSSI-CE).
+        </p>
+        <div class="footer-legal-links">
+          <a href="aviso-legal.html" class="footer-legal-link">Aviso Legal</a> |
+          <a href="politica-privacidad.html" class="footer-legal-link">Política de Privacidad</a> |
+          <a href="politica-cookies.html" class="footer-legal-link">Política de Cookies</a> |
+          <a href="condiciones-uso.html" class="footer-legal-link">Condiciones de Uso</a>
+        </div>
+      </div>
+
+<<<<<<< HEAD:index.html
+      <!-- Banner de cookies -->
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+      <div id="cookie-banner" class="cookie-banner">
+        <p>Usamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia.
+          <a href="politica-cookies.html">Más información</a>.
+        </p>
+        <button id="accept-cookies" class="btn btn-aceptar-cookies">Aceptar</button>
+      </div>
+
+<<<<<<< HEAD:index.html
+
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+      <div class="text-center mt-4 border-top pt-3 small footer-copy">
+        &copy; 2025 Vinyl Lab — Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Audio público (para no requerir carpetas locales) -->
+  <audio id="abbeyRoadAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Botón hamburguesa activo -->
+  <script>
+    const offcanvasEl = document.getElementById('menuLateral');
+    const btnHamb = document.getElementById('btnHamburguesa');
+
+    offcanvasEl.addEventListener('show.bs.offcanvas', () => {
+      btnHamb.classList.add('active');
+    });
+<<<<<<< HEAD:index.html
+
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+    offcanvasEl.addEventListener('hidden.bs.offcanvas', () => {
+      btnHamb.classList.remove('active');
+    });
+  </script>
+
+  <!-- Scripts: Play/Pause audio y Leer más/Menos -->
+  <script>
+    const playButton = document.getElementById('playButton');
+    const audio = document.getElementById('abbeyRoadAudio');
+    const img = document.querySelector('.imagen-principal');
+    const imagenCont = document.querySelector('.imagen');
+    let isPlaying = false;
+
+    audio.volume = 1.0;
+
+    function centerPlayButton() {
+      if (getComputedStyle(imagenCont).position === 'static') {
+        imagenCont.style.position = 'relative';
+      }
+      const imgRect = img.getBoundingClientRect();
+      const contRect = imagenCont.getBoundingClientRect();
+      const centerX = imgRect.left - contRect.left + imgRect.width / 2;
+      const centerY = imgRect.top - contRect.top + imgRect.height / 2;
+      playButton.style.position = 'absolute';
+      playButton.style.left = centerX + 'px';
+      playButton.style.top = centerY + 'px';
+      playButton.style.transform = 'translate(-50%, -50%)';
+    }
+
+    if (img.complete) {
+      centerPlayButton();
+    } else {
+      img.addEventListener('load', centerPlayButton);
+    }
+    window.addEventListener('resize', centerPlayButton);
+
+    playButton.addEventListener('click', () => {
+      if (!isPlaying) {
+        audio.play().then(() => {
+          playButton.innerHTML = '<i class="bi bi-pause-fill"></i>';
+          isPlaying = true;
+        }).catch(err => console.log(err));
+      } else {
+        audio.pause();
+        playButton.innerHTML = '<i class="bi bi-play-fill"></i>';
+        isPlaying = false;
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      playButton.innerHTML = '<i class="bi bi-play-fill"></i>';
+      isPlaying = false;
+<<<<<<< HEAD:index.html
+    });
+
+    // --- Leer más / Leer menos (FUNCIONA con alturas dinámicas) ---
+=======
+    }
+
+    );
+
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+    const textoHistoria = document.getElementById('textoHistoria');
+    const btnLeerMas = document.getElementById('btnLeerMas');
+    let abierto = false;
+
+    function colapsar() {
+      textoHistoria.style.maxHeight = '200px';
+      btnLeerMas.textContent = 'Leer más';
+      btnLeerMas.setAttribute('aria-expanded', 'false');
+      abierto = false;
+    }
+
+    function expandir() {
+      textoHistoria.style.maxHeight = textoHistoria.scrollHeight + 'px';
+      btnLeerMas.textContent = 'Leer menos';
+      btnLeerMas.setAttribute('aria-expanded', 'true');
+      abierto = true;
+    }
+
+<<<<<<< HEAD:index.html
+    // Estado inicial
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+    colapsar();
+
+    btnLeerMas.addEventListener('click', () => {
+      if (abierto) {
+        colapsar();
+      } else {
+        expandir();
+      }
+    });
+
+<<<<<<< HEAD:index.html
+    // Si cambia el tamaño de ventana y está abierto, recalcula la altura
+=======
+>>>>>>> 06eacd3887e28eed1ecec6011ad08656416b15a4:index.php
+    window.addEventListener('resize', () => {
+      if (abierto) {
+        textoHistoria.style.maxHeight = textoHistoria.scrollHeight + 'px';
+      }
+    });
+  </script>
+</body>
+
+</html>
