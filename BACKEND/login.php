@@ -1,6 +1,7 @@
 <?php
 session_start();
-require 'conexion.php';
+require_once __DIR__ . '/conexion.php';
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre = $_POST['nombre'] ?? '';
@@ -16,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['usuario'] = $nombre;
         $stmt->close();
         $conn->close();
-        header("Location: ../FRONTEND/index.php");
+        header("Location: index.php");
         exit;
     } else {
         $stmt->close();
