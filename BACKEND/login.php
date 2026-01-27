@@ -6,18 +6,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre = $_POST['nombre'] ?? '';
     $pass = $_POST['pass'] ?? '';
 
-    $nombre = $conn->real_escape_string($nombre);
-    $pass = $conn->real_escape_string($pass);
+    // Usar consultas preparadas para evitar SQL injection
+    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE nombre = ? AND pass = ?");
+    $stmt->bind_param("ss", $nombre, $pass);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
 
-    $sql = "SELECT * FROM usuarios WHERE nombre='$nombre' AND pass='$pass'";
-    $resultado = $conn->query($sql);
-
-    if ($resultado && $resultado->num_rows === 1) {
+    if ($resultado->num_rows === 1) {
         $_SESSION['usuario'] = $nombre;
+        $stmt->close();
         $conn->close();
-        header("Location: index.php");
+        header("Location: ../FRONTEND/index.php");
         exit;
     } else {
+        $stmt->close();
         $conn->close();
         echo "<script>
             alert('Usuario o contraseña incorrectos.');
@@ -25,9 +27,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </script>";
         exit;
     }
-} else {
-    http_response_code(405);
-    echo "Método no permitido";
-    exit;
 }
 ?>
