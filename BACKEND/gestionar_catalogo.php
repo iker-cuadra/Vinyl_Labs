@@ -1,9 +1,6 @@
 <?php
 session_start();
 require_once __DIR__ . '/conexion.php';
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +31,7 @@ require_once __DIR__ . '/conexion.php';
 <header class="main-header">
   <div class="container d-flex align-items-center justify-content-between">
     <div class="header-left d-flex align-items-center">
-      <img src="Imagenes/VinylLab.png" class="header-logo me-2">
+      <img src="imagenes/VinylLab.png" class="header-logo me-2">
       <h1 class="header-title">Vinyl Lab</h1>
     </div>
 
@@ -55,7 +52,7 @@ require_once __DIR__ . '/conexion.php';
 <!-- MENÚ LATERAL -->
 <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral">
   <div class="offcanvas-header">
-    <img src="Imagenes/VinylLab.png" class="sidebar-logo">
+    <img src="imagenes/VinylLab.png" class="sidebar-logo">
   </div>
 </div>
 

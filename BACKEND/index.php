@@ -20,7 +20,7 @@ session_start();
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <!-- Estilos -->
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,
@@ -90,17 +90,17 @@ session_start();
     <div class="container-fluid d-flex align-items-center justify-content-between py-2 px-4">
       <!-- Logo + título -->
       <div class="d-flex align-items-center">
-        <img src="../FRONTEND/imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2" style="height: 50px;">
+        <img src="FRONTEND/imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2" style="height: 50px;">
         <h1 class="header-title mb-0">Vinyl Lab</h1>
       </div>
 
       <!-- Botones de usuario -->
       <div class="d-flex align-items-center gap-2">
         <?php if (isset($_SESSION['usuario'])): ?>
-          <a href="gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
-          <a href="logout.php" class="btn-login-custom">Cerrar sesión</a>
+          <a href="FRONTEND/gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
+          <a href="FRONTEND/logout.php" class="btn-login-custom">Cerrar sesión</a>
         <?php else: ?>
-          <a href="login.html" class="btn-login-custom">Iniciar sesión</a>
+          <a href="FRONTEND/login.html" class="btn-login-custom">Iniciar sesión</a>
         <?php endif; ?>
 
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
@@ -117,19 +117,21 @@ session_start();
   <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
     <div class="offcanvas-header flex-column align-items-start w-100">
       <div class="logo-container">
-        <img src="../FRONTEND/imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
+        <img src="FRONTEND/imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
       </div>
     </div>
     <div class="offcanvas-body">
       <nav class="nav flex-column">
-        <a class="nav-link" href="index.php">Inicio</a>
-        <a class="nav-link" href="catalogo.php">Catálogo</a>
+        <a class="nav-link" href="FRONTEND/index.php">Inicio</a>
+        <a class="nav-link" href="FRONTEND/catalogo.php">Catálogo</a>
         <a class="nav-link" href="#">Ofertas</a>
         <a class="nav-link" href="#">Contacto</a>
         <?php if (isset($_SESSION['usuario'])): ?>
-          <a href="gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
+          <a href="FRONTEND/gestionar_catalogo.php" class="nav-link">Gestionar catálogo</a>
+          <a href="FRONTEND/logout.php" class="nav-link">Cerrar sesión</a>
+        <?php else: ?>
+          <a href="FRONTEND/login.html" class="nav-link">Iniciar sesión</a>
         <?php endif; ?>
-
       </nav>
     </div>
   </div>
@@ -138,7 +140,7 @@ session_start();
   <section class="splash-full">
     <h1 class="titulo-splash">Vinyl Lab</h1>
     <p class="subtitulo-splash">"El sonido del pasado, con la calidez del presente"</p>
-    <a href="catalogo.php" class="btn-catalogo">Ver Catálogo</a>
+    <a href="FRONTEND/catalogo.php" class="btn-catalogo">Ver Catálogo</a>
   </section>
 
   <!-- CONTENIDO PRINCIPAL ORIGINAL COMPLETO -->
@@ -148,7 +150,7 @@ session_start();
       <!-- Lado Izquierdo: Imagen + Play + Precio -->
       <div class="hero-left text-center text-lg-start position-relative">
         <div class="imagen position-relative d-inline-block mb-3">
-          <img src="../FRONTEND/imagenes/beatles1.jpg" alt="Vinilo destacado" class="imagen-principal">
+          <img src="FRONTEND/imagenes/beatles1.jpg" alt="Vinilo destacado" class="imagen-principal">
           <button class="btn-play" id="playButton" aria-label="Reproducir">
             <i class="bi bi-play-fill"></i>
           </button>
@@ -177,10 +179,10 @@ session_start();
       <h2 class="mb-4">Explora nuestra colección</h2>
       <div class="carousel3d">
         <div class="carousel3d-content">
-          <div class="carousel3d-item"><img src="../FRONTEND/imagenes/beatles1.jpg" alt="Abbey Road - The Beatles"></div>
-          <div class="carousel3d-item"><img src="../FRONTEND/imagenes/pinkfloyd.png" alt="The Dark Side of the Moon - Pink Floyd">
+          <div class="carousel3d-item"><img src="FRONTEND/imagenes/beatles1.jpg" alt="Abbey Road - The Beatles"></div>
+          <div class="carousel3d-item"><img src="FRONTEND/imagenes/pinkfloyd.png" alt="The Dark Side of the Moon - Pink Floyd">
           </div>
-          <div class="carousel3d-item"><img src="../FRONTEND/imagenes/queen.png" alt="A Night at the Opera - Queen"></div>
+          <div class="carousel3d-item"><img src="FRONTEND/imagenes/queen.png" alt="A Night at the Opera - Queen"></div>
         </div>
       </div>
     </section>
@@ -207,7 +209,7 @@ session_start();
     <section class="info-tienda">
       <div class="row align-items-center">
         <div class="col-lg-6 mb-4 mb-lg-0">
-          <img src="../FRONTEND/imagenes/vinylstore1.png" alt="Vinyl store" class="img-fluid rounded shadow">
+          <img src="FRONTEND/imagenes/vinylstore1.png" alt="Vinyl store" class="img-fluid rounded shadow">
         </div>
         <div class="col-lg-6">
           <h2>Sobre Nuestra Tienda</h2>
@@ -222,13 +224,13 @@ session_start();
     </section>
   </main>
 
-  <!-- Footer (sin modificaciones) -->
+  <!-- Footer -->
   <footer class="footer mt-5 pt-5 pb-4">
     <div class="container">
       <div class="row gy-4">
         <!-- Logo -->
         <div class="col-md-3 text-center text-md-start">
-          <img src="../FRONTEND/imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="footer-logo mb-2">
+          <img src="FRONTEND/imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="footer-logo mb-2">
           <p class="footer-text">El sonido del pasado, con la calidez del presente.</p>
         </div>
 
@@ -236,8 +238,8 @@ session_start();
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Enlaces</h5>
           <ul class="list-unstyled footer-links">
-            <li><a href="inicio.php">Inicio</a></li>
-            <li><a href="catalogo.php">Catálogo</a></li>
+            <li><a href="FRONTEND/index.php">Inicio</a></li>
+            <li><a href="FRONTEND/catalogo.php">Catálogo</a></li>
             <li><a href="#">Ofertas</a></li>
             <li><a href="#">Contacto</a></li>
           </ul>
@@ -294,7 +296,7 @@ session_start();
     </div>
   </footer>
 
-  <!-- Audio público (para no requerir carpetas locales) -->
+  <!-- Audio público -->
   <audio id="abbeyRoadAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
   <!-- Bootstrap JS -->
@@ -360,9 +362,7 @@ session_start();
     audio.addEventListener('ended', () => {
       playButton.innerHTML = '<i class="bi bi-play-fill"></i>';
       isPlaying = false;
-    }
-
-    );
+    });
 
     const textoHistoria = document.getElementById('textoHistoria');
     const btnLeerMas = document.getElementById('btnLeerMas');
