@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $conn->close();
         echo "<script>
             alert('Usuario o contraseña incorrectos.');
-            window.location.href = 'login.html';
+            window.location.href = '../FRONTEND/login.html';
         </script>";
         exit;
     }
