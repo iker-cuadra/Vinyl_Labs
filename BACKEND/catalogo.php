@@ -39,7 +39,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
   <header class="main-header">
     <div class="container d-flex align-items-center justify-content-between">
       <div class="header-left d-flex align-items-center">
-        <img src="../Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2">
+        <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2">
         <h1 class="header-title">Vinyl Lab</h1>
       </div>
 
@@ -63,7 +63,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
   <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
     <div class="offcanvas-header flex-column align-items-start w-100">
       <div class="logo-container">
-        <img src="../Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
+        <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
       </div>
     </div>
     <div class="offcanvas-body">
@@ -108,7 +108,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
     <div class="container">
       <div class="row gy-4">
         <div class="col-md-3 text-center text-md-start">
-          <img src="../Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="footer-logo mb-2">
+          <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="footer-logo mb-2">
           <p class="footer-text">El sonido del pasado, con la calidez del presente.</p>
         </div>
 

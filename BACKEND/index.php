@@ -90,7 +90,7 @@ session_start();
     <div class="container-fluid d-flex align-items-center justify-content-between py-2 px-4">
       <!-- Logo + título -->
       <div class="d-flex align-items-center">
-        <img src="FRONTEND/imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2" style="height: 50px;">
+        <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2" style="height: 50px;">
         <h1 class="header-title mb-0">Vinyl Lab</h1>
       </div>
 
@@ -117,7 +117,7 @@ session_start();
   <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
     <div class="offcanvas-header flex-column align-items-start w-100">
       <div class="logo-container">
-        <img src="FRONTEND/imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
+        <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
       </div>
     </div>
     <div class="offcanvas-body">
@@ -150,7 +150,7 @@ session_start();
       <!-- Lado Izquierdo: Imagen + Play + Precio -->
       <div class="hero-left text-center text-lg-start position-relative">
         <div class="imagen position-relative d-inline-block mb-3">
-          <img src="FRONTEND/imagenes/beatles1.jpg" alt="Vinilo destacado" class="imagen-principal">
+          <img src="imagenes/beatles1.jpg" alt="Vinilo destacado" class="imagen-principal">
           <button class="btn-play" id="playButton" aria-label="Reproducir">
             <i class="bi bi-play-fill"></i>
           </button>
@@ -179,10 +179,10 @@ session_start();
       <h2 class="mb-4">Explora nuestra colección</h2>
       <div class="carousel3d">
         <div class="carousel3d-content">
-          <div class="carousel3d-item"><img src="FRONTEND/imagenes/beatles1.jpg" alt="Abbey Road - The Beatles"></div>
-          <div class="carousel3d-item"><img src="FRONTEND/imagenes/pinkfloyd.png" alt="The Dark Side of the Moon - Pink Floyd">
+          <div class="carousel3d-item"><img src="imagenes/beatles1.jpg" alt="Abbey Road - The Beatles"></div>
+          <div class="carousel3d-item"><img src="imagenes/pinkfloyd.png" alt="The Dark Side of the Moon - Pink Floyd">
           </div>
-          <div class="carousel3d-item"><img src="FRONTEND/imagenes/queen.png" alt="A Night at the Opera - Queen"></div>
+          <div class="carousel3d-item"><img src="imagenes/queen.png" alt="A Night at the Opera - Queen"></div>
         </div>
       </div>
     </section>
@@ -209,7 +209,7 @@ session_start();
     <section class="info-tienda">
       <div class="row align-items-center">
         <div class="col-lg-6 mb-4 mb-lg-0">
-          <img src="FRONTEND/imagenes/vinylstore1.png" alt="Vinyl store" class="img-fluid rounded shadow">
+          <img src="imagenes/vinylstore1.png" alt="Vinyl store" class="img-fluid rounded shadow">
         </div>
         <div class="col-lg-6">
           <h2>Sobre Nuestra Tienda</h2>
@@ -230,7 +230,7 @@ session_start();
       <div class="row gy-4">
         <!-- Logo -->
         <div class="col-md-3 text-center text-md-start">
-          <img src="FRONTEND/imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="footer-logo mb-2">
+          <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="footer-logo mb-2">
           <p class="footer-text">El sonido del pasado, con la calidez del presente.</p>
         </div>
 
@@ -238,8 +238,8 @@ session_start();
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Enlaces</h5>
           <ul class="list-unstyled footer-links">
-            <li><a href="FRONTEND/index.php">Inicio</a></li>
-            <li><a href="FRONTEND/catalogo.php">Catálogo</a></li>
+            <li><a href="index.php">Inicio</a></li>
+            <li><a href="catalogo.php">Catálogo</a></li>
             <li><a href="#">Ofertas</a></li>
             <li><a href="#">Contacto</a></li>
           </ul>
