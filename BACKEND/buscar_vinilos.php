@@ -1,6 +1,7 @@
 <?php
-session_start();
-require 'conexion.php';
+require __DIR__ . '/session_bootstrap.php';
+require_once __DIR__ . '/conexion.php';
+
 
 if (!isset($_SESSION['usuario'])) {
   exit;

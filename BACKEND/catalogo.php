@@ -1,6 +1,7 @@
 <?php
 session_start();
-require 'conexion.php';
+require_once __DIR__ . '/conexion.php';
+
 $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DESC");
 ?>
 

@@ -1,11 +1,9 @@
 <?php
 session_start();
-require 'conexion.php';
+require_once __DIR__ . '/conexion.php';
 
-if (!isset($_SESSION['usuario'])) {
-  header("Location: login.html");
-  exit();
-}
+
+
 ?>
 
 <!DOCTYPE html>
