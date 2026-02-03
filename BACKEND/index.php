@@ -97,10 +97,10 @@ session_start();
       <!-- Botones de usuario -->
       <div class="d-flex align-items-center gap-2">
         <?php if (isset($_SESSION['usuario'])): ?>
-          <a href="FRONTEND/gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
-          <a href="FRONTEND/logout.php" class="btn-login-custom">Cerrar sesión</a>
+          <a href="gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
+          <a href="logout.php" class="btn-login-custom">Cerrar sesión</a>
         <?php else: ?>
-          <a href="FRONTEND/login.html" class="btn-login-custom">Iniciar sesión</a>
+          <a href="../FRONTEND/login.html" class="btn-login-custom">Iniciar sesión</a>
         <?php endif; ?>
 
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
@@ -122,13 +122,13 @@ session_start();
     </div>
     <div class="offcanvas-body">
       <nav class="nav flex-column">
-        <a class="nav-link" href="FRONTEND/index.php">Inicio</a>
-        <a class="nav-link" href="FRONTEND/catalogo.php">Catálogo</a>
+        <a class="nav-link" href="index.php">Inicio</a>
+        <a class="nav-link" href="catalogo.php">Catálogo</a>
         <a class="nav-link" href="#">Ofertas</a>
         <a class="nav-link" href="#">Contacto</a>
         <?php if (isset($_SESSION['usuario'])): ?>
-          <a href="FRONTEND/gestionar_catalogo.php" class="nav-link">Gestionar catálogo</a>
-          <a href="FRONTEND/logout.php" class="nav-link">Cerrar sesión</a>
+          <a href="gestionar_catalogo.php" class="nav-link">Gestionar catálogo</a>
+          <a href="logout.php" class="nav-link">Cerrar sesión</a>
         <?php else: ?>
           <a href="FRONTEND/login.html" class="nav-link">Iniciar sesión</a>
         <?php endif; ?>

@@ -24,7 +24,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <!-- Estilos -->
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,
@@ -115,7 +115,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Enlaces</h5>
           <ul class="list-unstyled footer-links">
-            <li><a href="index.html">Inicio</a></li>
+            <li><a href="../FRONTEND/index.html">Inicio</a></li>
             <li><a href="catalogo.php">Catálogo</a></li>
             <li><a href="#">Ofertas</a></li>
             <li><a href="#">Contacto</a></li>
