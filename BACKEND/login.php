@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['usuario'] = $nombre;
         $stmt->close();
         $conn->close();
-        header("Location: index.php");
+        header("Location: https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/");
         exit;
     } else {
         $stmt->close();
