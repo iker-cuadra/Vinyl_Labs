@@ -36,8 +36,7 @@ session_start();
         Gestionar catálogo
       </a>
 
-      <!-- 🔴 AQUÍ ESTABA EL ERROR -->
-      <a href="https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/ " class="btn-login-custom">Inicio</a>
+      <a href="https://vinyl-labs-h7dqd0kd-iker-cuadras-projects.vercel.app/" class="btn-login-custom">Inicio</a>
 
       <a href="https://vinyllabs-production.up.railway.app/logout.php" class="btn-login-custom">Cerrar sesión</a>
 
@@ -57,7 +56,7 @@ session_start();
   </div>
   <div class="offcanvas-body">
     <nav class="nav flex-column">
-      <a class="nav-link" href="https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/">Inicio</a>
+      <a class="nav-link" href="https://vinyl-labs-h7dqd0kd-iker-cuadras-projects.vercel.app/">Inicio</a>
       <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
     </nav>
   </div>
