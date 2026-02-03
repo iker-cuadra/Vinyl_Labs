@@ -36,9 +36,9 @@ require_once __DIR__ . '/conexion.php';
     </div>
 
     <div class="d-flex align-items-center gap-2">
-      <a href="add_vinilos.php" class="btn-login-custom">Añadir vinilo</a>
-      <a href="index.php" class="btn-login-custom">Inicio</a>
-      <a href="logout.php" class="btn-login-custom">Cerrar sesión</a>
+      <a href="https://vinyllabs-production.up.railway.app/add_vinilos.php" class="btn-login-custom">Añadir vinilo</a>
+      <a href="https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/" class="btn-login-custom">Inicio</a>
+      <a href="https://vinyllabs-production.up.railway.app/logout.php" class="btn-login-custom">Cerrar sesión</a>
 
       <button class="btn btn-hamburguesa" type="button"
         data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
@@ -104,7 +104,7 @@ const input = document.getElementById('buscar');
 const resultado = document.getElementById('resultado');
 
 function buscarVinilos(valor = '') {
-  fetch('buscar_vinilos.php?buscar=' + encodeURIComponent(valor))
+  fetch('https://vinyllabs-production.up.railway.app/buscar_vinilos.php?buscar=' + encodeURIComponent(valor))
     .then(res => res.text())
     .then(data => {
       resultado.innerHTML = data;

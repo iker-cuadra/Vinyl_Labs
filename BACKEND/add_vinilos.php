@@ -27,19 +27,19 @@ session_start();
 <header class="main-header">
   <div class="container d-flex align-items-center justify-content-between">
     <div class="header-left d-flex align-items-center">
-      <img src="Imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2">
+      <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="header-logo me-2">
       <h1 class="header-title">Vinyl Lab</h1>
     </div>
 
     <div class="d-flex align-items-center gap-2">
-      <a href="gestionar_catalogo.php" class="btn-login-custom">
+      <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" class="btn-login-custom">
         Gestionar catálogo
       </a>
 
       <!-- 🔴 AQUÍ ESTABA EL ERROR -->
-      <a href="index.php" class="btn-login-custom">Inicio</a>
+      <a href="https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/ " class="btn-login-custom">Inicio</a>
 
-      <a href="logout.php" class="btn-login-custom">Cerrar sesión</a>
+      <a href="https://vinyllabs-production.up.railway.app/logout.php" class="btn-login-custom">Cerrar sesión</a>
 
       <button class="btn btn-hamburguesa" type="button"
         data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
@@ -53,12 +53,12 @@ session_start();
 <!-- MENÚ LATERAL -->
 <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral">
   <div class="offcanvas-header flex-column align-items-start w-100">
-    <img src="Imagenes/VinylLab.png" class="sidebar-logo">
+    <img src="imagenes/VinylLab.png" class="sidebar-logo">
   </div>
   <div class="offcanvas-body">
     <nav class="nav flex-column">
-      <a class="nav-link" href="index.php">Inicio</a>
-      <a class="nav-link" href="catalogo.php">Catálogo</a>
+      <a class="nav-link" href="https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/">Inicio</a>
+      <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
     </nav>
   </div>
 </div>
@@ -73,7 +73,7 @@ session_start();
       Añadir nuevo vinilo
     </h2>
 
-    <form action="guardar_vinilo.php" method="POST" enctype="multipart/form-data">
+    <form action="https://vinyllabs-production.up.railway.app/guardar_vinilo.php" method="POST" enctype="multipart/form-data">
 
       <div class="mb-3">
         <label class="form-label">Nombre del vinilo</label>

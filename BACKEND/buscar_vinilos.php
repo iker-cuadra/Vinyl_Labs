@@ -36,7 +36,7 @@ while ($v = $result->fetch_assoc()):
     </td>
 
     <td class="d-flex gap-2 justify-content-center">
-      <a href="toggle_vinilo.php?id=<?= $v['id'] ?>" class="btn btn-sm" style="background-color:#c48a3a;color:white;">
+      <a href="https://vinyllabs-production.up.railway.app/toggle_vinilo.php?id=<?= $v['id'] ?>" class="btn btn-sm" style="background-color:#c48a3a;color:white;">
         <?= $v['visible'] ? 'Ocultar' : 'Mostrar' ?>
       </a>
 

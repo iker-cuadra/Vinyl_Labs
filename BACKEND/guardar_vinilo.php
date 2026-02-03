@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 
-    header("Location: catalogo.php");
+    header("Location: https://vinyllabs-production.up.railway.app/catalogo.php");
     exit;
 
 } else {

@@ -11,5 +11,5 @@ if (file_exists($img)) unlink($img);
 // Borrar registro
 $conn->query("DELETE FROM vinilos WHERE id = $id");
 
-header("Location: gestionar_catalogo.php");
+header("Location: https://vinyllabs-production.up.railway.app/gestionar_catalogo.php");
 exit();

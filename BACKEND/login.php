@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $conn->close();
         echo "<script>
             alert('Usuario o contraseña incorrectos.');
-            window.location.href = '../FRONTEND/login.html';
+            window.location.href = 'https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/';
         </script>";
         exit;
     }

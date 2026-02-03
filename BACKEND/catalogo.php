@@ -45,7 +45,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
 
       <div class="d-flex align-items-center gap-2">
         <?php if (isset($_SESSION['usuario'])): ?>
-          <a href="gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
+          <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
         <?php endif; ?>
 
         <a href="https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/" class="btn-login-custom">Inicio</a>
@@ -69,7 +69,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
     <div class="offcanvas-body">
       <nav class="nav flex-column">
         <a class="nav-link" href="https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/">Inicio</a>
-        <a class="nav-link" href="catalogo.php">Catálogo</a>
+        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
         <a class="nav-link" href="#">Ofertas</a>
         <a class="nav-link" href="#">Contacto</a>
 
@@ -116,7 +116,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
           <h5 class="footer-titulo">Enlaces</h5>
           <ul class="list-unstyled footer-links">
             <li><a href="https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/">Inicio</a></li>
-            <li><a href="catalogo.php">Catálogo</a></li>
+            <li><a href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a></li>
             <li><a href="#">Ofertas</a></li>
             <li><a href="#">Contacto</a></li>
           </ul>
