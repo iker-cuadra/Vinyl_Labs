@@ -17,14 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['usuario'] = $nombre;
         $stmt->close();
         $conn->close();
-        header("Location: https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/");
+        header("Location: https://vinyllabs-production.up.railway.app/login.php");
         exit;
     } else {
         $stmt->close();
         $conn->close();
         echo "<script>
             alert('Usuario o contraseña incorrectos.');
-            window.location.href = 'https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/';
+            window.location.href = 'https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/login.html';
         </script>";
         exit;
     }
