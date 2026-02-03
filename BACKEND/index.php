@@ -140,7 +140,7 @@ session_start();
   <section class="splash-full">
     <h1 class="titulo-splash">Vinyl Lab</h1>
     <p class="subtitulo-splash">"El sonido del pasado, con la calidez del presente"</p>
-    <a href="FRONTEND/catalogo.php" class="btn-catalogo">Ver Catálogo</a>
+    <a href="catalogo.php" class="btn-catalogo">Ver Catálogo</a>
   </section>
 
   <!-- CONTENIDO PRINCIPAL ORIGINAL COMPLETO -->
