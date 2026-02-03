@@ -130,7 +130,7 @@ session_start();
           <a href="gestionar_catalogo.php" class="nav-link">Gestionar catálogo</a>
           <a href="logout.php" class="nav-link">Cerrar sesión</a>
         <?php else: ?>
-          <a href="FRONTEND/login.html" class="nav-link">Iniciar sesión</a>
+          <a href="../FRONTEND/login.html" class="nav-link">Iniciar sesión</a>
         <?php endif; ?>
       </nav>
     </div>
