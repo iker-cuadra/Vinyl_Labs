@@ -4,6 +4,14 @@ require_once __DIR__ . '/conexion.php';
 
 $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DESC");
 
+// Reseñas con nombre del vinilo — más recientes primero
+$resenas = $conn->query("
+    SELECT r.nombre, r.ciudad, r.comentario, r.fecha, v.nombre AS vinilo_nombre
+    FROM resenas r
+    JOIN vinilos v ON r.vinilo_id = v.id
+    ORDER BY r.fecha DESC
+");
+
 // Mensaje de éxito tras enviar reseña
 $resena_ok = isset($_GET['resena']) && $_GET['resena'] === 'ok';
 ?>
@@ -46,6 +54,113 @@ $resena_ok = isset($_GET['resena']) && $_GET['resena'] === 'ok';
     .btn-resena:hover {
       background-color: #b8860b;
       color: #fff;
+    }
+
+    /* ── Sección de reseñas ─────────────────────────────── */
+    .resenas-section {
+      background: linear-gradient(135deg, #2a1205 0%, #4a2010 60%, #3a1a08 100%);
+      padding: 64px 0 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .resenas-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 20% 50%, rgba(184,134,11,0.08) 0%, transparent 60%),
+                        radial-gradient(circle at 80% 20%, rgba(184,134,11,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .resenas-titulo {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: 3px;
+      color: #f5deb3;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .resenas-subtitulo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(245,222,179,0.5);
+      text-align: center;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
+    .resenas-track-wrapper { position: relative; overflow: hidden; }
+    .resenas-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+      will-change: transform;
+    }
+    .resena-card {
+      flex: 0 0 calc(33.333% - 14px);
+      background: rgba(255,248,235,0.06);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(184,134,11,0.25);
+      border-radius: 14px;
+      padding: 28px 26px 24px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    @media (max-width: 991px) { .resena-card { flex: 0 0 calc(50% - 10px); } }
+    @media (max-width: 600px)  { .resena-card { flex: 0 0 100%; } }
+    .resena-card:hover { transform: translateY(-3px); border-color: rgba(184,134,11,0.55); }
+    .resena-comillas {
+      font-size: 3.5rem; line-height: 0.6;
+      color: rgba(184,134,11,0.35); font-family: Georgia,serif;
+      margin-bottom: 14px; display: block;
+    }
+    .resena-comentario {
+      font-family: 'Raleway', sans-serif; font-size: 0.92rem; line-height: 1.65;
+      color: rgba(255,248,235,0.85); margin-bottom: 20px;
+      display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .resena-footer {
+      border-top: 1px solid rgba(184,134,11,0.2);
+      padding-top: 14px; display: flex; align-items: center; gap: 10px;
+    }
+    .resena-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: linear-gradient(135deg,#b8860b,#8b6914);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue',cursive; font-size: 1.05rem; color: #fff; flex-shrink: 0;
+    }
+    .resena-meta { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+    .resena-nombre {
+      font-family: 'Raleway',sans-serif; font-weight: 700; font-size: 0.88rem;
+      color: #f5deb3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .resena-ciudad { font-family: 'Raleway',sans-serif; font-size: 0.75rem; color: rgba(245,222,179,0.5); }
+    .resena-vinilo-tag {
+      margin-left: auto;
+      background: rgba(184,134,11,0.18); border: 1px solid rgba(184,134,11,0.3);
+      border-radius: 999px; padding: 3px 10px;
+      font-family: 'Raleway',sans-serif; font-size: 0.72rem; font-weight: 600; color: #d4a830;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px; flex-shrink: 0;
+    }
+    .resenas-nav {
+      display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 36px;
+    }
+    .resenas-btn {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: transparent; border: 1.5px solid rgba(184,134,11,0.4); color: #d4a830;
+      font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+    .resenas-btn:hover { background: rgba(184,134,11,0.2); border-color: #b8860b; transform: scale(1.08); }
+    .resenas-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+    .resenas-dots { display: flex; gap: 7px; align-items: center; }
+    .resenas-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(184,134,11,0.3); cursor: pointer;
+      transition: background 0.2s, transform 0.2s; border: none; padding: 0;
+    }
+    .resenas-dot.active { background: #b8860b; transform: scale(1.35); }
+    .resenas-empty {
+      text-align: center; color: rgba(245,222,179,0.45);
+      font-family: 'Raleway',sans-serif; font-size: 0.95rem; padding: 32px 0;
     }
   </style>
 
@@ -140,6 +255,58 @@ $resena_ok = isset($_GET['resena']) && $_GET['resena'] === 'ok';
     </div>
   </main>
 
+  <!-- ── Sección de reseñas ─────────────────────────────────────────── -->
+  <?php
+  $resenas_arr = [];
+  if ($resenas && $resenas->num_rows > 0) {
+      while ($r = $resenas->fetch_assoc()) {
+          $resenas_arr[] = $r;
+      }
+  }
+  ?>
+  <section class="resenas-section">
+    <div class="container">
+      <p class="resenas-subtitulo">Lo que dicen nuestros clientes</p>
+      <h2 class="resenas-titulo">Opiniones</h2>
+
+      <?php if (empty($resenas_arr)): ?>
+        <p class="resenas-empty">
+          <i class="bi bi-chat-square-dots" style="font-size:2rem;display:block;margin-bottom:10px;"></i>
+          Aún no hay reseñas. ¡Sé el primero en dejar la tuya!
+        </p>
+      <?php else: ?>
+        <div class="resenas-track-wrapper" id="resenasWrapper">
+          <div class="resenas-track" id="resenasTrack">
+            <?php foreach ($resenas_arr as $r): ?>
+              <div class="resena-card">
+                <span class="resena-comillas">"</span>
+                <p class="resena-comentario"><?= htmlspecialchars($r['comentario']) ?></p>
+                <div class="resena-footer">
+                  <div class="resena-avatar"><?= mb_strtoupper(mb_substr($r['nombre'], 0, 1)) ?></div>
+                  <div class="resena-meta">
+                    <span class="resena-nombre"><?= htmlspecialchars($r['nombre']) ?></span>
+                    <span class="resena-ciudad"><i class="bi bi-geo-alt-fill me-1" style="font-size:0.65rem;"></i><?= htmlspecialchars($r['ciudad']) ?></span>
+                  </div>
+                  <span class="resena-vinilo-tag">💿 <?= htmlspecialchars($r['vinilo_nombre']) ?></span>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
+
+        <div class="resenas-nav">
+          <button class="resenas-btn" id="resenaPrev" aria-label="Anterior">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <div class="resenas-dots" id="resenasDots"></div>
+          <button class="resenas-btn" id="resenaNext" aria-label="Siguiente">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+      <?php endif; ?>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="footer mt-5 pt-5 pb-4">
     <div class="container">
@@ -216,6 +383,86 @@ $resena_ok = isset($_GET['resena']) && $_GET['resena'] === 'ok';
     const btnHamb = document.getElementById('btnHamburguesa');
     offcanvasEl.addEventListener('show.bs.offcanvas', () => btnHamb.classList.add('active'));
     offcanvasEl.addEventListener('hidden.bs.offcanvas', () => btnHamb.classList.remove('active'));
+  </script>
+
+  <!-- Carrusel de reseñas -->
+  <script>
+    (function () {
+      const track   = document.getElementById('resenasTrack');
+      const wrapper = document.getElementById('resenasWrapper');
+      const btnPrev = document.getElementById('resenaPrev');
+      const btnNext = document.getElementById('resenaNext');
+      const dotsEl  = document.getElementById('resenasDots');
+
+      if (!track) return; // sin reseñas, no hay carrusel
+
+      let current    = 0;
+      let perPage    = 3;
+      const cards    = Array.from(track.querySelectorAll('.resena-card'));
+      const total    = cards.length;
+
+      function getPerPage() {
+        if (window.innerWidth <= 600)  return 1;
+        if (window.innerWidth <= 991)  return 2;
+        return 3;
+      }
+
+      function totalPages() { return Math.ceil(total / perPage); }
+
+      function buildDots() {
+        dotsEl.innerHTML = '';
+        for (let i = 0; i < totalPages(); i++) {
+          const d = document.createElement('button');
+          d.className = 'resenas-dot' + (i === current ? ' active' : '');
+          d.setAttribute('aria-label', `Página ${i + 1}`);
+          d.addEventListener('click', () => goTo(i));
+          dotsEl.appendChild(d);
+        }
+      }
+
+      function goTo(page) {
+        const pages = totalPages();
+        current = Math.max(0, Math.min(page, pages - 1));
+
+        // Calcular offset: cuántos cards se desplazan
+        const cardEl     = cards[0];
+        const cardWidth  = cardEl.offsetWidth + 20; // gap 20px
+        const offset     = current * perPage * cardWidth;
+
+        track.style.transform = `translateX(-${offset}px)`;
+
+        // Actualizar dots
+        dotsEl.querySelectorAll('.resenas-dot').forEach((d, i) =>
+          d.classList.toggle('active', i === current)
+        );
+
+        // Botones
+        btnPrev.disabled = current === 0;
+        btnNext.disabled = current >= pages - 1;
+      }
+
+      function init() {
+        perPage = getPerPage();
+        current = 0;
+        track.style.transform = 'translateX(0)';
+        buildDots();
+        goTo(0);
+      }
+
+      btnPrev.addEventListener('click', () => goTo(current - 1));
+      btnNext.addEventListener('click', () => goTo(current + 1));
+
+      // Swipe táctil
+      let startX = 0;
+      wrapper.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      wrapper.addEventListener('touchend',   e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+      });
+
+      window.addEventListener('resize', init);
+      init();
+    })();
   </script>
 
 </body>
