@@ -21,7 +21,7 @@
 
   <style>
     .card-form {
-      max-width: 850px;
+      max-width: 650px;
       border-radius: 14px;
       background-color: #fff3e6;
     }
@@ -32,21 +32,60 @@
       letter-spacing: 1px;
     }
 
-    .badge-vinilo {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(91, 60, 32, 0.15);
-      border: 1px solid rgba(91, 60, 32, 0.25);
-      font-weight: 700;
-      color: var(--texto);
-      font-size: 0.95rem;
+    /* Tarjeta del vinilo seleccionado */
+    .vinilo-seleccionado {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(91, 60, 32, 0.08);
+      border: 1.5px solid rgba(91, 60, 32, 0.2);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 24px;
     }
 
-    .helper {
+    .vinilo-seleccionado .disco-icon {
+      font-size: 2.2rem;
+      line-height: 1;
+      flex-shrink: 0;
+      animation: spin 6s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .vinilo-seleccionado .vinilo-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vinilo-seleccionado .vinilo-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7a4a1e;
+      margin-bottom: 2px;
+    }
+
+    .vinilo-seleccionado .vinilo-nombre {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.4rem;
+      color: #3a1a05;
+      line-height: 1.1;
+    }
+
+    .vinilo-sin-seleccionar {
+      background: #fff0f0;
+      border: 1.5px dashed #e57373;
+      border-radius: 10px;
+      padding: 14px 16px;
       text-align: center;
-      margin-bottom: 18px;
-      opacity: 0.9;
+      color: #c62828;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
     }
 
     .alert-error {
@@ -75,7 +114,6 @@
         <a href="https://vinyllabs-production.up.railway.app/catalogo.php" class="btn-login-custom">
           Catálogo
         </a>
-
         <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
 
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
@@ -103,21 +141,31 @@
   <main class="container py-5" style="margin-top: 130px;">
     <div class="card shadow-lg mx-auto p-4 card-form">
 
-      <h2 class="mb-3 text-center titulo-form">
-        Dejar reseña
-      </h2>
+      <h2 class="mb-4 text-center titulo-form">Dejar reseña</h2>
 
       <!-- Mensaje de error si viene de redirección -->
       <div id="errorMsg" class="alert-error" style="display:none;"></div>
 
-      <div class="helper">
-        Vinilo seleccionado: <span class="badge-vinilo" id="viniloBadge">—</span>
+      <!-- Vinilo seleccionado automáticamente (se muestra con JS) -->
+      <div id="viniloOk" class="vinilo-seleccionado" style="display:none;">
+        <span class="disco-icon">💿</span>
+        <div class="vinilo-info">
+          <span class="vinilo-label">Reseñando el vinilo</span>
+          <span class="vinilo-nombre" id="viniloNombreTexto">—</span>
+        </div>
       </div>
 
-      <!-- action apunta al backend PHP -->
+      <!-- Aviso si se accede sin vinilo seleccionado -->
+      <div id="viniloKo" class="vinilo-sin-seleccionar" style="display:none;">
+        <i class="bi bi-exclamation-circle me-2"></i>
+        No se ha seleccionado ningún vinilo.
+        <a href="https://vinyllabs-production.up.railway.app/catalogo.php">Vuelve al catálogo</a>
+        y pulsa "Dejar reseña" en el vinilo que quieras.
+      </div>
+
       <form action="https://vinyllabs-production.up.railway.app/guardar_resena.php" method="POST" autocomplete="off">
 
-        <!-- vinilo_id oculto — se rellena con JS desde la URL -->
+        <!-- vinilo_id oculto — se rellena automáticamente con JS desde la URL -->
         <input type="hidden" name="vinilo_id" id="vinilo_id" value="">
 
         <div class="mb-3">
@@ -132,7 +180,8 @@
 
         <div class="mb-4">
           <label class="form-label">Comentario</label>
-          <textarea name="comentario" class="form-control" rows="4" required></textarea>
+          <textarea name="comentario" class="form-control" rows="4"
+            placeholder="¿Qué te parece este vinilo?" required></textarea>
         </div>
 
         <div class="text-center">
@@ -155,33 +204,32 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const viniloId   = params.get("vinilo_id");
-    const viniloNombre = params.get("vinilo_nombre");
-    const errorParam = params.get("error");
+    const params        = new URLSearchParams(window.location.search);
+    const viniloId      = params.get("vinilo_id");
+    const viniloNombre  = params.get("vinilo_nombre");
+    const errorParam    = params.get("error");
 
-    const input  = document.getElementById("vinilo_id");
-    const badge  = document.getElementById("viniloBadge");
-    const btnEnviar = document.getElementById("btnEnviar");
-    const errorMsg  = document.getElementById("errorMsg");
+    const inputId      = document.getElementById("vinilo_id");
+    const btnEnviar    = document.getElementById("btnEnviar");
+    const viniloOk     = document.getElementById("viniloOk");
+    const viniloKo     = document.getElementById("viniloKo");
+    const nombreTexto  = document.getElementById("viniloNombreTexto");
+    const errorMsg     = document.getElementById("errorMsg");
 
-    // Mostrar el nombre del vinilo en el badge
-    if (viniloNombre) {
-      badge.textContent = decodeURIComponent(viniloNombre);
-    } else {
-      badge.textContent = "No indicado";
-    }
-
-    // Rellenar el campo oculto con el id numérico
     if (viniloId && /^\d+$/.test(viniloId)) {
-      input.value = viniloId;
+      // ✅ Vinilo recibido desde el catálogo: mostrar tarjeta y rellenar campo oculto
+      inputId.value = viniloId;
+      nombreTexto.textContent = viniloNombre
+        ? decodeURIComponent(viniloNombre.replace(/\+/g, ' '))
+        : `Vinilo #${viniloId}`;
+      viniloOk.style.display = 'flex';
     } else {
-      // Sin id válido: deshabilitar envío
+      // ❌ Sin vinilo: aviso y botón deshabilitado
+      viniloKo.style.display = 'block';
       btnEnviar.disabled = true;
-      btnEnviar.title = "No se ha seleccionado ningún vinilo";
     }
 
-    // Mostrar mensaje de error si viene redirigido desde guardar_resena.php
+    // Mensajes de error de redirección desde guardar_resena.php
     if (errorParam === 'campos_vacios') {
       errorMsg.style.display = 'block';
       errorMsg.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i>Por favor, rellena todos los campos.';
@@ -190,9 +238,9 @@
       errorMsg.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i>Ha ocurrido un error al guardar la reseña. Inténtalo de nuevo.';
     }
 
-    // Efecto activo del botón hamburguesa
+    // Hamburguesa
     const offcanvasEl = document.getElementById('menuLateral');
-    const btnHamb = document.getElementById('btnHamburguesa');
+    const btnHamb     = document.getElementById('btnHamburguesa');
     offcanvasEl.addEventListener('show.bs.offcanvas', () => btnHamb.classList.add('active'));
     offcanvasEl.addEventListener('hidden.bs.offcanvas', () => btnHamb.classList.remove('active'));
   </script>
