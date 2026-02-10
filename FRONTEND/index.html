@@ -80,7 +80,7 @@
 
     /* Ocultar botones por defecto hasta que se verifique la sesión */
     .sesion-required {
-      display: none !important;
+      display: none;
     }
   </style>
 </head>
@@ -333,10 +333,12 @@
         
         const data = await response.json();
         
+        console.log('Respuesta de sesión:', data); // Para debugging
+        
         if (data.sesion_activa) {
           // Hay sesión activa - mostrar botones de gestión y cerrar sesión
           document.querySelectorAll('.sesion-required').forEach(el => {
-            el.style.display = '';
+            el.style.display = 'inline-block';
           });
           
           // Ocultar botones de iniciar sesión
@@ -344,8 +346,8 @@
           document.getElementById('btnIniciarSesionMenu').style.display = 'none';
         } else {
           // No hay sesión - mostrar botón de iniciar sesión
-          document.getElementById('btnIniciarSesion').style.display = '';
-          document.getElementById('btnIniciarSesionMenu').style.display = '';
+          document.getElementById('btnIniciarSesion').style.display = 'inline-block';
+          document.getElementById('btnIniciarSesionMenu').style.display = 'block';
           
           // Ocultar botones que requieren sesión
           document.querySelectorAll('.sesion-required').forEach(el => {
@@ -355,8 +357,11 @@
       } catch (error) {
         console.error('Error al verificar sesión:', error);
         // En caso de error, mostrar solo el botón de iniciar sesión
-        document.getElementById('btnIniciarSesion').style.display = '';
-        document.getElementById('btnIniciarSesionMenu').style.display = '';
+        document.getElementById('btnIniciarSesion').style.display = 'inline-block';
+        document.getElementById('btnIniciarSesionMenu').style.display = 'block';
+        document.querySelectorAll('.sesion-required').forEach(el => {
+          el.style.display = 'none';
+        });
       }
     }
 
