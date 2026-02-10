@@ -26,6 +26,26 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
   <!-- Estilos -->
   <link rel="stylesheet" href="styles.css" />
 
+  <style>
+    .btn-resena {
+      background-color: transparent;
+      border: 1px solid #b8860b;
+      color: #b8860b;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-resena:hover {
+      background-color: #b8860b;
+      color: #fff;
+    }
+  </style>
+
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -95,7 +115,12 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
               <h5 class="card-title" style="font-family: 'Bebas Neue', sans-serif;">
                 <?= htmlspecialchars($row['nombre']) ?>
               </h5>
-              <p class="card-text mb-2"><?= number_format($row['precio'], 2, ',', '.') ?> €</p>
+              <p class="card-text mb-3"><?= number_format($row['precio'], 2, ',', '.') ?> €</p>
+              <div class="mt-auto">
+                <a href="formulario.html?vinilo=<?= urlencode($row['nombre']) ?>" class="btn btn-resena w-100">
+                  <i class="bi bi-star me-1"></i> Dejar reseña
+                </a>
+              </div>
             </div>
           </div>
         </div>
