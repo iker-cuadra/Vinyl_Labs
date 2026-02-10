@@ -100,7 +100,7 @@ session_start();
         <?php if (isset($_SESSION['usuario'])): ?>
           <a href="https://vinyllabs-production.up.railway.app/logout.php" class="btn-login-custom">Cerrar sesión</a>
         <?php else: ?>
-          <a href="https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/login.html" class="btn-login-custom">Iniciar sesión</a>
+          <a href="https://vinyl-labs-jziagpvmw-iker-cuadras-projects.vercel.app/login.html" class="btn-login-custom">Iniciar sesión</a>
         <?php endif; ?>
 
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
@@ -122,7 +122,7 @@ session_start();
     </div>
     <div class="offcanvas-body">
       <nav class="nav flex-column">
-        <a class="nav-link" href="https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/">Inicio</a>
+        <a class="nav-link" href="https://vinyl-labs-jziagpvmw-iker-cuadras-projects.vercel.app">Inicio</a>
         <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
         <a class="nav-link" href="#">Ofertas</a>
         <a class="nav-link" href="#">Contacto</a>
@@ -130,7 +130,7 @@ session_start();
         <?php if (isset($_SESSION['usuario'])): ?>
           <a href="https://vinyllabs-production.up.railway.app/logout.php" class="nav-link">Cerrar sesión</a>
         <?php else: ?>
-          <a href="https://vinyl-labs-h7clqd0kd-iker-cuadras-projects.vercel.app/login.html" class="nav-link">Iniciar sesión</a>
+          <a href="https://vinyl-labs-jziagpvmw-iker-cuadras-projects.vercel.app/login.html" class="nav-link">Iniciar sesión</a>
         <?php endif; ?>
       </nav>
     </div>

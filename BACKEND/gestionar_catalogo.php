@@ -37,7 +37,7 @@ require_once __DIR__ . '/conexion.php';
 
     <div class="d-flex align-items-center gap-2">
       <a href="https://vinyllabs-production.up.railway.app/add_vinilos.php" class="btn-login-custom">Añadir vinilo</a>
-      <a href="https://vinyl-labs.vercel.app/" class="btn-login-custom">Inicio</a>
+      <a href="https://vinyl-labs-jziagpvmw-iker-cuadras-projects.vercel.app" class="btn-login-custom">Inicio</a>
       <a href="https://vinyllabs-production.up.railway.app/logout.php" class="btn-login-custom">Cerrar sesión</a>
 
       <button class="btn btn-hamburguesa" type="button"
