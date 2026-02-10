@@ -117,7 +117,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
               </h5>
               <p class="card-text mb-3"><?= number_format($row['precio'], 2, ',', '.') ?> €</p>
               <div class="mt-auto">
-                <a href="formulario.html?vinilo=<?= urlencode($row['nombre']) ?>" class="btn btn-resena w-100">
+                <a href="../FRONTEND/formulario.html?vinilo=<?= urlencode($row['nombre']) ?>" class="btn btn-resena w-100">
                   <i class="bi bi-star me-1"></i> Dejar reseña
                 </a>
               </div>

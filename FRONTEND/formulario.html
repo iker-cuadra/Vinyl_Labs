@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dejar reseña | Vinyl Lab</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&family=Bebas+Neue&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS del proyecto -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* Solo lo mínimo extra para el formulario (respeta tu styles.css) */
+    .form-card {
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(45, 27, 13, 0.25);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.85);
+      outline: none;
+      box-sizing: border-box;
+      color: var(--texto);
+    }
+
+    input:focus,
+    textarea:focus {
+      box-shadow: 0 0 0 3px rgba(244, 232, 210, 0.8);
+      border-color: rgba(91, 60, 32, 0.35);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .helper {
+      text-align: center;
+      margin: 10px 0 16px 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(91, 60, 32, 0.15);
+      border: 1px solid rgba(91, 60, 32, 0.25);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="main-header">
+    <div class="header-left">
+      <h1 class="header-title">Vinyl Lab</h1>
+    </div>
+
+    <a class="btn-catalogo" href="https://vinyllabs-production.up.railway.app/catalogo.php">
+      ← Volver al catálogo
+    </a>
+  </header>
+
+  <main class="main-content">
+    <section class="hero">
+      <h2 class="titulo-principal">Dejar reseña</h2>
+      <p class="eslogan">Cuéntanos qué te ha parecido este vinilo</p>
+    </section>
+
+    <section class="info-historia form-card">
+      <div class="helper">
+        Vinilo seleccionado: <span class="badge" id="viniloBadge">—</span>
+      </div>
+
+      <form action="guardar_resena.php" method="POST" autocomplete="off">
+        <!-- vinilo_id oculto (se rellena desde la URL ?vinilo_id=XX) -->
+        <input type="hidden" name="vinilo_id" id="vinilo_id" value="">
+
+        <div class="row">
+          <div>
+            <label for="nombre">Nombre *</label>
+            <input type="text" id="nombre" name="nombre" maxlength="100" required>
+          </div>
+
+          <div>
+            <label for="ciudad">Ciudad *</label>
+            <input type="text" id="ciudad" name="ciudad" maxlength="100" required>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <label for="comentario">Comentario *</label>
+          <textarea id="comentario" name="comentario" required></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn-catalogo">Enviar reseña</button>
+          <a class="btn-catalogo" href="https://vinyllabs-production.up.railway.app/catalogo.php">Volver</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // Lee vinilo_id de la URL: formulario.html?vinilo_id=3
+    const params = new URLSearchParams(window.location.search);
+    const viniloId = params.get("vinilo_id");
+
+    const input = document.getElementById("vinilo_id");
+    const badge = document.getElementById("viniloBadge");
+
+    if (viniloId && /^\d+$/.test(viniloId)) {
+      input.value = viniloId;
+      badge.textContent = viniloId;
+    } else {
+      badge.textContent = "No indicado";
+    }
+  </script>
+
+</body>
+
+</html>
