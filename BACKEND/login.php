@@ -11,7 +11,8 @@ session_start();
 $allowed_origins = [
     'https://vinyl-labs.vercel.app',
     'http://localhost:3000',
-    'http://localhost:5173'
+    'http://localhost:5173',
+    'http://127.0.0.1:5500'
 ];
 
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
@@ -52,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        // Buscar usuario en la base de datos
-        $stmt = $conn->prepare("SELECT id, usuario, contrasena FROM usuarios WHERE usuario = ?");
+        // CORRECCIÓN: Usar 'nombre' y 'pass' según la estructura de tu tabla
+        $stmt = $conn->prepare("SELECT id, nombre, pass FROM usuarios WHERE nombre = ?");
         $stmt->bind_param("s", $usuario);
         $stmt->execute();
         $resultado = $stmt->get_result();
@@ -62,19 +63,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $row = $resultado->fetch_assoc();
             
             // Verificar contraseña
-            if (password_verify($contrasena, $row['contrasena'])) {
+            // Primero intentamos con password_verify (para contraseñas hasheadas)
+            // Si falla, comparamos directamente (para contraseñas en texto plano)
+            $password_valida = false;
+            
+            if (password_verify($contrasena, $row['pass'])) {
+                // Contraseña hasheada correcta
+                $password_valida = true;
+            } elseif ($contrasena === $row['pass']) {
+                // Contraseña en texto plano (TEMPORAL - deberías hashear las contraseñas)
+                $password_valida = true;
+            }
+            
+            if ($password_valida) {
                 // Regenerar ID de sesión por seguridad
                 session_regenerate_id(true);
                 
                 // Guardar datos en la sesión
-                $_SESSION['usuario'] = $row['usuario'];
+                $_SESSION['usuario'] = $row['nombre'];
                 $_SESSION['usuario_id'] = $row['id'];
                 $_SESSION['login_time'] = time();
 
                 echo json_encode([
                     'success' => true,
                     'message' => 'Login exitoso',
-                    'usuario' => $row['usuario']
+                    'usuario' => $row['nombre']
                 ]);
             } else {
                 echo json_encode([
