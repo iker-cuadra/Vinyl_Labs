@@ -128,7 +128,7 @@ $resena_ok = isset($_GET['resena']) && $_GET['resena'] === 'ok';
               </h5>
               <p class="card-text mb-3"><?= number_format($row['precio'], 2, ',', '.') ?> €</p>
               <div class="mt-auto">
-                <a href="../FRONTEND/formulario.html?vinilo_id=<?= (int)$row['id'] ?>&vinilo_nombre=<?= urlencode($row['nombre']) ?>"
+                <a href="https://vinyl-labs.vercel.app/formulario.html?vinilo_id=<?= (int)$row['id'] ?>&vinilo_nombre=<?= urlencode($row['nombre']) ?>"
                    class="btn btn-resena w-100">
                   <i class="bi bi-star me-1"></i> Dejar reseña
                 </a>
