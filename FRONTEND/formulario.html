@@ -32,7 +32,6 @@
       letter-spacing: 1px;
     }
 
-    /* Tarjeta del vinilo seleccionado */
     .vinilo-seleccionado {
       display: flex;
       align-items: center;
@@ -88,14 +87,24 @@
       font-size: 0.9rem;
     }
 
-    .alert-error {
-      background-color: #ffe5e5;
-      border: 1px solid #f5c6cb;
-      color: #721c24;
+    .alert-msg {
       border-radius: 8px;
       padding: 12px 16px;
       margin-bottom: 18px;
       text-align: center;
+      display: none;
+    }
+
+    .alert-msg.error {
+      background-color: #ffe5e5;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+    }
+
+    .alert-msg.enviando {
+      background-color: #fff8e1;
+      border: 1px solid #ffe082;
+      color: #7a5c00;
     }
   </style>
 </head>
@@ -111,9 +120,7 @@
       </div>
 
       <div class="d-flex align-items-center gap-2">
-        <a href="https://vinyllabs-production.up.railway.app/catalogo.php" class="btn-login-custom">
-          Catálogo
-        </a>
+        <a href="https://vinyllabs-production.up.railway.app/catalogo.php" class="btn-login-custom">Catálogo</a>
         <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
 
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
@@ -143,10 +150,10 @@
 
       <h2 class="mb-4 text-center titulo-form">Dejar reseña</h2>
 
-      <!-- Mensaje de error si viene de redirección -->
-      <div id="errorMsg" class="alert-error" style="display:none;"></div>
+      <!-- Mensajes de estado -->
+      <div id="alertMsg" class="alert-msg"></div>
 
-      <!-- Vinilo seleccionado automáticamente (se muestra con JS) -->
+      <!-- Vinilo seleccionado automáticamente -->
       <div id="viniloOk" class="vinilo-seleccionado" style="display:none;">
         <span class="disco-icon">💿</span>
         <div class="vinilo-info">
@@ -155,7 +162,7 @@
         </div>
       </div>
 
-      <!-- Aviso si se accede sin vinilo seleccionado -->
+      <!-- Aviso si se accede sin vinilo -->
       <div id="viniloKo" class="vinilo-sin-seleccionar" style="display:none;">
         <i class="bi bi-exclamation-circle me-2"></i>
         No se ha seleccionado ningún vinilo.
@@ -163,9 +170,8 @@
         y pulsa "Dejar reseña" en el vinilo que quieras.
       </div>
 
-      <form action="https://vinyllabs-production.up.railway.app/guardar_resena.php" method="POST" autocomplete="off">
+      <form id="formResena" autocomplete="off">
 
-        <!-- vinilo_id oculto — se rellena automáticamente con JS desde la URL -->
         <input type="hidden" name="vinilo_id" id="vinilo_id" value="">
 
         <div class="mb-3">
@@ -204,41 +210,91 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    const params        = new URLSearchParams(window.location.search);
-    const viniloId      = params.get("vinilo_id");
-    const viniloNombre  = params.get("vinilo_nombre");
-    const errorParam    = params.get("error");
+    // ── Leer parámetros de la URL ─────────────────────────────────────────────
+    const params       = new URLSearchParams(window.location.search);
+    const viniloId     = params.get("vinilo_id");
+    const viniloNombre = params.get("vinilo_nombre");
 
-    const inputId      = document.getElementById("vinilo_id");
-    const btnEnviar    = document.getElementById("btnEnviar");
-    const viniloOk     = document.getElementById("viniloOk");
-    const viniloKo     = document.getElementById("viniloKo");
-    const nombreTexto  = document.getElementById("viniloNombreTexto");
-    const errorMsg     = document.getElementById("errorMsg");
+    const inputId     = document.getElementById("vinilo_id");
+    const btnEnviar   = document.getElementById("btnEnviar");
+    const viniloOk    = document.getElementById("viniloOk");
+    const viniloKo    = document.getElementById("viniloKo");
+    const nombreTexto = document.getElementById("viniloNombreTexto");
+    const alertMsg    = document.getElementById("alertMsg");
 
+    // ── Mostrar vinilo seleccionado ───────────────────────────────────────────
     if (viniloId && /^\d+$/.test(viniloId)) {
-      // ✅ Vinilo recibido desde el catálogo: mostrar tarjeta y rellenar campo oculto
       inputId.value = viniloId;
       nombreTexto.textContent = viniloNombre
         ? decodeURIComponent(viniloNombre.replace(/\+/g, ' '))
         : `Vinilo #${viniloId}`;
       viniloOk.style.display = 'flex';
     } else {
-      // ❌ Sin vinilo: aviso y botón deshabilitado
       viniloKo.style.display = 'block';
       btnEnviar.disabled = true;
     }
 
-    // Mensajes de error de redirección desde guardar_resena.php
-    if (errorParam === 'campos_vacios') {
-      errorMsg.style.display = 'block';
-      errorMsg.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i>Por favor, rellena todos los campos.';
-    } else if (errorParam === 'db') {
-      errorMsg.style.display = 'block';
-      errorMsg.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i>Ha ocurrido un error al guardar la reseña. Inténtalo de nuevo.';
+    // ── Helpers para mostrar mensajes ─────────────────────────────────────────
+    function showAlert(tipo, html) {
+      alertMsg.className = `alert-msg ${tipo}`;
+      alertMsg.innerHTML = html;
+      alertMsg.style.display = 'block';
     }
 
-    // Hamburguesa
+    function hideAlert() {
+      alertMsg.style.display = 'none';
+    }
+
+    // ── Submit con fetch (evita problemas de CORS en redirecciones) ───────────
+    document.getElementById("formResena").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = new FormData(form);
+
+      // Validación mínima en cliente
+      const vinId  = data.get("vinilo_id");
+      const nombre = data.get("nombre").trim();
+      const ciudad = data.get("ciudad").trim();
+      const coment = data.get("comentario").trim();
+
+      if (!vinId || !nombre || !ciudad || !coment) {
+        showAlert('error', '<i class="bi bi-exclamation-triangle-fill me-2"></i>Por favor, rellena todos los campos.');
+        return;
+      }
+
+      // Deshabilitar botón y mostrar estado de envío
+      btnEnviar.disabled = true;
+      showAlert('enviando', '<i class="bi bi-hourglass-split me-2"></i>Enviando reseña…');
+
+      try {
+        const resp = await fetch(
+          "https://vinyllabs-production.up.railway.app/guardar_resena.php",
+          {
+            method: "POST",
+            body: data,
+            // Sin 'redirect: follow' para que fetch maneje la respuesta
+          }
+        );
+
+        // guardar_resena.php devuelve un redirect 302 al catálogo si todo va bien
+        // fetch sigue la redirección automáticamente; si llegamos aquí con ok=true
+        // o la URL final es el catálogo, consideramos éxito.
+        if (resp.ok || resp.redirected) {
+          // Redirigir manualmente al catálogo con el mensaje de éxito
+          window.location.href =
+            "https://vinyllabs-production.up.railway.app/catalogo.php?resena=ok";
+        } else {
+          throw new Error("Error de servidor: " + resp.status);
+        }
+      } catch (err) {
+        btnEnviar.disabled = false;
+        showAlert('error', '<i class="bi bi-exclamation-triangle-fill me-2"></i>Ha ocurrido un error al enviar la reseña. Inténtalo de nuevo.');
+        console.error(err);
+      }
+    });
+
+    // ── Hamburguesa ───────────────────────────────────────────────────────────
     const offcanvasEl = document.getElementById('menuLateral');
     const btnHamb     = document.getElementById('btnHamburguesa');
     offcanvasEl.addEventListener('show.bs.offcanvas', () => btnHamb.classList.add('active'));
