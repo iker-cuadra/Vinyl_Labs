@@ -20,7 +20,6 @@
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    /* Ajuste mínimo para que el formulario quede como la tarjeta de "Añadir vinilo" */
     .card-form {
       max-width: 850px;
       border-radius: 14px;
@@ -49,12 +48,22 @@
       margin-bottom: 18px;
       opacity: 0.9;
     }
+
+    .alert-error {
+      background-color: #ffe5e5;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      text-align: center;
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER (igual estilo que tu gestionar) -->
+  <!-- HEADER -->
   <header class="main-header">
     <div class="container d-flex align-items-center justify-content-between">
       <div class="header-left d-flex align-items-center">
@@ -63,14 +72,12 @@
       </div>
 
       <div class="d-flex align-items-center gap-2">
-        <!-- Botones arriba derecha (mismo estilo btn-login-custom) -->
         <a href="https://vinyllabs-production.up.railway.app/catalogo.php" class="btn-login-custom">
           Catálogo
         </a>
 
         <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
 
-        <!-- Hamburguesa -->
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
           aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
           <span class="navbar-toggler-icon"></span>
@@ -100,12 +107,17 @@
         Dejar reseña
       </h2>
 
+      <!-- Mensaje de error si viene de redirección -->
+      <div id="errorMsg" class="alert-error" style="display:none;"></div>
+
       <div class="helper">
         Vinilo seleccionado: <span class="badge-vinilo" id="viniloBadge">—</span>
       </div>
 
-      <form action="guardar_resena.php" method="POST" autocomplete="off">
-        <!-- vinilo_id oculto (se rellena desde la URL con JS) -->
+      <!-- action apunta al backend PHP -->
+      <form action="https://vinyllabs-production.up.railway.app/guardar_resena.php" method="POST" autocomplete="off">
+
+        <!-- vinilo_id oculto — se rellena con JS desde la URL -->
         <input type="hidden" name="vinilo_id" id="vinilo_id" value="">
 
         <div class="mb-3">
@@ -124,7 +136,7 @@
         </div>
 
         <div class="text-center">
-          <button type="submit" class="btn btn-catalogo px-5">
+          <button type="submit" id="btnEnviar" class="btn btn-catalogo px-5">
             Enviar reseña
           </button>
         </div>
@@ -143,23 +155,42 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // Lee vinilo_id de la URL: formulario.html?vinilo_id=3
     const params = new URLSearchParams(window.location.search);
-    const viniloId = params.get("vinilo_id");
+    const viniloId   = params.get("vinilo_id");
+    const viniloNombre = params.get("vinilo_nombre");
+    const errorParam = params.get("error");
 
-    const input = document.getElementById("vinilo_id");
-    const badge = document.getElementById("viniloBadge");
+    const input  = document.getElementById("vinilo_id");
+    const badge  = document.getElementById("viniloBadge");
+    const btnEnviar = document.getElementById("btnEnviar");
+    const errorMsg  = document.getElementById("errorMsg");
 
-    if (viniloId && /^\d+$/.test(viniloId)) {
-      input.value = viniloId;
-      badge.textContent = viniloId;
+    // Mostrar el nombre del vinilo en el badge
+    if (viniloNombre) {
+      badge.textContent = decodeURIComponent(viniloNombre);
     } else {
       badge.textContent = "No indicado";
-      // opcional: deshabilitar submit si no hay vinilo_id
-      // document.querySelector('button[type="submit"]').disabled = true;
     }
 
-    // Efecto activo del botón hamburguesa (igual que tu gestionar)
+    // Rellenar el campo oculto con el id numérico
+    if (viniloId && /^\d+$/.test(viniloId)) {
+      input.value = viniloId;
+    } else {
+      // Sin id válido: deshabilitar envío
+      btnEnviar.disabled = true;
+      btnEnviar.title = "No se ha seleccionado ningún vinilo";
+    }
+
+    // Mostrar mensaje de error si viene redirigido desde guardar_resena.php
+    if (errorParam === 'campos_vacios') {
+      errorMsg.style.display = 'block';
+      errorMsg.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i>Por favor, rellena todos los campos.';
+    } else if (errorParam === 'db') {
+      errorMsg.style.display = 'block';
+      errorMsg.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i>Ha ocurrido un error al guardar la reseña. Inténtalo de nuevo.';
+    }
+
+    // Efecto activo del botón hamburguesa
     const offcanvasEl = document.getElementById('menuLateral');
     const btnHamb = document.getElementById('btnHamburguesa');
     offcanvasEl.addEventListener('show.bs.offcanvas', () => btnHamb.classList.add('active'));

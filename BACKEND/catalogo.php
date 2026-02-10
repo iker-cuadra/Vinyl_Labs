@@ -3,6 +3,9 @@ session_start();
 require_once __DIR__ . '/conexion.php';
 
 $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DESC");
+
+// Mensaje de éxito tras enviar reseña
+$resena_ok = isset($_GET['resena']) && $_GET['resena'] === 'ok';
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +58,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
 
 <body>
 
-  <!-- Header (igual que index) -->
+  <!-- Header -->
   <header class="main-header">
     <div class="container d-flex align-items-center justify-content-between">
       <div class="header-left d-flex align-items-center">
@@ -70,7 +73,6 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
 
         <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
 
-
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
           aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
           <span class="navbar-toggler-icon"></span>
@@ -79,7 +81,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
     </div>
   </header>
 
-  <!-- Menú lateral offcanvas (igual) -->
+  <!-- Menú lateral offcanvas -->
   <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
     <div class="offcanvas-header flex-column align-items-start w-100">
       <div class="logo-container">
@@ -102,6 +104,15 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
 
   <!-- Contenido del catálogo -->
   <main class="main-content container py-5" style="margin-top: 120px;">
+
+    <?php if ($resena_ok): ?>
+      <div class="alert alert-success alert-dismissible fade show text-center mb-4" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        ¡Gracias! Tu reseña ha sido enviada correctamente.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+      </div>
+    <?php endif; ?>
+
     <h2 class="mb-4 text-center">Catálogo de Vinilos</h2>
     <div class="row g-4">
       <?php while ($row = $vinilos->fetch_assoc()): ?>
@@ -117,7 +128,8 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
               </h5>
               <p class="card-text mb-3"><?= number_format($row['precio'], 2, ',', '.') ?> €</p>
               <div class="mt-auto">
-                <a href="https://vinyl-labs.vercel.app/formulario.html?vinilo=<?= urlencode($row['nombre']) ?>" class="btn btn-resena w-100">
+                <a href="../FRONTEND/formulario.html?vinilo_id=<?= (int)$row['id'] ?>&vinilo_nombre=<?= urlencode($row['nombre']) ?>"
+                   class="btn btn-resena w-100">
                   <i class="bi bi-star me-1"></i> Dejar reseña
                 </a>
               </div>
@@ -128,7 +140,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
     </div>
   </main>
 
-  <!-- Footer (igual que index) -->
+  <!-- Footer -->
   <footer class="footer mt-5 pt-5 pb-4">
     <div class="container">
       <div class="row gy-4">
@@ -183,7 +195,6 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
         </div>
       </div>
 
-      <!-- Banner de cookies si lo tienes -->
       <div id="cookie-banner" class="cookie-banner">
         <p>Usamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia.
           <a href="politica-cookies.html">Más información</a>.
