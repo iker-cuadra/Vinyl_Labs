@@ -48,7 +48,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
           <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
         <?php endif; ?>
 
-        <a href="https://vinyl-labs-jziagpvmw-iker-cuadras-projects.vercel.app/" class="btn-login-custom">Inicio</a>
+        <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
 
 
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
@@ -68,7 +68,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
     </div>
     <div class="offcanvas-body">
       <nav class="nav flex-column">
-        <a class="nav-link" href="https://vinyl-labs-jziagpvmw-iker-cuadras-projects.vercel.app">Inicio</a>
+        <a class="nav-link" href="https://vinyl-labs.vercel.app">Inicio</a>
         <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
         <a class="nav-link" href="#">Ofertas</a>
         <a class="nav-link" href="#">Contacto</a>
@@ -115,7 +115,7 @@ $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DES
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Enlaces</h5>
           <ul class="list-unstyled footer-links">
-            <li><a href="https://vinyl-labs-jziagpvmw-iker-cuadras-projects.vercel.app">Inicio</a></li>
+            <li><a href="https://vinyl-labs.vercel.app">Inicio</a></li>
             <li><a href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a></li>
             <li><a href="#">Ofertas</a></li>
             <li><a href="#">Contacto</a></li>

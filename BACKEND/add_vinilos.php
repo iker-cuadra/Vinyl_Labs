@@ -36,7 +36,7 @@ session_start();
         Gestionar catálogo
       </a>
 
-      <a href="https://vinyl-labs-jziagpvmw-iker-cuadras-projects.vercel.app" class="btn-login-custom">Inicio</a>
+      <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
       <a href="https://vinyllabs-production.up.railway.app/logout.php" class="btn-login-custom">Cerrar sesión</a>
 
       <button class="btn btn-hamburguesa" type="button"
@@ -55,7 +55,7 @@ session_start();
   </div>
   <div class="offcanvas-body">
     <nav class="nav flex-column">
-      <a class="nav-link" href="https://vinyl-labs-jziagpvmw-iker-cuadras-projects.vercel.app">Inicio</a>
+      <a class="nav-link" href="https://vinyl-labs.vercel.app">Inicio</a>
       <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
     </nav>
   </div>

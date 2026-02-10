@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $conn->close();
 
         // ✅ Redirige a Vercel (pon la página que quieras)
-        header("Location: https://vinyl-labs-jziagpvmw-iker-cuadras-projects.vercel.app/");
+        header("Location: https://vinyl-labs.vercel.app");
         exit;
     } else {
         $stmt->close();
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         echo "<script>
             alert('Usuario o contraseña incorrectos.');
-            window.location.href = 'https://vinyl-labs-jziagpvmw-iker-cuadras-projects.vercel.app/login.html';
+            window.location.href = 'https://vinyl-labs.vercel.app/login.html';
         </script>";
         exit;
     }
