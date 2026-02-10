@@ -4,13 +4,16 @@ require_once __DIR__ . '/conexion.php';
 
 $vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DESC");
 
-// Reseñas con nombre del vinilo — más recientes primero
-$resenas = $conn->query("
+$resenas_sql = "
     SELECT r.nombre, r.ciudad, r.comentario, r.fecha, v.nombre AS vinilo_nombre
     FROM resenas r
     JOIN vinilos v ON r.vinilo_id = v.id
     ORDER BY r.fecha DESC
-");
+";
+$resenas = $conn->query($resenas_sql);
+if (!$resenas) {
+    die("Error en query de reseñas: " . $conn->error);
+}
 
 // Mensaje de éxito tras enviar reseña
 $resena_ok = isset($_GET['resena']) && $_GET['resena'] === 'ok';
