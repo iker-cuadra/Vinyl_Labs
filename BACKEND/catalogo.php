@@ -85,111 +85,380 @@ if (isset($_GET['error'])) {
       color: #fff;
     }
 
-    /* ── Sección de reseñas ─────────────────────────────── */
+    /* ── Sección de reseñas mejorada ─────────────────────────────── */
     .resenas-section {
-      background: linear-gradient(135deg, #2a1205 0%, #4a2010 60%, #3a1a08 100%);
-      padding: 64px 0 72px;
+      background: linear-gradient(160deg, #1a0d06 0%, #3d1f10 40%, #2a1508 70%, #1f0f05 100%);
+      padding: 80px 0 90px;
       position: relative;
       overflow: hidden;
     }
+    
+    /* Efectos de fondo decorativos */
     .resenas-section::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(circle at 20% 50%, rgba(184,134,11,0.08) 0%, transparent 60%),
-                        radial-gradient(circle at 80% 20%, rgba(184,134,11,0.06) 0%, transparent 50%);
+      background-image: 
+        radial-gradient(circle at 15% 30%, rgba(184,134,11,0.12) 0%, transparent 50%),
+        radial-gradient(circle at 85% 70%, rgba(218,165,32,0.08) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, rgba(139,105,20,0.05) 0%, transparent 70%);
       pointer-events: none;
+      animation: pulseGlow 8s ease-in-out infinite;
     }
+    
+    .resenas-section::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(184,134,11,0.5) 20%, 
+        rgba(218,165,32,0.8) 50%, 
+        rgba(184,134,11,0.5) 80%, 
+        transparent 100%);
+      box-shadow: 0 2px 20px rgba(184,134,11,0.3);
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    
+    /* Encabezados */
     .resenas-titulo {
       font-family: 'Bebas Neue', cursive;
-      font-size: clamp(2rem, 5vw, 3rem);
-      letter-spacing: 3px;
-      color: #f5deb3;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      letter-spacing: 5px;
+      background: linear-gradient(135deg, #f5deb3 0%, #daa520 50%, #b8860b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       text-align: center;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      text-shadow: 0 4px 12px rgba(184,134,11,0.3);
+      position: relative;
     }
+    
+    .resenas-titulo::after {
+      content: '💿';
+      position: absolute;
+      font-size: 0.4em;
+      top: -10px;
+      right: -15px;
+      animation: spinSlow 20s linear infinite;
+      filter: drop-shadow(0 0 10px rgba(184,134,11,0.5));
+    }
+    
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
     .resenas-subtitulo {
       font-family: 'Raleway', sans-serif;
-      font-size: 0.85rem;
-      color: rgba(245,222,179,0.5);
+      font-size: 0.9rem;
+      color: rgba(218,165,32,0.7);
       text-align: center;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 48px;
+      margin-bottom: 60px;
+      font-weight: 300;
+      position: relative;
     }
-    .resenas-track-wrapper { position: relative; overflow: hidden; }
+    
+    .resenas-subtitulo::before,
+    .resenas-subtitulo::after {
+      content: '★';
+      color: rgba(184,134,11,0.4);
+      margin: 0 12px;
+      font-size: 0.7em;
+    }
+    
+    /* Carrusel */
+    .resenas-track-wrapper { 
+      position: relative; 
+      overflow: hidden; 
+      padding: 10px 0;
+    }
+    
     .resenas-track {
       display: flex;
-      gap: 20px;
-      transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+      gap: 24px;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
       will-change: transform;
     }
+    
+    /* Tarjetas de reseña */
     .resena-card {
-      flex: 0 0 calc(33.333% - 14px);
-      background: rgba(255,248,235,0.06);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(184,134,11,0.25);
-      border-radius: 14px;
-      padding: 28px 26px 24px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      flex: 0 0 calc(33.333% - 16px);
+      background: linear-gradient(145deg, rgba(255,248,235,0.08) 0%, rgba(255,248,235,0.04) 100%);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(184,134,11,0.3);
+      border-radius: 20px;
+      padding: 32px 28px 28px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      box-shadow: 
+        0 4px 20px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.1);
     }
-    @media (max-width: 991px) { .resena-card { flex: 0 0 calc(50% - 10px); } }
+    
+    .resena-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(218,165,32,0.6) 50%, 
+        transparent 100%);
+      border-radius: 20px 20px 0 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    @media (max-width: 991px) { .resena-card { flex: 0 0 calc(50% - 12px); } }
     @media (max-width: 600px)  { .resena-card { flex: 0 0 100%; } }
-    .resena-card:hover { transform: translateY(-3px); border-color: rgba(184,134,11,0.55); }
+    
+    .resena-card:hover { 
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(218,165,32,0.6);
+      box-shadow: 
+        0 12px 40px rgba(184,134,11,0.25),
+        0 0 0 1px rgba(218,165,32,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    
+    .resena-card:hover::before {
+      opacity: 1;
+    }
+    
+    /* Comillas decorativas */
     .resena-comillas {
-      font-size: 3.5rem; line-height: 0.6;
-      color: rgba(184,134,11,0.35); font-family: Georgia,serif;
-      margin-bottom: 14px; display: block;
+      font-size: 4rem; 
+      line-height: 0.5;
+      background: linear-gradient(135deg, rgba(184,134,11,0.5), rgba(218,165,32,0.3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: Georgia, serif;
+      margin-bottom: 18px; 
+      display: block;
+      font-weight: bold;
+      filter: drop-shadow(0 2px 4px rgba(184,134,11,0.2));
     }
+    
+    /* Comentario */
     .resena-comentario {
-      font-family: 'Raleway', sans-serif; font-size: 0.92rem; line-height: 1.65;
-      color: rgba(255,248,235,0.85); margin-bottom: 20px;
-      display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+      font-family: 'Raleway', sans-serif; 
+      font-size: 0.95rem; 
+      line-height: 1.75;
+      color: rgba(255,248,235,0.92); 
+      margin-bottom: 24px;
+      display: -webkit-box; 
+      -webkit-line-clamp: 4; 
+      -webkit-box-orient: vertical; 
+      overflow: hidden;
+      font-weight: 300;
+      letter-spacing: 0.01em;
     }
+    
+    /* Footer de la tarjeta */
     .resena-footer {
-      border-top: 1px solid rgba(184,134,11,0.2);
-      padding-top: 14px; display: flex; align-items: center; gap: 10px;
+      border-top: 1px solid rgba(184,134,11,0.25);
+      padding-top: 16px; 
+      display: flex; 
+      align-items: center; 
+      gap: 12px;
     }
+    
+    /* Avatar mejorado */
     .resena-avatar {
-      width: 38px; height: 38px; border-radius: 50%;
-      background: linear-gradient(135deg,#b8860b,#8b6914);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Bebas Neue',cursive; font-size: 1.05rem; color: #fff; flex-shrink: 0;
+      width: 44px; 
+      height: 44px; 
+      border-radius: 50%;
+      background: linear-gradient(135deg, #daa520 0%, #b8860b 50%, #8b6914 100%);
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      font-family: 'Bebas Neue', cursive; 
+      font-size: 1.15rem; 
+      color: #fff; 
+      flex-shrink: 0;
+      box-shadow: 
+        0 4px 12px rgba(184,134,11,0.4),
+        inset 0 1px 2px rgba(255,255,255,0.3);
+      border: 2px solid rgba(255,248,235,0.2);
+      position: relative;
     }
-    .resena-meta { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+    
+    .resena-avatar::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, transparent 0%, rgba(218,165,32,0.3) 100%);
+      z-index: -1;
+      filter: blur(4px);
+    }
+    
+    /* Meta información */
+    .resena-meta { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 3px; 
+      min-width: 0; 
+    }
+    
     .resena-nombre {
-      font-family: 'Raleway',sans-serif; font-weight: 700; font-size: 0.88rem;
-      color: #f5deb3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      font-family: 'Raleway', sans-serif; 
+      font-weight: 700; 
+      font-size: 0.92rem;
+      color: #f5deb3; 
+      white-space: nowrap; 
+      overflow: hidden; 
+      text-overflow: ellipsis;
+      letter-spacing: 0.02em;
     }
-    .resena-ciudad { font-family: 'Raleway',sans-serif; font-size: 0.75rem; color: rgba(245,222,179,0.5); }
+    
+    .resena-ciudad { 
+      font-family: 'Raleway', sans-serif; 
+      font-size: 0.78rem; 
+      color: rgba(218,165,32,0.6);
+      font-weight: 300;
+    }
+    
+    /* Tag del vinilo */
     .resena-vinilo-tag {
       margin-left: auto;
-      background: rgba(184,134,11,0.18); border: 1px solid rgba(184,134,11,0.3);
-      border-radius: 999px; padding: 3px 10px;
-      font-family: 'Raleway',sans-serif; font-size: 0.72rem; font-weight: 600; color: #d4a830;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(184,134,11,0.25) 0%, rgba(139,105,20,0.15) 100%);
+      border: 1px solid rgba(218,165,32,0.4);
+      border-radius: 999px; 
+      padding: 5px 12px;
+      font-family: 'Raleway', sans-serif; 
+      font-size: 0.74rem; 
+      font-weight: 600; 
+      color: #daa520;
+      white-space: nowrap; 
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+      max-width: 130px; 
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(184,134,11,0.2);
+      letter-spacing: 0.03em;
     }
+    
+    /* Navegación del carrusel */
     .resenas-nav {
-      display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 36px;
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      gap: 16px; 
+      margin-top: 48px;
     }
+    
     .resenas-btn {
-      width: 42px; height: 42px; border-radius: 50%;
-      background: transparent; border: 1.5px solid rgba(184,134,11,0.4); color: #d4a830;
-      font-size: 1rem; display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      width: 50px; 
+      height: 50px; 
+      border-radius: 50%;
+      background: rgba(255,248,235,0.05);
+      backdrop-filter: blur(8px);
+      border: 2px solid rgba(184,134,11,0.5); 
+      color: #daa520;
+      font-size: 1.1rem; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      cursor: pointer; 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
-    .resenas-btn:hover { background: rgba(184,134,11,0.2); border-color: #b8860b; transform: scale(1.08); }
-    .resenas-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
-    .resenas-dots { display: flex; gap: 7px; align-items: center; }
+    
+    .resenas-btn:hover:not(:disabled) { 
+      background: rgba(184,134,11,0.3);
+      border-color: #daa520;
+      transform: scale(1.15);
+      box-shadow: 
+        0 6px 20px rgba(184,134,11,0.4),
+        0 0 20px rgba(218,165,32,0.3);
+    }
+    
+    .resenas-btn:active:not(:disabled) {
+      transform: scale(1.05);
+    }
+    
+    .resenas-btn:disabled { 
+      opacity: 0.25; 
+      cursor: not-allowed; 
+      transform: none; 
+      border-color: rgba(184,134,11,0.2);
+    }
+    
+    /* Dots de navegación */
+    .resenas-dots { 
+      display: flex; 
+      gap: 10px; 
+      align-items: center; 
+    }
+    
     .resenas-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: rgba(184,134,11,0.3); cursor: pointer;
-      transition: background 0.2s, transform 0.2s; border: none; padding: 0;
+      width: 10px; 
+      height: 10px; 
+      border-radius: 50%;
+      background: rgba(184,134,11,0.35); 
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      border: none; 
+      padding: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      position: relative;
     }
-    .resenas-dot.active { background: #b8860b; transform: scale(1.35); }
+    
+    .resenas-dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    
+    .resenas-dot:hover:not(.active) {
+      background: rgba(184,134,11,0.5);
+      transform: scale(1.2);
+    }
+    
+    .resenas-dot.active { 
+      background: linear-gradient(135deg, #daa520, #b8860b);
+      transform: scale(1.5);
+      box-shadow: 
+        0 0 12px rgba(218,165,32,0.6),
+        0 4px 8px rgba(0,0,0,0.4);
+    }
+    
+    .resenas-dot.active::after {
+      border-color: rgba(218,165,32,0.4);
+    }
+    
+    /* Estado vacío */
     .resenas-empty {
-      text-align: center; color: rgba(245,222,179,0.45);
-      font-family: 'Raleway',sans-serif; font-size: 0.95rem; padding: 32px 0;
+      text-align: center; 
+      color: rgba(245,222,179,0.5);
+      font-family: 'Raleway', sans-serif; 
+      font-size: 1rem; 
+      padding: 48px 0;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+    
+    .resenas-empty i {
+      opacity: 0.6;
+      filter: drop-shadow(0 4px 8px rgba(184,134,11,0.3));
     }
   </style>
 
