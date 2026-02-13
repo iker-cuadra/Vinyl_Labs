@@ -19,6 +19,12 @@
   <!-- Estilos del proyecto -->
   <link rel="stylesheet" href="styles.css">
 
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+<text y='0.9em' font-size='400'>💿</text>
+</svg>">
+
   <style>
     .card-form {
       max-width: 650px;
@@ -51,8 +57,13 @@
     }
 
     @keyframes spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .vinilo-seleccionado .vinilo-info {
@@ -176,7 +187,8 @@
         y pulsa "Dejar reseña" en el vinilo que quieras.
       </div>
 
-      <form id="formResena" autocomplete="off" method="POST" action="https://vinyllabs-production.up.railway.app/guardar_resena.php">
+      <form id="formResena" autocomplete="off" method="POST"
+        action="https://vinyllabs-production.up.railway.app/guardar_resena.php">
 
         <input type="hidden" name="vinilo_id" id="vinilo_id" value="">
 
@@ -217,16 +229,16 @@
 
   <script>
     // ── Leer parámetros de la URL ─────────────────────────────────────────────
-    const params       = new URLSearchParams(window.location.search);
-    const viniloId     = params.get("vinilo_id");
+    const params = new URLSearchParams(window.location.search);
+    const viniloId = params.get("vinilo_id");
     const viniloNombre = params.get("vinilo_nombre");
 
-    const inputId     = document.getElementById("vinilo_id");
-    const btnEnviar   = document.getElementById("btnEnviar");
-    const viniloOk    = document.getElementById("viniloOk");
-    const viniloKo    = document.getElementById("viniloKo");
+    const inputId = document.getElementById("vinilo_id");
+    const btnEnviar = document.getElementById("btnEnviar");
+    const viniloOk = document.getElementById("viniloOk");
+    const viniloKo = document.getElementById("viniloKo");
     const nombreTexto = document.getElementById("viniloNombreTexto");
-    const alertMsg    = document.getElementById("alertMsg");
+    const alertMsg = document.getElementById("alertMsg");
 
     // ── Mostrar vinilo seleccionado ───────────────────────────────────────────
     if (viniloId && /^\d+$/.test(viniloId)) {
@@ -256,7 +268,7 @@
       e.preventDefault();
 
       const form = e.target;
-      const vinId  = inputId.value;
+      const vinId = inputId.value;
       const nombre = document.getElementById("nombre").value.trim();
       const ciudad = document.getElementById("ciudad").value.trim();
       const coment = document.getElementById("comentario").value.trim();
@@ -278,7 +290,7 @@
 
     // ── Hamburguesa ───────────────────────────────────────────────────────────
     const offcanvasEl = document.getElementById('menuLateral');
-    const btnHamb     = document.getElementById('btnHamburguesa');
+    const btnHamb = document.getElementById('btnHamburguesa');
     offcanvasEl.addEventListener('show.bs.offcanvas', () => btnHamb.classList.add('active'));
     offcanvasEl.addEventListener('hidden.bs.offcanvas', () => btnHamb.classList.remove('active'));
   </script>
