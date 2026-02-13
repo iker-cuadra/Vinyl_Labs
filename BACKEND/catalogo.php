@@ -2,7 +2,19 @@
 session_start();
 require_once __DIR__ . '/conexion.php';
 
-$vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DESC");
+// ── Configuración de paginación ────────────────────────────────────
+$vinilos_por_pagina = 8;
+$pagina_actual = isset($_GET['pagina']) ? max(1, (int)$_GET['pagina']) : 1;
+$offset = ($pagina_actual - 1) * $vinilos_por_pagina;
+
+// Contar total de vinilos visibles
+$total_result = $conn->query("SELECT COUNT(*) as total FROM vinilos WHERE visible = 1");
+$total_row = $total_result->fetch_assoc();
+$total_vinilos = $total_row['total'];
+$total_paginas = ceil($total_vinilos / $vinilos_por_pagina);
+
+// Obtener vinilos de la página actual
+$vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DESC LIMIT $vinilos_por_pagina OFFSET $offset");
 
 $resenas_sql = "
     SELECT r.nombre, r.ciudad, r.comentario, r.fecha, v.nombre AS vinilo_nombre
@@ -460,6 +472,102 @@ if (isset($_GET['error'])) {
       opacity: 0.6;
       filter: drop-shadow(0 4px 8px rgba(184,134,11,0.3));
     }
+
+    /* ── Paginación del catálogo ─────────────────────────────── */
+    .pagination-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+      gap: 8px;
+    }
+
+    .pagination-info {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.9rem;
+      color: #7a5a3a;
+      margin-right: 20px;
+      font-weight: 500;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .page-item {
+      display: inline-block;
+    }
+
+    .page-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: 42px;
+      padding: 8px 14px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #b8860b;
+      background: rgba(255, 248, 235, 0.6);
+      border: 1.5px solid rgba(184, 134, 11, 0.3);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .page-link:hover {
+      background: rgba(184, 134, 11, 0.15);
+      border-color: #b8860b;
+      color: #8b6914;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+    }
+
+    .page-item.active .page-link {
+      background: linear-gradient(135deg, #daa520 0%, #b8860b 100%);
+      border-color: #b8860b;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(184, 134, 11, 0.4);
+      transform: scale(1.08);
+      font-weight: 700;
+    }
+
+    .page-item.disabled .page-link {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+      background: rgba(255, 248, 235, 0.3);
+      border-color: rgba(184, 134, 11, 0.15);
+    }
+
+    .page-link i {
+      font-size: 0.85rem;
+    }
+
+    /* Estilos responsive para paginación */
+    @media (max-width: 576px) {
+      .pagination-wrapper {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .pagination-info {
+        margin-right: 0;
+      }
+
+      .page-link {
+        min-width: 38px;
+        height: 38px;
+        padding: 6px 10px;
+        font-size: 0.85rem;
+      }
+    }
   </style>
 
   <!-- Favicon -->
@@ -559,6 +667,61 @@ if (isset($_GET['error'])) {
         </div>
       <?php endwhile; ?>
     </div>
+
+    <?php if ($total_paginas > 1): ?>
+      <!-- Paginación -->
+      <div class="pagination-wrapper">
+        <span class="pagination-info">
+          Página <?= $pagina_actual ?> de <?= $total_paginas ?> 
+          (<?= $total_vinilos ?> vinilos en total)
+        </span>
+        
+        <ul class="pagination">
+          <!-- Botón anterior -->
+          <li class="page-item <?= $pagina_actual <= 1 ? 'disabled' : '' ?>">
+            <a class="page-link" href="?pagina=<?= $pagina_actual - 1 ?><?= $resena_ok ? '&resena=ok' : '' ?>" aria-label="Anterior">
+              <i class="bi bi-chevron-left"></i>
+            </a>
+          </li>
+
+          <?php
+          // Lógica para mostrar números de página
+          $rango = 2; // Cuántas páginas mostrar a cada lado de la actual
+          $inicio = max(1, $pagina_actual - $rango);
+          $fin = min($total_paginas, $pagina_actual + $rango);
+
+          // Primera página
+          if ($inicio > 1) {
+            echo '<li class="page-item"><a class="page-link" href="?pagina=1' . ($resena_ok ? '&resena=ok' : '') . '">1</a></li>';
+            if ($inicio > 2) {
+              echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+            }
+          }
+
+          // Páginas del rango
+          for ($i = $inicio; $i <= $fin; $i++) {
+            $active = $i === $pagina_actual ? 'active' : '';
+            echo '<li class="page-item ' . $active . '"><a class="page-link" href="?pagina=' . $i . ($resena_ok ? '&resena=ok' : '') . '">' . $i . '</a></li>';
+          }
+
+          // Última página
+          if ($fin < $total_paginas) {
+            if ($fin < $total_paginas - 1) {
+              echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+            }
+            echo '<li class="page-item"><a class="page-link" href="?pagina=' . $total_paginas . ($resena_ok ? '&resena=ok' : '') . '">' . $total_paginas . '</a></li>';
+          }
+          ?>
+
+          <!-- Botón siguiente -->
+          <li class="page-item <?= $pagina_actual >= $total_paginas ? 'disabled' : '' ?>">
+            <a class="page-link" href="?pagina=<?= $pagina_actual + 1 ?><?= $resena_ok ? '&resena=ok' : '' ?>" aria-label="Siguiente">
+              <i class="bi bi-chevron-right"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    <?php endif; ?>
   </main>
 
   <!-- ── Sección de reseñas ─────────────────────────────────────────── -->
