@@ -106,6 +106,12 @@
       border: 1px solid #ffe082;
       color: #7a5c00;
     }
+
+    .alert-msg.success {
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+    }
   </style>
 </head>
 
@@ -170,23 +176,23 @@
         y pulsa "Dejar reseña" en el vinilo que quieras.
       </div>
 
-      <form id="formResena" autocomplete="off">
+      <form id="formResena" autocomplete="off" method="POST" action="https://vinyllabs-production.up.railway.app/guardar_resena.php">
 
         <input type="hidden" name="vinilo_id" id="vinilo_id" value="">
 
         <div class="mb-3">
           <label class="form-label">Nombre</label>
-          <input type="text" name="nombre" class="form-control" maxlength="100" required>
+          <input type="text" name="nombre" id="nombre" class="form-control" maxlength="100" required>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Ciudad</label>
-          <input type="text" name="ciudad" class="form-control" maxlength="100" required>
+          <input type="text" name="ciudad" id="ciudad" class="form-control" maxlength="100" required>
         </div>
 
         <div class="mb-4">
           <label class="form-label">Comentario</label>
-          <textarea name="comentario" class="form-control" rows="4"
+          <textarea name="comentario" id="comentario" class="form-control" rows="4"
             placeholder="¿Qué te parece este vinilo?" required></textarea>
         </div>
 
@@ -245,53 +251,29 @@
       alertMsg.style.display = 'none';
     }
 
-    // ── Submit con fetch (evita problemas de CORS en redirecciones) ───────────
-    document.getElementById("formResena").addEventListener("submit", async function (e) {
+    // ── Submit del formulario ─────────────────────────────────────────────────
+    document.getElementById("formResena").addEventListener("submit", function (e) {
       e.preventDefault();
 
       const form = e.target;
-      const data = new FormData(form);
+      const vinId  = inputId.value;
+      const nombre = document.getElementById("nombre").value.trim();
+      const ciudad = document.getElementById("ciudad").value.trim();
+      const coment = document.getElementById("comentario").value.trim();
 
-      // Validación mínima en cliente
-      const vinId  = data.get("vinilo_id");
-      const nombre = data.get("nombre").trim();
-      const ciudad = data.get("ciudad").trim();
-      const coment = data.get("comentario").trim();
-
+      // Validación en cliente
       if (!vinId || !nombre || !ciudad || !coment) {
         showAlert('error', '<i class="bi bi-exclamation-triangle-fill me-2"></i>Por favor, rellena todos los campos.');
         return;
       }
 
-      // Deshabilitar botón y mostrar estado de envío
+      // Mostrar estado de envío
       btnEnviar.disabled = true;
       showAlert('enviando', '<i class="bi bi-hourglass-split me-2"></i>Enviando reseña…');
 
-      try {
-        const resp = await fetch(
-          "https://vinyllabs-production.up.railway.app/guardar_resena.php",
-          {
-            method: "POST",
-            body: data,
-            // Sin 'redirect: follow' para que fetch maneje la respuesta
-          }
-        );
-
-        // guardar_resena.php devuelve un redirect 302 al catálogo si todo va bien
-        // fetch sigue la redirección automáticamente; si llegamos aquí con ok=true
-        // o la URL final es el catálogo, consideramos éxito.
-        if (resp.ok || resp.redirected) {
-          // Redirigir manualmente al catálogo con el mensaje de éxito
-          window.location.href =
-            "https://vinyllabs-production.up.railway.app/catalogo.php?resena=ok";
-        } else {
-          throw new Error("Error de servidor: " + resp.status);
-        }
-      } catch (err) {
-        btnEnviar.disabled = false;
-        showAlert('error', '<i class="bi bi-exclamation-triangle-fill me-2"></i>Ha ocurrido un error al enviar la reseña. Inténtalo de nuevo.');
-        console.error(err);
-      }
+      // Enviar formulario de forma tradicional
+      // Esto evita problemas de CORS y permite que el servidor haga el redirect
+      form.submit();
     });
 
     // ── Hamburguesa ───────────────────────────────────────────────────────────

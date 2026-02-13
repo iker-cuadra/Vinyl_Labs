@@ -15,8 +15,34 @@ if (!$resenas) {
     die("Error en query de reseñas: " . $conn->error);
 }
 
-// Mensaje de éxito tras enviar reseña
+// Mensajes de estado
 $resena_ok = isset($_GET['resena']) && $_GET['resena'] === 'ok';
+$error_msg = '';
+
+if (isset($_GET['error'])) {
+    switch ($_GET['error']) {
+        case 'campos_vacios':
+            $error_msg = 'Por favor, rellena todos los campos del formulario.';
+            break;
+        case 'campos_muy_largos':
+            $error_msg = 'Uno o más campos exceden la longitud máxima permitida.';
+            break;
+        case 'vinilo_no_existe':
+            $error_msg = 'El vinilo seleccionado no existe.';
+            break;
+        case 'db_error':
+            $error_msg = 'Error de base de datos. Inténtalo de nuevo más tarde.';
+            break;
+        case 'insert_failed':
+            $error_msg = 'No se pudo guardar la reseña. Inténtalo de nuevo.';
+            break;
+        case 'metodo_invalido':
+            $error_msg = 'Método de envío no válido.';
+            break;
+        default:
+            $error_msg = 'Ha ocurrido un error. Inténtalo de nuevo.';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -227,6 +253,14 @@ $resena_ok = isset($_GET['resena']) && $_GET['resena'] === 'ok';
       <div class="alert alert-success alert-dismissible fade show text-center mb-4" role="alert">
         <i class="bi bi-check-circle-fill me-2"></i>
         ¡Gracias! Tu reseña ha sido enviada correctamente.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+      </div>
+    <?php endif; ?>
+
+    <?php if (!empty($error_msg)): ?>
+      <div class="alert alert-danger alert-dismissible fade show text-center mb-4" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <?= htmlspecialchars($error_msg) ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
       </div>
     <?php endif; ?>
