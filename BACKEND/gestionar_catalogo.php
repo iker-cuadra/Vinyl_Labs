@@ -126,10 +126,14 @@ require_once __DIR__ . '/conexion.php';
     const resultado = document.getElementById('resultado');
 
     function buscarVinilos(valor = '') {
-      fetch('https://vinyllabs-production.up.railway.app/buscar_vinilos.php?buscar=' + encodeURIComponent(valor))
+      fetch('buscar_vinilos_admin.php?buscar=' + encodeURIComponent(valor))
         .then(res => res.text())
         .then(data => {
           resultado.innerHTML = data;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          resultado.innerHTML = '<tr><td colspan="5" class="text-center text-danger">Error al cargar los datos</td></tr>';
         });
     }
 
@@ -140,6 +144,80 @@ require_once __DIR__ . '/conexion.php';
     input.addEventListener('keyup', () => {
       buscarVinilos(input.value);
     });
+
+    // Función para cambiar visibilidad
+    function toggleVisible(id, visible) {
+      const estado = visible ? 1 : 0;
+      fetch('toggle_vinilo.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'id=' + id + '&visible=' + estado
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          // Mostrar mensaje de éxito
+          const mensaje = document.createElement('div');
+          mensaje.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
+          mensaje.style.zIndex = '9999';
+          mensaje.innerHTML = `
+            <i class="bi bi-check-circle me-2"></i>
+            Vinilo ${visible ? 'visible' : 'oculto'} correctamente
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          `;
+          document.body.appendChild(mensaje);
+          setTimeout(() => mensaje.remove(), 3000);
+        } else {
+          alert('Error al actualizar: ' + (data.message || 'Desconocido'));
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error al actualizar la visibilidad');
+      });
+    }
+
+    // Función para eliminar vinilo
+    function eliminarVinilo(id) {
+      if (!confirm('¿Estás seguro de que quieres eliminar este vinilo?')) {
+        return;
+      }
+
+      fetch('eliminar_vinilo.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'id=' + id
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          // Recargar la búsqueda
+          buscarVinilos(input.value);
+          
+          // Mostrar mensaje de éxito
+          const mensaje = document.createElement('div');
+          mensaje.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
+          mensaje.style.zIndex = '9999';
+          mensaje.innerHTML = `
+            <i class="bi bi-check-circle me-2"></i>
+            Vinilo eliminado correctamente
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          `;
+          document.body.appendChild(mensaje);
+          setTimeout(() => mensaje.remove(), 3000);
+        } else {
+          alert('Error al eliminar: ' + (data.message || 'Desconocido'));
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error al eliminar el vinilo');
+      });
+    }
   </script>
 
 </body>
