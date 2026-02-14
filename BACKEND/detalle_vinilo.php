@@ -157,6 +157,8 @@ $resenas_result = $resenas_stmt->get_result();
       padding: 10px 30px;
       border-radius: 10px;
       transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .btn-volver:hover {
@@ -232,88 +234,49 @@ $resenas_result = $resenas_stmt->get_result();
       </div>
 
       <div class="d-flex align-items-center gap-2">
-        <a href="https://vinyllabs-production.up.railway.app/catalogo.php" class="btn-login-custom">Catálogo</a>
-        <a href="https://vinyl-labs.vercel.app" class="btn-login-custom d-none d-md-inline-block">Inicio</a>
+        <?php if (isset($_SESSION['usuario'])): ?>
+          <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
+        <?php endif; ?>
+
+        <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
 
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
-          aria-controls="menuLateral" aria-label="Abrir menú">
-          <i class="bi bi-list" style="font-size: 1.5rem;"></i>
+          aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
+          <span class="navbar-toggler-icon"></span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Menú lateral -->
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="menuLateral" aria-labelledby="menuLateralLabel" style="background: linear-gradient(180deg, #3d2714 0%, #2a1a0d 100%); width: 280px;">
-    <div class="offcanvas-header" style="border-bottom: 1px solid rgba(184, 134, 11, 0.3); padding: 20px;">
-      <div class="d-flex align-items-center">
-        <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" style="height: 40px; margin-right: 10px;">
-        <h5 class="offcanvas-title" id="menuLateralLabel" style="color: #f5deb3; font-family: 'Bebas Neue', cursive; font-size: 1.5rem; margin: 0;">Vinyl Lab</h5>
+  <!-- Menú lateral offcanvas -->
+  <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
+    <div class="offcanvas-header flex-column align-items-start w-100">
+      <div class="logo-container">
+        <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
       </div>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style="filter: brightness(0) invert(1);"></button>
     </div>
-    <div class="offcanvas-body" style="padding: 30px 20px;">
-      <nav class="nav flex-column gap-3">
-        <a class="nav-link offcanvas-link" href="https://vinyl-labs.vercel.app">
-          <i class="bi bi-house-door me-2"></i> Inicio
-        </a>
-        <a class="nav-link offcanvas-link active-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">
-          <i class="bi bi-music-note-list me-2"></i> Catálogo
-        </a>
-        <a class="nav-link offcanvas-link" href="#">
-          <i class="bi bi-tag me-2"></i> Ofertas
-        </a>
-        <a class="nav-link offcanvas-link" href="#">
-          <i class="bi bi-envelope me-2"></i> Contacto
-        </a>
+    <div class="offcanvas-body">
+      <nav class="nav flex-column">
+        <a class="nav-link" href="https://vinyl-labs.vercel.app">Inicio</a>
+        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
+        <a class="nav-link" href="#">Ofertas</a>
+        <a class="nav-link" href="#">Contacto</a>
+
+        <?php if (isset($_SESSION['usuario'])): ?>
+          <a class="nav-link" href="gestionar_catalogo.php">Gestionar catálogo</a>
+        <?php endif; ?>
       </nav>
     </div>
   </div>
 
-  <style>
-    .offcanvas-link {
-      color: #f5deb3;
-      font-family: 'Raleway', sans-serif;
-      font-size: 1.1rem;
-      padding: 12px 15px;
-      border-radius: 8px;
-      transition: all 0.3s;
-      text-decoration: none;
-    }
-
-    .offcanvas-link:hover {
-      background: rgba(184, 134, 11, 0.3) !important;
-      transform: translateX(5px);
-      color: #f5deb3;
-    }
-
-    .offcanvas-link.active-link {
-      background: rgba(184, 134, 11, 0.2);
-    }
-
-    .btn-volver {
-      background: transparent;
-      border: 2px solid #b8860b;
-      color: #b8860b;
-      font-family: 'Raleway', sans-serif;
-      font-weight: 600;
-      padding: 10px 30px;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .btn-volver:hover {
-      background: #b8860b;
-      color: white;
-    }
-  </style>
-
   <!-- Contenido del detalle -->
   <main class="container vinilo-detalle">
     
-  
+    <div class="mb-4">
+      <a href="catalogo.php" class="btn btn-volver">
+        <i class="bi bi-arrow-left me-2"></i> Volver al catálogo
+      </a>
+    </div>
 
     <div class="row g-5">
       <!-- Imagen del vinilo -->
@@ -446,7 +409,7 @@ $resenas_result = $resenas_stmt->get_result();
           </ul>
         </div>
         
-     <div class="col-md-3 text-center text-md-start">
+        <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Síguenos</h5>
           <div class="social-icons">
             <a href="https://www.instagram.com/" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
@@ -497,6 +460,13 @@ $resenas_result = $resenas_stmt->get_result();
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const offcanvasEl = document.getElementById('menuLateral');
+    const btnHamb = document.getElementById('btnHamburguesa');
+    offcanvasEl.addEventListener('show.bs.offcanvas', () => btnHamb.classList.add('active'));
+    offcanvasEl.addEventListener('hidden.bs.offcanvas', () => btnHamb.classList.remove('active'));
+  </script>
 
 </body>
 
