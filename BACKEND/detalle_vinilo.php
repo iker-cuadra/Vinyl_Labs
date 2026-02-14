@@ -39,6 +39,12 @@ $resenas_stmt = $conn->prepare("
 $resenas_stmt->bind_param("i", $vinilo_id);
 $resenas_stmt->execute();
 $resenas_result = $resenas_stmt->get_result();
+
+// Guardar reseñas en array
+$resenas_array = [];
+while ($r = $resenas_result->fetch_assoc()) {
+    $resenas_array[] = $r;
+}
 ?>
 
 <!DOCTYPE html>
@@ -172,53 +178,203 @@ $resenas_result = $resenas_stmt->get_result();
       color: white;
     }
 
-    /* Sección de reseñas */
+    /* Sección de reseñas con carrusel */
     .resenas-vinilo {
       background: linear-gradient(135deg, #2a1205 0%, #4a2010 60%, #3a1a08 100%);
       padding: 60px 0;
       margin-top: 60px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .resena-item {
+    .resenas-titulo-seccion {
+      color: #f5deb3;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2.5rem;
+      letter-spacing: 3px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* Carrusel de reseñas */
+    .resenas-carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      padding: 20px 0;
+    }
+
+    .resenas-carousel-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+
+    /* Tarjetas compactas */
+    .resena-card-compact {
+      flex: 0 0 calc(33.333% - 14px);
       background: rgba(255, 248, 235, 0.08);
-      border: 1px solid rgba(184, 134, 11, 0.3);
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 20px;
+      border: 1.5px solid rgba(184, 134, 11, 0.3);
+      border-radius: 12px;
+      padding: 20px;
       transition: all 0.3s ease;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
     }
 
-    .resena-item:hover {
-      transform: translateY(-3px);
+    @media (max-width: 991px) {
+      .resena-card-compact {
+        flex: 0 0 calc(50% - 10px);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .resena-card-compact {
+        flex: 0 0 100%;
+      }
+    }
+
+    .resena-card-compact:hover {
+      transform: translateY(-5px);
       border-color: rgba(218, 165, 32, 0.6);
-      box-shadow: 0 5px 20px rgba(184, 134, 11, 0.3);
+      box-shadow: 0 8px 25px rgba(184, 134, 11, 0.3);
     }
 
-    .resena-autor {
+    .resena-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .resena-avatar-compact {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #daa520, #b8860b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.1rem;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(184, 134, 11, 0.4);
+    }
+
+    .resena-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .resena-nombre-compact {
       font-family: 'Raleway', sans-serif;
       font-weight: 700;
       color: #f5deb3;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .resena-ciudad {
-      font-family: 'Raleway', sans-serif;
+    .resena-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.75rem;
       color: rgba(218, 165, 32, 0.7);
-      font-size: 0.9rem;
+      margin-top: 2px;
     }
 
-    .resena-texto {
+    .resena-ciudad-compact {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .resena-fecha-compact {
+      color: rgba(245, 222, 179, 0.5);
+    }
+
+    .resena-comentario-compact {
       font-family: 'Raleway', sans-serif;
       color: rgba(255, 248, 235, 0.9);
-      line-height: 1.7;
-      margin-top: 15px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
     }
 
-    .resena-fecha {
-      font-family: 'Raleway', sans-serif;
-      color: rgba(245, 222, 179, 0.5);
-      font-size: 0.85rem;
-      margin-top: 10px;
+    /* Navegación del carrusel */
+    .resenas-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .resenas-btn {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 248, 235, 0.08);
+      border: 2px solid rgba(184, 134, 11, 0.5);
+      color: #daa520;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .resenas-btn:hover:not(:disabled) {
+      background: rgba(184, 134, 11, 0.3);
+      border-color: #daa520;
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(184, 134, 11, 0.4);
+    }
+
+    .resenas-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Dots indicadores */
+    .resenas-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .resenas-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(184, 134, 11, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      padding: 0;
+    }
+
+    .resenas-dot:hover:not(.active) {
+      background: rgba(184, 134, 11, 0.6);
+      transform: scale(1.2);
+    }
+
+    .resenas-dot.active {
+      background: linear-gradient(135deg, #daa520, #b8860b);
+      transform: scale(1.4);
+      box-shadow: 0 0 10px rgba(218, 165, 32, 0.6);
     }
   </style>
 
@@ -362,40 +518,50 @@ $resenas_result = $resenas_stmt->get_result();
     </div>
   </main>
 
-  <!-- Sección de reseñas -->
-  <?php if ($resenas_result->num_rows > 0): ?>
+  <!-- Sección de reseñas con carrusel -->
+  <?php if (!empty($resenas_array)): ?>
     <section class="resenas-vinilo">
       <div class="container">
-        <h2 class="text-center mb-5" style="color: #f5deb3; font-family: 'Bebas Neue', cursive; font-size: 2.5rem; letter-spacing: 3px;">
+        <h2 class="resenas-titulo-seccion">
           <i class="bi bi-chat-square-quote me-2"></i>
           Opiniones sobre este vinilo
         </h2>
 
-        <div class="row">
-          <div class="col-lg-10 mx-auto">
-            <?php while ($resena = $resenas_result->fetch_assoc()): ?>
-              <div class="resena-item">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <p class="resena-autor mb-1">
-                      <i class="bi bi-person-circle me-2"></i>
-                      <?= htmlspecialchars($resena['nombre']) ?>
-                    </p>
-                    <p class="resena-ciudad mb-0">
-                      <i class="bi bi-geo-alt-fill me-1"></i>
-                      <?= htmlspecialchars($resena['ciudad']) ?>
-                    </p>
+        <div class="resenas-carousel-wrapper" id="resenasWrapper">
+          <div class="resenas-carousel-track" id="resenasTrack">
+            <?php foreach ($resenas_array as $resena): ?>
+              <div class="resena-card-compact">
+                <div class="resena-header">
+                  <div class="resena-avatar-compact">
+                    <?= mb_strtoupper(mb_substr($resena['nombre'], 0, 1)) ?>
                   </div>
-                  <p class="resena-fecha">
-                    <?= date('d/m/Y', strtotime($resena['fecha'])) ?>
-                  </p>
+                  <div class="resena-info">
+                    <p class="resena-nombre-compact"><?= htmlspecialchars($resena['nombre']) ?></p>
+                    <div class="resena-meta">
+                      <span class="resena-ciudad-compact">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <?= htmlspecialchars($resena['ciudad']) ?>
+                      </span>
+                      <span class="resena-fecha-compact">
+                        <?= date('d/m/Y', strtotime($resena['fecha'])) ?>
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <p class="resena-texto mb-0">
-                  "<?= htmlspecialchars($resena['comentario']) ?>"
-                </p>
+                <p class="resena-comentario-compact">"<?= htmlspecialchars($resena['comentario']) ?>"</p>
               </div>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
           </div>
+        </div>
+
+        <div class="resenas-nav">
+          <button class="resenas-btn" id="btnPrev" aria-label="Anterior">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <div class="resenas-dots" id="resenaDots"></div>
+          <button class="resenas-btn" id="btnNext" aria-label="Siguiente">
+            <i class="bi bi-chevron-right"></i>
+          </button>
         </div>
       </div>
     </section>
@@ -477,6 +643,92 @@ $resenas_result = $resenas_stmt->get_result();
     const btnHamb = document.getElementById('btnHamburguesa');
     offcanvasEl.addEventListener('show.bs.offcanvas', () => btnHamb.classList.add('active'));
     offcanvasEl.addEventListener('hidden.bs.offcanvas', () => btnHamb.classList.remove('active'));
+  </script>
+
+  <!-- Script del carrusel de reseñas -->
+  <script>
+    (function() {
+      const track = document.getElementById('resenasTrack');
+      const wrapper = document.getElementById('resenasWrapper');
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
+      const dotsContainer = document.getElementById('resenaDots');
+
+      if (!track) return;
+
+      let currentPage = 0;
+      let itemsPerPage = 3;
+      const cards = Array.from(track.querySelectorAll('.resena-card-compact'));
+      const totalCards = cards.length;
+
+      function getItemsPerPage() {
+        if (window.innerWidth <= 576) return 1;
+        if (window.innerWidth <= 991) return 2;
+        return 3;
+      }
+
+      function totalPages() {
+        return Math.ceil(totalCards / itemsPerPage);
+      }
+
+      function buildDots() {
+        dotsContainer.innerHTML = '';
+        const pages = totalPages();
+        for (let i = 0; i < pages; i++) {
+          const dot = document.createElement('button');
+          dot.className = 'resenas-dot' + (i === currentPage ? ' active' : '');
+          dot.setAttribute('aria-label', `Página ${i + 1}`);
+          dot.addEventListener('click', () => goToPage(i));
+          dotsContainer.appendChild(dot);
+        }
+      }
+
+      function goToPage(page) {
+        const pages = totalPages();
+        currentPage = Math.max(0, Math.min(page, pages - 1));
+
+        const cardWidth = cards[0].offsetWidth + 20; // ancho + gap
+        const offset = currentPage * itemsPerPage * cardWidth;
+
+        track.style.transform = `translateX(-${offset}px)`;
+
+        // Actualizar dots
+        dotsContainer.querySelectorAll('.resenas-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentPage);
+        });
+
+        // Actualizar botones
+        btnPrev.disabled = currentPage === 0;
+        btnNext.disabled = currentPage >= pages - 1;
+      }
+
+      function init() {
+        itemsPerPage = getItemsPerPage();
+        currentPage = 0;
+        track.style.transform = 'translateX(0)';
+        buildDots();
+        goToPage(0);
+      }
+
+      btnPrev.addEventListener('click', () => goToPage(currentPage - 1));
+      btnNext.addEventListener('click', () => goToPage(currentPage + 1));
+
+      // Soporte táctil
+      let startX = 0;
+      wrapper.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+
+      wrapper.addEventListener('touchend', e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          goToPage(diff > 0 ? currentPage + 1 : currentPage - 1);
+        }
+      });
+
+      window.addEventListener('resize', init);
+      init();
+    })();
   </script>
 
 </body>
