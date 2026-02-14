@@ -104,6 +104,16 @@ if (isset($_GET['error'])) {
       color: #fff;
     }
 
+    /* ── Menú hamburguesa mejorado ─────────────────────────────── */
+    .offcanvas .nav-link {
+      transition: all 0.3s ease;
+    }
+    
+    .offcanvas .nav-link:hover {
+      background: rgba(184, 134, 11, 0.3) !important;
+      transform: translateX(5px);
+    }
+
     /* ── Sección de reseñas mejorada ─────────────────────────────── */
     .resenas-section {
       background: linear-gradient(160deg, #1a0d06 0%, #3d1f10 40%, #2a1508 70%, #1f0f05 100%);
@@ -596,35 +606,48 @@ if (isset($_GET['error'])) {
 
       <div class="d-flex align-items-center gap-2">
         <?php if (isset($_SESSION['usuario'])): ?>
-          <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
+          <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" class="btn-login-custom d-none d-md-inline-block">Gestionar catálogo</a>
         <?php endif; ?>
 
-        <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
+        <a href="https://vinyl-labs.vercel.app" class="btn-login-custom d-none d-md-inline-block">Inicio</a>
 
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
-          aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
-          <span class="navbar-toggler-icon"></span>
+          aria-controls="menuLateral" aria-label="Abrir menú">
+          <i class="bi bi-list" style="font-size: 1.5rem;"></i>
         </button>
       </div>
     </div>
   </header>
 
   <!-- Menú lateral offcanvas -->
- <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
-    <div class="offcanvas-header flex-column align-items-start w-100">
-      <div class="logo-container">
-        <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="menuLateral" aria-labelledby="menuLateralLabel" style="background: linear-gradient(180deg, #3d2714 0%, #2a1a0d 100%); width: 280px;">
+    <div class="offcanvas-header" style="border-bottom: 1px solid rgba(184, 134, 11, 0.3); padding: 20px;">
+      <div class="d-flex align-items-center">
+        <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" style="height: 40px; margin-right: 10px;">
+        <h5 class="offcanvas-title" id="menuLateralLabel" style="color: #f5deb3; font-family: 'Bebas Neue', cursive; font-size: 1.5rem; margin: 0;">Vinyl Lab</h5>
       </div>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style="filter: brightness(0) invert(1);"></button>
     </div>
-    <div class="offcanvas-body">
-      <nav class="nav flex-column">
-        <a class="nav-link" href="https://vinyl-labs.vercel.app">Inicio</a>
-        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
-        <a class="nav-link" href="#">Ofertas</a>
-        <a class="nav-link" href="#">Contacto</a>
+    <div class="offcanvas-body" style="padding: 30px 20px;">
+      <nav class="nav flex-column gap-3">
+        <a class="nav-link" href="https://vinyl-labs.vercel.app" style="color: #f5deb3; font-family: 'Raleway', sans-serif; font-size: 1.1rem; padding: 12px 15px; border-radius: 8px; transition: all 0.3s; text-decoration: none;">
+          <i class="bi bi-house-door me-2"></i> Inicio
+        </a>
+        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php" style="color: #f5deb3; font-family: 'Raleway', sans-serif; font-size: 1.1rem; padding: 12px 15px; border-radius: 8px; transition: all 0.3s; text-decoration: none; background: rgba(184, 134, 11, 0.2);">
+          <i class="bi bi-music-note-list me-2"></i> Catálogo
+        </a>
+        <a class="nav-link" href="#" style="color: #f5deb3; font-family: 'Raleway', sans-serif; font-size: 1.1rem; padding: 12px 15px; border-radius: 8px; transition: all 0.3s; text-decoration: none;">
+          <i class="bi bi-tag me-2"></i> Ofertas
+        </a>
+        <a class="nav-link" href="#" style="color: #f5deb3; font-family: 'Raleway', sans-serif; font-size: 1.1rem; padding: 12px 15px; border-radius: 8px; transition: all 0.3s; text-decoration: none;">
+          <i class="bi bi-envelope me-2"></i> Contacto
+        </a>
         
         <?php if (isset($_SESSION['usuario'])): ?>
-          <a class="nav-link" href="gestionar_catalogo.php">Gestionar catálogo</a>
+          <hr style="border-color: rgba(184, 134, 11, 0.3); margin: 20px 0;">
+          <a class="nav-link" href="gestionar_catalogo.php" style="color: #daa520; font-family: 'Raleway', sans-serif; font-size: 1.1rem; padding: 12px 15px; border-radius: 8px; transition: all 0.3s; text-decoration: none;">
+            <i class="bi bi-gear me-2"></i> Gestionar catálogo
+          </a>
         <?php endif; ?>
       </nav>
     </div>
@@ -846,10 +869,10 @@ if (isset($_GET['error'])) {
           Información y Comercio Electrónico (LSSI-CE).
         </p>
         <div class="footer-legal-links">
-          <a href="../Avisos/legal.html" class="footer-legal-link">Aviso Legal</a> |
-          <a href="../Avisos/priv.html" class="footer-legal-link">Política de Privacidad</a> |
-          <a href="../Avisos/cookies.html" class="footer-legal-link">Política de Cookies</a> |
-          <a href="../Avisos/condiciones.html" class="footer-legal-link">Condiciones de Uso</a>
+          <a href="aviso-legal.html" class="footer-legal-link">Aviso Legal</a> |
+          <a href="politica-privacidad.html" class="footer-legal-link">Política de Privacidad</a> |
+          <a href="politica-cookies.html" class="footer-legal-link">Política de Cookies</a> |
+          <a href="condiciones-uso.html" class="footer-legal-link">Condiciones de Uso</a>
         </div>
       </div>
 
@@ -868,13 +891,6 @@ if (isset($_GET['error'])) {
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    const offcanvasEl = document.getElementById('menuLateral');
-    const btnHamb = document.getElementById('btnHamburguesa');
-    offcanvasEl.addEventListener('show.bs.offcanvas', () => btnHamb.classList.add('active'));
-    offcanvasEl.addEventListener('hidden.bs.offcanvas', () => btnHamb.classList.remove('active'));
-  </script>
 
   <!-- Carrusel de reseñas -->
   <script>
@@ -917,7 +933,7 @@ if (isset($_GET['error'])) {
 
         // Calcular offset: cuántos cards se desplazan
         const cardEl     = cards[0];
-        const cardWidth  = cardEl.offsetWidth + 20; // gap 20px
+        const cardWidth  = cardEl.offsetWidth + 24; // gap 24px
         const offset     = current * perPage * cardWidth;
 
         track.style.transform = `translateX(-${offset}px)`;
