@@ -2,6 +2,12 @@
 session_start();
 require_once __DIR__ . '/conexion.php';
 
+// Inicializar carrito si no existe
+if (!isset($_SESSION['carrito'])) {
+    $_SESSION['carrito'] = [];
+}
+$carrito_items = $_SESSION['carrito'];
+
 // Obtener el ID del vinilo
 $vinilo_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
@@ -241,6 +247,16 @@ $resenas_result = $resenas_stmt->get_result();
         <a href="https://vinyllabs-production.up.railway.app/catalogo.php" class="btn-login-custom">Catálogo</a>
         <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
 
+        <!-- Botón del carrito -->
+        <a href="carrito.php" class="btn-login-custom position-relative">
+          <i class="bi bi-cart3"></i> Carrito
+          <?php if (!empty($carrito_items)): ?>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              <?= count($carrito_items) ?>
+            </span>
+          <?php endif; ?>
+        </a>
+
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
           aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
           <span class="navbar-toggler-icon"></span>
@@ -337,9 +353,9 @@ $resenas_result = $resenas_stmt->get_result();
               <i class="bi bi-star-fill me-2"></i> Dejar una reseña
             </a>
             
-            <button class="btn btn-volver">
+            <a href="gestionar_carrito.php?accion=agregar&id=<?= $vinilo['id'] ?>" class="btn btn-volver">
               <i class="bi bi-cart-plus me-2"></i> Añadir al carrito
-            </button>
+            </a>
           </div>
         </div>
       </div>

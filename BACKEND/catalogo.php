@@ -2,6 +2,12 @@
 session_start();
 require_once __DIR__ . '/conexion.php';
 
+// Inicializar carrito si no existe
+if (!isset($_SESSION['carrito'])) {
+    $_SESSION['carrito'] = [];
+}
+$carrito = $_SESSION['carrito'];
+
 // ── Configuración de paginación ────────────────────────────────────
 $vinilos_por_pagina = 8;
 $pagina_actual = isset($_GET['pagina']) ? max(1, (int)$_GET['pagina']) : 1;
@@ -601,6 +607,16 @@ if (isset($_GET['error'])) {
 
         <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
 
+        <!-- Botón del carrito -->
+        <a href="carrito.php" class="btn-login-custom position-relative">
+          <i class="bi bi-cart3"></i> Carrito
+          <?php if (!empty($carrito)): ?>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              <?= count($carrito) ?>
+            </span>
+          <?php endif; ?>
+        </a>
+
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
           aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
           <span class="navbar-toggler-icon"></span>
@@ -656,7 +672,7 @@ if (isset($_GET['error'])) {
         while ($row = $vinilos->fetch_assoc()): 
       ?>
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-          <div class="card h-100 shadow-sm" style="background-color: rgba(255,255,255,0.9); border: none; cursor: pointer; transition: transform 0.3s ease;" onclick="window.location.href='https://vinyllabs-production.up.railway.app/detalle_vinilo.php?id=<?= $row['id'] ?>';" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div class="card h-100 shadow-sm" style="background-color: rgba(255,255,255,0.9); border: none; cursor: pointer; transition: transform 0.3s ease;" onclick="window.location.href='detalle_vinilo.php?id=<?= $row['id'] ?>';" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
             <?php if (!empty($row['imagen'])): 
               // Debug: mostrar ruta
               $ruta_imagen = htmlspecialchars($row['imagen']);
@@ -680,7 +696,7 @@ if (isset($_GET['error'])) {
               </h5>
               <p class="card-text mb-3"><?= number_format($row['precio'], 2, ',', '.') ?> €</p>
               <div class="mt-auto d-flex gap-2">
-                <a href="https://vinyllabs-production.up.railway.app/detalle_vinilo.php?id=<?= $row['id'] ?>" 
+                <a href="detalle_vinilo.php?id=<?= $row['id'] ?>" 
                    class="btn btn-sm flex-grow-1"
                    style="background: linear-gradient(135deg, #daa520, #b8860b); color: white; font-weight: 600; border: none;"
                    onclick="event.stopPropagation();">
@@ -833,10 +849,10 @@ if (isset($_GET['error'])) {
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Síguenos</h5>
           <div class="social-icons">
-            <a href="https://www.instagram.com/" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="https://www.facebook.com/" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-            <a href="https://x.com/" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
-            <a href="https://www.youtube.com/" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
           </div>
         </div>
 
@@ -859,10 +875,10 @@ if (isset($_GET['error'])) {
           Información y Comercio Electrónico (LSSI-CE).
         </p>
         <div class="footer-legal-links">
-          <a href="https://vinyl-labs.vercel.app/Avisos/legal.html" class="footer-legal-link">Aviso Legal</a> |
-          <a href="https://vinyl-labs.vercel.app/Avisos/priv.html" class="footer-legal-link">Política de Privacidad</a> |
-          <a href="https://vinyl-labs.vercel.app/Avisos/cookies.html" class="footer-legal-link">Política de Cookies</a> |
-          <a href="https://vinyl-labs.vercel.app/Avisos/condiciones.html" class="footer-legal-link">Condiciones de Uso</a>
+          <a href="aviso-legal.html" class="footer-legal-link">Aviso Legal</a> |
+          <a href="politica-privacidad.html" class="footer-legal-link">Política de Privacidad</a> |
+          <a href="politica-cookies.html" class="footer-legal-link">Política de Cookies</a> |
+          <a href="condiciones-uso.html" class="footer-legal-link">Condiciones de Uso</a>
         </div>
       </div>
 
