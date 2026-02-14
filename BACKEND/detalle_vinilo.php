@@ -238,6 +238,7 @@ $resenas_result = $resenas_stmt->get_result();
           <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
         <?php endif; ?>
 
+        <a href="https://vinyllabs-production.up.railway.app/catalogo.php" class="btn-login-custom">Catálogo</a>
         <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
 
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
