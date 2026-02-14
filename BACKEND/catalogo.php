@@ -13,15 +13,43 @@ $vinilos_por_pagina = 8;
 $pagina_actual = isset($_GET['pagina']) ? max(1, (int)$_GET['pagina']) : 1;
 $offset = ($pagina_actual - 1) * $vinilos_por_pagina;
 
-// Contar total de vinilos visibles
-$total_result = $conn->query("SELECT COUNT(*) as total FROM vinilos WHERE visible = 1");
-$total_row = $total_result->fetch_assoc();
+// Búsqueda
+$busqueda = isset($_GET['buscar']) ? trim($_GET['buscar']) : '';
+$where_busqueda = '';
+$params = [];
+$types = '';
+
+if (!empty($busqueda)) {
+    $where_busqueda = " AND (nombre LIKE ? OR artista LIKE ? OR genero LIKE ?)";
+    $busqueda_param = "%{$busqueda}%";
+    $params = [$busqueda_param, $busqueda_param, $busqueda_param];
+    $types = 'sss';
+}
+
+// Contar total de vinilos visibles con búsqueda
+$count_sql = "SELECT COUNT(*) as total FROM vinilos WHERE visible = 1" . $where_busqueda;
+$stmt_count = $conn->prepare($count_sql);
+if (!empty($busqueda)) {
+    $stmt_count->bind_param($types, ...$params);
+}
+$stmt_count->execute();
+$total_row = $stmt_count->get_result()->fetch_assoc();
 $total_vinilos = $total_row['total'];
 $total_paginas = ceil($total_vinilos / $vinilos_por_pagina);
 
 // Obtener vinilos de la página actual con prepared statement
-$stmt = $conn->prepare("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DESC LIMIT ? OFFSET ?");
-$stmt->bind_param("ii", $vinilos_por_pagina, $offset);
+$sql = "SELECT * FROM vinilos WHERE visible = 1" . $where_busqueda . " ORDER BY id DESC LIMIT ? OFFSET ?";
+$stmt = $conn->prepare($sql);
+
+if (!empty($busqueda)) {
+    $params[] = $vinilos_por_pagina;
+    $params[] = $offset;
+    $types .= 'ii';
+    $stmt->bind_param($types, ...$params);
+} else {
+    $stmt->bind_param("ii", $vinilos_por_pagina, $offset);
+}
+
 $stmt->execute();
 $vinilos = $stmt->get_result();
 
@@ -42,6 +70,7 @@ if (!$resenas) {
 
 // Mensajes de estado
 $resena_ok = isset($_GET['resena']) && $_GET['resena'] === 'ok';
+$carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
 $error_msg = '';
 
 if (isset($_GET['error'])) {
@@ -108,6 +137,115 @@ if (isset($_GET['error'])) {
     .btn-resena:hover {
       background-color: #b8860b;
       color: #fff;
+    }
+
+    /* ── Barra de búsqueda ─────────────────────────────── */
+    .search-container {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    .search-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 50px 14px 20px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      border: 2px solid rgba(184, 134, 11, 0.3);
+      border-radius: 50px;
+      background: rgba(255, 248, 235, 0.9);
+      color: #5a4a3a;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #b8860b;
+      background: #fff;
+      box-shadow: 0 6px 25px rgba(184, 134, 11, 0.25);
+    }
+
+    .search-input::placeholder {
+      color: rgba(90, 74, 58, 0.5);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      color: #b8860b;
+      font-size: 1.2rem;
+      pointer-events: none;
+    }
+
+    .clear-search {
+      position: absolute;
+      right: 55px;
+      background: none;
+      border: none;
+      color: #b8860b;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 5px;
+      display: none;
+      transition: color 0.2s ease;
+    }
+
+    .clear-search:hover {
+      color: #8b6914;
+    }
+
+    .clear-search.show {
+      display: block;
+    }
+
+    .search-results-info {
+      text-align: center;
+      margin: 20px 0;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.95rem;
+      color: #7a5a3a;
+      font-weight: 500;
+    }
+
+    .search-results-info .highlight {
+      color: #b8860b;
+      font-weight: 700;
+    }
+
+    /* Botón añadir al carrito */
+    .btn-add-cart {
+      background: linear-gradient(135deg, #28a745, #218838);
+      color: white;
+      border: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+    }
+
+    .btn-add-cart:hover {
+      background: linear-gradient(135deg, #218838, #1e7e34);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.5);
+      color: white;
+    }
+
+    .btn-add-cart:active {
+      transform: translateY(0);
+    }
+
+    .btn-add-cart i {
+      transition: transform 0.3s ease;
+    }
+
+    .btn-add-cart:hover i {
+      transform: scale(1.2);
     }
 
     /* ── Sección de reseñas mejorada ─────────────────────────────── */
@@ -640,7 +778,7 @@ if (isset($_GET['error'])) {
         <a class="nav-link" href="#">Contacto</a>
 
         <?php if (isset($_SESSION['usuario'])): ?>
-          <a class="nav-link" href="gestionar_catalogo.php">Gestionar catálogo</a>
+          <a class="nav-link" href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php">Gestionar catálogo</a>
         <?php endif; ?>
       </nav>
     </div>
@@ -657,6 +795,14 @@ if (isset($_GET['error'])) {
       </div>
     <?php endif; ?>
 
+    <?php if ($carrito_msg): ?>
+      <div class="alert alert-success alert-dismissible fade show text-center mb-4" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        ¡Vinilo añadido al carrito correctamente!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+      </div>
+    <?php endif; ?>
+
     <?php if (!empty($error_msg)): ?>
       <div class="alert alert-danger alert-dismissible fade show text-center mb-4" role="alert">
         <i class="bi bi-exclamation-triangle-fill me-2"></i>
@@ -666,6 +812,32 @@ if (isset($_GET['error'])) {
     <?php endif; ?>
 
     <h2 class="mb-4 text-center">Catálogo de Vinilos</h2>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+      <div class="search-wrapper">
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Buscar por nombre, artista o género..."
+          value="<?= htmlspecialchars($busqueda) ?>"
+          autocomplete="off"
+        >
+        <button type="button" class="clear-search" id="clearSearch" title="Limpiar búsqueda">
+          <i class="bi bi-x-circle-fill"></i>
+        </button>
+        <i class="bi bi-search search-icon"></i>
+      </div>
+    </div>
+
+    <?php if (!empty($busqueda)): ?>
+      <div class="search-results-info">
+        Se encontraron <span class="highlight"><?= $total_vinilos ?></span> resultado<?= $total_vinilos != 1 ? 's' : '' ?> para 
+        "<span class="highlight"><?= htmlspecialchars($busqueda) ?></span>"
+      </div>
+    <?php endif; ?>
+
     <div class="row g-4">
       <?php 
       if ($vinilos && $vinilos->num_rows > 0) {
@@ -674,20 +846,17 @@ if (isset($_GET['error'])) {
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
           <div class="card h-100 shadow-sm" style="background-color: rgba(255,255,255,0.9); border: none; cursor: pointer; transition: transform 0.3s ease;" onclick="window.location.href='detalle_vinilo.php?id=<?= $row['id'] ?>';" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
             <?php if (!empty($row['imagen'])): 
-              // Debug: mostrar ruta
               $ruta_imagen = htmlspecialchars($row['imagen']);
               $existe_archivo = file_exists(__DIR__ . '/' . $row['imagen']) ? '✓' : '✗';
             ?>
-              <!-- Debug: <?= $ruta_imagen ?> (Existe: <?= $existe_archivo ?>) -->
               <img src="<?= $ruta_imagen ?>" 
                    class="card-img-top"
                    alt="<?= htmlspecialchars($row['nombre']) ?>" 
                    style="object-fit: cover; height: 300px; width: 100%;"
-                   onerror="console.error('Error cargando imagen: <?= $ruta_imagen ?>'); this.onerror=null; this.parentElement.innerHTML='<div class=\'card-img-top bg-secondary d-flex align-items-center justify-content-center\' style=\'height: 300px;\'><i class=\'bi bi-music-note-beamed\' style=\'font-size: 4rem; color: rgba(255,255,255,0.5);\'></i><div style=\'font-size:0.7rem; color:white; margin-top:10px;\'><?= $existe_archivo ?> <?= basename($ruta_imagen) ?></div></div>';">
+                   onerror="console.error('Error cargando imagen: <?= $ruta_imagen ?>'); this.onerror=null; this.parentElement.innerHTML='<div class=\'card-img-top bg-secondary d-flex align-items-center justify-content-center\' style=\'height: 300px;\'><i class=\'bi bi-music-note-beamed\' style=\'font-size: 4rem; color: rgba(255,255,255,0.5);\'></i></div>';">
             <?php else: ?>
               <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 300px;">
                 <i class="bi bi-music-note-beamed" style="font-size: 4rem; color: rgba(255,255,255,0.5);"></i>
-                <div style="font-size:0.7rem; color:white; margin-top:10px;">Sin imagen en BD</div>
               </div>
             <?php endif; ?>
             <div class="card-body d-flex flex-column">
@@ -695,17 +864,24 @@ if (isset($_GET['error'])) {
                 <?= htmlspecialchars($row['nombre']) ?>
               </h5>
               <p class="card-text mb-3"><?= number_format($row['precio'], 2, ',', '.') ?> €</p>
-              <div class="mt-auto d-flex gap-2">
-                <a href="detalle_vinilo.php?id=<?= $row['id'] ?>" 
-                   class="btn btn-sm flex-grow-1"
-                   style="background: linear-gradient(135deg, #daa520, #b8860b); color: white; font-weight: 600; border: none;"
+              <div class="mt-auto d-flex flex-column gap-2">
+                <div class="d-flex gap-2">
+                  <a href="detalle_vinilo.php?id=<?= $row['id'] ?>" 
+                     class="btn btn-sm flex-grow-1"
+                     style="background: linear-gradient(135deg, #daa520, #b8860b); color: white; font-weight: 600; border: none;"
+                     onclick="event.stopPropagation();">
+                    <i class="bi bi-eye me-1"></i> Ver detalles
+                  </a>
+                  <a href="https://vinyl-labs.vercel.app/formulario.html?vinilo_id=<?= (int)$row['id'] ?>&vinilo_nombre=<?= urlencode($row['nombre']) ?>"
+                     class="btn btn-resena btn-sm"
+                     onclick="event.stopPropagation();">
+                    <i class="bi bi-star"></i>
+                  </a>
+                </div>
+                <a href="https://vinyllabs-production.up.railway.app/gestionar_carrito.php?accion=agregar&id=<?= $row['id'] ?>" 
+                   class="btn btn-add-cart btn-sm w-100"
                    onclick="event.stopPropagation();">
-                  <i class="bi bi-eye me-1"></i> Ver detalles
-                </a>
-                <a href="https://vinyl-labs.vercel.app/formulario.html?vinilo_id=<?= (int)$row['id'] ?>&vinilo_nombre=<?= urlencode($row['nombre']) ?>"
-                   class="btn btn-resena btn-sm"
-                   onclick="event.stopPropagation();">
-                  <i class="bi bi-star"></i>
+                  <i class="bi bi-cart-plus me-1"></i> Añadir al carrito
                 </a>
               </div>
             </div>
@@ -714,7 +890,7 @@ if (isset($_GET['error'])) {
       <?php 
         endwhile;
       } else {
-        echo '<div class="col-12 text-center"><p class="text-muted">No hay vinilos disponibles en este momento.</p></div>';
+        echo '<div class="col-12 text-center"><p class="text-muted">No hay vinilos disponibles' . (!empty($busqueda) ? ' que coincidan con tu búsqueda' : ' en este momento') . '.</p></div>';
       }
       ?>
     </div>
@@ -724,26 +900,26 @@ if (isset($_GET['error'])) {
       <div class="pagination-wrapper">
         <span class="pagination-info">
           Página <?= $pagina_actual ?> de <?= $total_paginas ?> 
-          (<?= $total_vinilos ?> vinilos en total)
+          (<?= $total_vinilos ?> vinilo<?= $total_vinilos != 1 ? 's' : '' ?> en total)
         </span>
         
         <ul class="pagination">
           <!-- Botón anterior -->
           <li class="page-item <?= $pagina_actual <= 1 ? 'disabled' : '' ?>">
-            <a class="page-link" href="?pagina=<?= $pagina_actual - 1 ?><?= $resena_ok ? '&resena=ok' : '' ?>" aria-label="Anterior">
+            <a class="page-link" href="?pagina=<?= $pagina_actual - 1 ?><?= !empty($busqueda) ? '&buscar=' . urlencode($busqueda) : '' ?><?= $resena_ok ? '&resena=ok' : '' ?>" aria-label="Anterior">
               <i class="bi bi-chevron-left"></i>
             </a>
           </li>
 
           <?php
           // Lógica para mostrar números de página
-          $rango = 2; // Cuántas páginas mostrar a cada lado de la actual
+          $rango = 2;
           $inicio = max(1, $pagina_actual - $rango);
           $fin = min($total_paginas, $pagina_actual + $rango);
 
           // Primera página
           if ($inicio > 1) {
-            echo '<li class="page-item"><a class="page-link" href="?pagina=1' . ($resena_ok ? '&resena=ok' : '') . '">1</a></li>';
+            echo '<li class="page-item"><a class="page-link" href="?pagina=1' . (!empty($busqueda) ? '&buscar=' . urlencode($busqueda) : '') . ($resena_ok ? '&resena=ok' : '') . '">1</a></li>';
             if ($inicio > 2) {
               echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
             }
@@ -752,7 +928,7 @@ if (isset($_GET['error'])) {
           // Páginas del rango
           for ($i = $inicio; $i <= $fin; $i++) {
             $active = $i === $pagina_actual ? 'active' : '';
-            echo '<li class="page-item ' . $active . '"><a class="page-link" href="?pagina=' . $i . ($resena_ok ? '&resena=ok' : '') . '">' . $i . '</a></li>';
+            echo '<li class="page-item ' . $active . '"><a class="page-link" href="?pagina=' . $i . (!empty($busqueda) ? '&buscar=' . urlencode($busqueda) : '') . ($resena_ok ? '&resena=ok' : '') . '">' . $i . '</a></li>';
           }
 
           // Última página
@@ -760,13 +936,13 @@ if (isset($_GET['error'])) {
             if ($fin < $total_paginas - 1) {
               echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
             }
-            echo '<li class="page-item"><a class="page-link" href="?pagina=' . $total_paginas . ($resena_ok ? '&resena=ok' : '') . '">' . $total_paginas . '</a></li>';
+            echo '<li class="page-item"><a class="page-link" href="?pagina=' . $total_paginas . (!empty($busqueda) ? '&buscar=' . urlencode($busqueda) : '') . ($resena_ok ? '&resena=ok' : '') . '">' . $total_paginas . '</a></li>';
           }
           ?>
 
           <!-- Botón siguiente -->
           <li class="page-item <?= $pagina_actual >= $total_paginas ? 'disabled' : '' ?>">
-            <a class="page-link" href="?pagina=<?= $pagina_actual + 1 ?><?= $resena_ok ? '&resena=ok' : '' ?>" aria-label="Siguiente">
+            <a class="page-link" href="?pagina=<?= $pagina_actual + 1 ?><?= !empty($busqueda) ? '&buscar=' . urlencode($busqueda) : '' ?><?= $resena_ok ? '&resena=ok' : '' ?>" aria-label="Siguiente">
               <i class="bi bi-chevron-right"></i>
             </a>
           </li>
@@ -905,6 +1081,73 @@ if (isset($_GET['error'])) {
     offcanvasEl.addEventListener('hidden.bs.offcanvas', () => btnHamb.classList.remove('active'));
   </script>
 
+  <!-- Script de búsqueda en tiempo real -->
+  <script>
+    (function() {
+      const searchInput = document.getElementById('searchInput');
+      const clearBtn = document.getElementById('clearSearch');
+      let searchTimeout;
+
+      // Mostrar/ocultar botón de limpiar
+      function updateClearButton() {
+        if (searchInput.value.trim().length > 0) {
+          clearBtn.classList.add('show');
+        } else {
+          clearBtn.classList.remove('show');
+        }
+      }
+
+      // Realizar búsqueda
+      function performSearch() {
+        const searchTerm = searchInput.value.trim();
+        const currentUrl = new URL(window.location.href);
+        
+        if (searchTerm.length > 0) {
+          currentUrl.searchParams.set('buscar', searchTerm);
+        } else {
+          currentUrl.searchParams.delete('buscar');
+        }
+        
+        // Resetear a la primera página cuando se busca
+        currentUrl.searchParams.set('pagina', '1');
+        
+        window.location.href = currentUrl.toString();
+      }
+
+      // Event listener para el input
+      searchInput.addEventListener('input', function() {
+        updateClearButton();
+        
+        // Debounce: esperar 500ms después de que el usuario deje de escribir
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(performSearch, 500);
+      });
+
+      // Event listener para Enter
+      searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          clearTimeout(searchTimeout);
+          performSearch();
+        }
+      });
+
+      // Event listener para el botón de limpiar
+      clearBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        updateClearButton();
+        
+        // Redirigir sin parámetro de búsqueda
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.delete('buscar');
+        currentUrl.searchParams.set('pagina', '1');
+        window.location.href = currentUrl.toString();
+      });
+
+      // Inicializar el estado del botón
+      updateClearButton();
+    })();
+  </script>
+
   <!-- Carrusel de reseñas -->
   <script>
     (function () {
@@ -914,7 +1157,7 @@ if (isset($_GET['error'])) {
       const btnNext = document.getElementById('resenaNext');
       const dotsEl  = document.getElementById('resenasDots');
 
-      if (!track) return; // sin reseñas, no hay carrusel
+      if (!track) return;
 
       let current    = 0;
       let perPage    = 3;
@@ -944,19 +1187,16 @@ if (isset($_GET['error'])) {
         const pages = totalPages();
         current = Math.max(0, Math.min(page, pages - 1));
 
-        // Calcular offset: cuántos cards se desplazan
         const cardEl     = cards[0];
-        const cardWidth  = cardEl.offsetWidth + 20; // gap 20px
+        const cardWidth  = cardEl.offsetWidth + 24;
         const offset     = current * perPage * cardWidth;
 
         track.style.transform = `translateX(-${offset}px)`;
 
-        // Actualizar dots
         dotsEl.querySelectorAll('.resenas-dot').forEach((d, i) =>
           d.classList.toggle('active', i === current)
         );
 
-        // Botones
         btnPrev.disabled = current === 0;
         btnNext.disabled = current >= pages - 1;
       }
@@ -972,7 +1212,6 @@ if (isset($_GET['error'])) {
       btnPrev.addEventListener('click', () => goTo(current - 1));
       btnNext.addEventListener('click', () => goTo(current + 1));
 
-      // Swipe táctil
       let startX = 0;
       wrapper.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
       wrapper.addEventListener('touchend',   e => {
