@@ -610,7 +610,7 @@ if (isset($_GET['error'])) {
   </header>
 
   <!-- Menú lateral offcanvas -->
- <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
+  <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
     <div class="offcanvas-header flex-column align-items-start w-100">
       <div class="logo-container">
         <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
@@ -622,7 +622,7 @@ if (isset($_GET['error'])) {
         <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
         <a class="nav-link" href="#">Ofertas</a>
         <a class="nav-link" href="#">Contacto</a>
-        
+
         <?php if (isset($_SESSION['usuario'])): ?>
           <a class="nav-link" href="gestionar_catalogo.php">Gestionar catálogo</a>
         <?php endif; ?>
@@ -656,16 +656,22 @@ if (isset($_GET['error'])) {
         while ($row = $vinilos->fetch_assoc()): 
       ?>
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-          <div class="card h-100 shadow-sm" style="background-color: rgba(255,255,255,0.9); border: none;">
-            <?php if (!empty($row['imagen'])): ?>
-              <img src="<?= htmlspecialchars($row['imagen']) ?>" 
+          <div class="card h-100 shadow-sm" style="background-color: rgba(255,255,255,0.9); border: none; cursor: pointer; transition: transform 0.3s ease;" onclick="window.location.href='https://vinyllabs-production.up.railway.app/detalle_vinilo.php?id=<?= $row['id'] ?>';" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+            <?php if (!empty($row['imagen'])): 
+              // Debug: mostrar ruta
+              $ruta_imagen = htmlspecialchars($row['imagen']);
+              $existe_archivo = file_exists(__DIR__ . '/' . $row['imagen']) ? '✓' : '✗';
+            ?>
+              <!-- Debug: <?= $ruta_imagen ?> (Existe: <?= $existe_archivo ?>) -->
+              <img src="<?= $ruta_imagen ?>" 
                    class="card-img-top"
                    alt="<?= htmlspecialchars($row['nombre']) ?>" 
                    style="object-fit: cover; height: 300px; width: 100%;"
-                   onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'card-img-top bg-secondary d-flex align-items-center justify-content-center\' style=\'height: 300px;\'><i class=\'bi bi-music-note-beamed\' style=\'font-size: 4rem; color: rgba(255,255,255,0.5);\'></i></div>';">
+                   onerror="console.error('Error cargando imagen: <?= $ruta_imagen ?>'); this.onerror=null; this.parentElement.innerHTML='<div class=\'card-img-top bg-secondary d-flex align-items-center justify-content-center\' style=\'height: 300px;\'><i class=\'bi bi-music-note-beamed\' style=\'font-size: 4rem; color: rgba(255,255,255,0.5);\'></i><div style=\'font-size:0.7rem; color:white; margin-top:10px;\'><?= $existe_archivo ?> <?= basename($ruta_imagen) ?></div></div>';">
             <?php else: ?>
               <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 300px;">
                 <i class="bi bi-music-note-beamed" style="font-size: 4rem; color: rgba(255,255,255,0.5);"></i>
+                <div style="font-size:0.7rem; color:white; margin-top:10px;">Sin imagen en BD</div>
               </div>
             <?php endif; ?>
             <div class="card-body d-flex flex-column">
@@ -673,10 +679,17 @@ if (isset($_GET['error'])) {
                 <?= htmlspecialchars($row['nombre']) ?>
               </h5>
               <p class="card-text mb-3"><?= number_format($row['precio'], 2, ',', '.') ?> €</p>
-              <div class="mt-auto">
+              <div class="mt-auto d-flex gap-2">
+                <a href="https://vinyllabs-production.up.railway.app/detalle_vinilo.php?id=<?= $row['id'] ?>" 
+                   class="btn btn-sm flex-grow-1"
+                   style="background: linear-gradient(135deg, #daa520, #b8860b); color: white; font-weight: 600; border: none;"
+                   onclick="event.stopPropagation();">
+                  <i class="bi bi-eye me-1"></i> Ver detalles
+                </a>
                 <a href="https://vinyl-labs.vercel.app/formulario.html?vinilo_id=<?= (int)$row['id'] ?>&vinilo_nombre=<?= urlencode($row['nombre']) ?>"
-                   class="btn btn-resena w-100">
-                  <i class="bi bi-star me-1"></i> Dejar reseña
+                   class="btn btn-resena btn-sm"
+                   onclick="event.stopPropagation();">
+                  <i class="bi bi-star"></i>
                 </a>
               </div>
             </div>
@@ -846,10 +859,10 @@ if (isset($_GET['error'])) {
           Información y Comercio Electrónico (LSSI-CE).
         </p>
         <div class="footer-legal-links">
-          <a href="https://vinyl-labs.vercel.app/legal.html" class="footer-legal-link">Aviso Legal</a> |
-          <a href="https://vinyl-labs.vercel.app/priv.html" class="footer-legal-link">Política de Privacidad</a> |
-          <a href="https://vinyl-labs.vercel.app/cookies.html" class="footer-legal-link">Política de Cookies</a> |
-          <a href="https://vinyl-labs.vercel.app/condiciones.html" class="footer-legal-link">Condiciones de Uso</a>
+          <a href="aviso-legal.html" class="footer-legal-link">Aviso Legal</a> |
+          <a href="politica-privacidad.html" class="footer-legal-link">Política de Privacidad</a> |
+          <a href="politica-cookies.html" class="footer-legal-link">Política de Cookies</a> |
+          <a href="condiciones-uso.html" class="footer-legal-link">Condiciones de Uso</a>
         </div>
       </div>
 
