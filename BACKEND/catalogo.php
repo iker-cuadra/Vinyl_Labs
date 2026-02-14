@@ -20,7 +20,7 @@ $params = [];
 $types = '';
 
 if (!empty($busqueda)) {
-    $where_busqueda = " AND (nombre LIKE ? OR artista LIKE ? OR genero LIKE ?)";
+    $where_busqueda = " AND (nombre LIKE ? OR descripcion LIKE ?)";
     $busqueda_param = "%{$busqueda}%";
     $params = [$busqueda_param, $busqueda_param, $busqueda_param];
     $types = 'sss';
