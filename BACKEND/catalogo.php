@@ -13,8 +13,15 @@ $total_row = $total_result->fetch_assoc();
 $total_vinilos = $total_row['total'];
 $total_paginas = ceil($total_vinilos / $vinilos_por_pagina);
 
-// Obtener vinilos de la página actual
-$vinilos = $conn->query("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DESC LIMIT $vinilos_por_pagina OFFSET $offset");
+// Obtener vinilos de la página actual con prepared statement
+$stmt = $conn->prepare("SELECT * FROM vinilos WHERE visible = 1 ORDER BY id DESC LIMIT ? OFFSET ?");
+$stmt->bind_param("ii", $vinilos_por_pagina, $offset);
+$stmt->execute();
+$vinilos = $stmt->get_result();
+
+if (!$vinilos) {
+    die("Error en query de vinilos: " . $conn->error);
+}
 
 $resenas_sql = "
     SELECT r.nombre, r.ciudad, r.comentario, r.fecha, v.nombre AS vinilo_nombre
@@ -644,12 +651,22 @@ if (isset($_GET['error'])) {
 
     <h2 class="mb-4 text-center">Catálogo de Vinilos</h2>
     <div class="row g-4">
-      <?php while ($row = $vinilos->fetch_assoc()): ?>
+      <?php 
+      if ($vinilos && $vinilos->num_rows > 0) {
+        while ($row = $vinilos->fetch_assoc()): 
+      ?>
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
           <div class="card h-100 shadow-sm" style="background-color: rgba(255,255,255,0.9); border: none;">
             <?php if (!empty($row['imagen'])): ?>
-              <img src="<?= htmlspecialchars($row['imagen']) ?>" class="card-img-top"
-                alt="<?= htmlspecialchars($row['nombre']) ?>">
+              <img src="<?= htmlspecialchars($row['imagen']) ?>" 
+                   class="card-img-top"
+                   alt="<?= htmlspecialchars($row['nombre']) ?>" 
+                   style="object-fit: cover; height: 300px; width: 100%;"
+                   onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'card-img-top bg-secondary d-flex align-items-center justify-content-center\' style=\'height: 300px;\'><i class=\'bi bi-music-note-beamed\' style=\'font-size: 4rem; color: rgba(255,255,255,0.5);\'></i></div>';">
+            <?php else: ?>
+              <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 300px;">
+                <i class="bi bi-music-note-beamed" style="font-size: 4rem; color: rgba(255,255,255,0.5);"></i>
+              </div>
             <?php endif; ?>
             <div class="card-body d-flex flex-column">
               <h5 class="card-title" style="font-family: 'Bebas Neue', sans-serif;">
@@ -665,7 +682,12 @@ if (isset($_GET['error'])) {
             </div>
           </div>
         </div>
-      <?php endwhile; ?>
+      <?php 
+        endwhile;
+      } else {
+        echo '<div class="col-12 text-center"><p class="text-muted">No hay vinilos disponibles en este momento.</p></div>';
+      }
+      ?>
     </div>
 
     <?php if ($total_paginas > 1): ?>
