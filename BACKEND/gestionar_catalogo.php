@@ -145,9 +145,10 @@ require_once __DIR__ . '/conexion.php';
       buscarVinilos(input.value);
     });
 
-    // Función para cambiar visibilidad
+    // Función para cambiar visibilidad - CORREGIDA
     function toggleVisible(id, visible) {
       const estado = visible ? 1 : 0;
+      
       fetch('toggle_vinilo.php', {
         method: 'POST',
         headers: {
@@ -158,6 +159,9 @@ require_once __DIR__ . '/conexion.php';
       .then(res => res.json())
       .then(data => {
         if (data.success) {
+          // RECARGAR LA LISTA - ESTO ES LO QUE FALTABA
+          buscarVinilos(input.value);
+          
           // Mostrar mensaje de éxito
           const mensaje = document.createElement('div');
           mensaje.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
@@ -175,7 +179,7 @@ require_once __DIR__ . '/conexion.php';
       })
       .catch(error => {
         console.error('Error:', error);
-        alert('Error al actualizar la visibilidad');
+        alert('Error al actualizar la visibilidad: ' + error.message);
       });
     }
 
