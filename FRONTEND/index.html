@@ -35,7 +35,7 @@
       align-items: center;
       text-align: center;
       /* Utiliza el fondo de madera ya presente */
-      background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/wood_pattern.png');
+      background-image: url('imagenes/FondoMadera.avif');
       background-size: cover;
       background-attachment: fixed;
       padding: 0 20px;
@@ -56,7 +56,8 @@
       font-size: 1.6rem;
       margin-top: 1rem;
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-      color: #222;;
+      color: #222;
+      ;
     }
 
     .splash-full .btn-catalogo {
@@ -100,24 +101,22 @@
       <!-- Botones de usuario -->
       <div class="d-flex align-items-center gap-2">
         <!-- Botón Gestionar catálogo (solo con sesión) -->
-        <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" 
-           class="btn-login-custom sesion-required" 
-           id="btnGestionarHeader">Gestionar catálogo</a>
-        
+        <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php"
+          class="btn-login-custom sesion-required" id="btnGestionarHeader">Gestionar catálogo</a>
+
         <!-- Botón Cerrar sesión (solo con sesión) -->
-        <a href="https://vinyllabs-production.up.railway.app/logout.php" 
-           class="btn-login-custom sesion-required" 
-           id="btnCerrarSesion">Cerrar sesión</a>
-        
+        <a href="https://vinyllabs-production.up.railway.app/logout.php" class="btn-login-custom sesion-required"
+          id="btnCerrarSesion">Cerrar sesión</a>
+
         <!-- Botón Iniciar sesión (solo sin sesión) -->
-        <a href="login.html" 
-           class="btn-login-custom" 
-           id="btnIniciarSesion">Iniciar sesión</a>
+        <a href="login.html" class="btn-login-custom" id="btnIniciarSesion">Iniciar sesión</a>
 
         <!-- Botón del carrito -->
-        <a href="https://vinyllabs-production.up.railway.app/carrito.php" class="btn-login-custom position-relative" id="btnCarrito">
+        <a href="https://vinyllabs-production.up.railway.app/carrito.php" class="btn-login-custom position-relative"
+          id="btnCarrito">
           <i class="bi bi-cart3"></i> Carrito
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="carritoContador" style="display: none;">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            id="carritoContador" style="display: none;">
             0
           </span>
         </a>
@@ -144,21 +143,17 @@
         <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
         <a class="nav-link" href="#">Ofertas</a>
         <a class="nav-link" href="#">Contacto</a>
-        
+
         <!-- Botón Gestionar catálogo en menú (solo con sesión) -->
-        <a class="nav-link sesion-required" 
-           href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" 
-           id="btnGestionarMenu">Gestionar catálogo</a>
-        
+        <a class="nav-link sesion-required" href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php"
+          id="btnGestionarMenu">Gestionar catálogo</a>
+
         <!-- Botón Cerrar sesión en menú (solo con sesión) -->
-        <a class="nav-link sesion-required" 
-           href="https://vinyllabs-production.up.railway.app/logout.php" 
-           id="btnCerrarSesionMenu">Cerrar sesión</a>
-        
+        <a class="nav-link sesion-required" href="https://vinyllabs-production.up.railway.app/logout.php"
+          id="btnCerrarSesionMenu">Cerrar sesión</a>
+
         <!-- Botón Iniciar sesión en menú (solo sin sesión) -->
-        <a class="nav-link" 
-           href="login.html" 
-           id="btnIniciarSesionMenu">Iniciar sesión</a>
+        <a class="nav-link" href="login.html" id="btnIniciarSesionMenu">Iniciar sesión</a>
       </nav>
     </div>
   </div>
@@ -166,7 +161,7 @@
   <!-- Splash / bienvenida -->
   <section class="splash-full">
     <h1 class="titulo-splash"><img src="imagenes/VinylLab.png"></h1>
-    <p class="subtitulo-splash">"El sonido del pasado, con la calidez del presente"</p>
+    <p class="subtitulo-splash"><strong>"El sonido del pasado, con la calidez del presente"</strong></p>
     <a href="https://vinyllabs-production.up.railway.app/catalogo.php" class="btn-catalogo">Ver Catálogo</a>
   </section>
 
@@ -194,7 +189,10 @@
         <h1 class="titulo-principal mb-3">Abbey Road</h1>
         <p class="eslogan mb-4"></p>
         <p class="hero-desc mb-4">
-          Abbey Road es el duodécimo álbum de estudio de The Beatles, lanzado el 26 de septiembre de 1969. Considerado uno de los mejores álbumes de la historia, destaca por su innovadora producción, la icónica portada y canciones clásicas como "Come Together" y "Here Comes the Sun". Es un testimonio del talento creativo de la banda y su legado perdura en la música contemporánea.
+          Abbey Road es el duodécimo álbum de estudio de The Beatles, lanzado el 26 de septiembre de 1969. Considerado
+          uno de los mejores álbumes de la historia, destaca por su innovadora producción, la icónica portada y
+          canciones clásicas como "Come Together" y "Here Comes the Sun". Es un testimonio del talento creativo de la
+          banda y su legado perdura en la música contemporánea.
         </p>
         <button class="btn-catalogo" type="button" id="btnAñadirCarrito">
           <i class="bi bi-cart-plus me-2"></i> Añadir al carrito
@@ -340,17 +338,17 @@
           method: 'GET',
           credentials: 'include' // Importante para enviar cookies de sesión
         });
-        
+
         const data = await response.json();
-        
+
         console.log('Respuesta de sesión:', data); // Para debugging
-        
+
         if (data.sesion_activa) {
           // Hay sesión activa - mostrar botones de gestión y cerrar sesión
           document.querySelectorAll('.sesion-required').forEach(el => {
             el.style.display = 'inline-block';
           });
-          
+
           // Ocultar botones de iniciar sesión
           document.getElementById('btnIniciarSesion').style.display = 'none';
           document.getElementById('btnIniciarSesionMenu').style.display = 'none';
@@ -358,13 +356,13 @@
           // No hay sesión - mostrar botón de iniciar sesión
           document.getElementById('btnIniciarSesion').style.display = 'inline-block';
           document.getElementById('btnIniciarSesionMenu').style.display = 'block';
-          
+
           // Ocultar botones que requieren sesión
           document.querySelectorAll('.sesion-required').forEach(el => {
             el.style.display = 'none';
           });
         }
-        
+
         // Actualizar contador de carrito
         if (data.carrito_items) {
           actualizarContadorCarrito(data.carrito_items);
@@ -392,7 +390,7 @@
     }
 
     // Añadir al carrito el vinilo con ID 12 (Abbey Road)
-    document.getElementById('btnAñadirCarrito').addEventListener('click', function() {
+    document.getElementById('btnAñadirCarrito').addEventListener('click', function () {
       // Redirigir a gestionar_carrito.php para añadir el vinilo con ID 12
       window.location.href = 'https://vinyllabs-production.up.railway.app/gestionar_carrito.php?accion=agregar&id=12';
     });
