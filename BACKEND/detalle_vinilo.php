@@ -272,12 +272,6 @@ $resenas_result = $resenas_stmt->get_result();
   <!-- Contenido del detalle -->
   <main class="container vinilo-detalle">
     
-    <div class="mb-4">
-      <a href="catalogo.php" class="btn btn-volver">
-        <i class="bi bi-arrow-left me-2"></i> Volver al catálogo
-      </a>
-    </div>
-
     <div class="row g-5">
       <!-- Imagen del vinilo -->
       <div class="col-lg-5 text-center">
