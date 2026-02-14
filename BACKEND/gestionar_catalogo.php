@@ -31,7 +31,7 @@ require_once __DIR__ . '/conexion.php';
 </head>
 
 <body style="
-  background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/wood_pattern.png');
+  background-image: url('imagenes/FondoMadera.avif');
   background-attachment: fixed;
 ">
 
