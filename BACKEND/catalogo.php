@@ -610,7 +610,7 @@ if (isset($_GET['error'])) {
   </header>
 
   <!-- Menú lateral offcanvas -->
-  <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
+ <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
     <div class="offcanvas-header flex-column align-items-start w-100">
       <div class="logo-container">
         <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
@@ -622,7 +622,7 @@ if (isset($_GET['error'])) {
         <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
         <a class="nav-link" href="#">Ofertas</a>
         <a class="nav-link" href="#">Contacto</a>
-
+        
         <?php if (isset($_SESSION['usuario'])): ?>
           <a class="nav-link" href="gestionar_catalogo.php">Gestionar catálogo</a>
         <?php endif; ?>
