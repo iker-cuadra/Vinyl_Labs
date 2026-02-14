@@ -833,10 +833,10 @@ if (isset($_GET['error'])) {
         <div class="col-md-3 text-center text-md-start">
           <h5 class="footer-titulo">Síguenos</h5>
           <div class="social-icons">
-            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
-            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://www.instagram.com/" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.youtube.com/" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
           </div>
         </div>
 
@@ -859,10 +859,10 @@ if (isset($_GET['error'])) {
           Información y Comercio Electrónico (LSSI-CE).
         </p>
         <div class="footer-legal-links">
-          <a href="aviso-legal.html" class="footer-legal-link">Aviso Legal</a> |
-          <a href="politica-privacidad.html" class="footer-legal-link">Política de Privacidad</a> |
-          <a href="politica-cookies.html" class="footer-legal-link">Política de Cookies</a> |
-          <a href="condiciones-uso.html" class="footer-legal-link">Condiciones de Uso</a>
+          <a href="https://vinyl-labs.vercel.app/FRONTEND/legal.html" class="footer-legal-link">Aviso Legal</a> |
+          <a href="https://vinyl-labs.vercel.app/FRONTEND/priv.html" class="footer-legal-link">Política de Privacidad</a> |
+          <a href="https://vinyl-labs.vercel.app/FRONTEND/cookies.html" class="footer-legal-link">Política de Cookies</a> |
+          <a href="https://vinyl-labs.vercel.app/FRONTEND/condiciones.html" class="footer-legal-link">Condiciones de Uso</a>
         </div>
       </div>
 

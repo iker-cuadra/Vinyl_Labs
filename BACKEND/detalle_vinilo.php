@@ -254,21 +254,61 @@ $resenas_result = $resenas_stmt->get_result();
     </div>
     <div class="offcanvas-body" style="padding: 30px 20px;">
       <nav class="nav flex-column gap-3">
-        <a class="nav-link" href="https://vinyl-labs.vercel.app" style="color: #f5deb3; font-family: 'Raleway', sans-serif; font-size: 1.1rem; padding: 12px 15px; border-radius: 8px; transition: all 0.3s; text-decoration: none;">
+        <a class="nav-link offcanvas-link" href="https://vinyl-labs.vercel.app">
           <i class="bi bi-house-door me-2"></i> Inicio
         </a>
-        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php" style="color: #f5deb3; font-family: 'Raleway', sans-serif; font-size: 1.1rem; padding: 12px 15px; border-radius: 8px; transition: all 0.3s; text-decoration: none; background: rgba(184, 134, 11, 0.2);">
+        <a class="nav-link offcanvas-link active-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">
           <i class="bi bi-music-note-list me-2"></i> Catálogo
         </a>
-        <a class="nav-link" href="#" style="color: #f5deb3; font-family: 'Raleway', sans-serif; font-size: 1.1rem; padding: 12px 15px; border-radius: 8px; transition: all 0.3s; text-decoration: none;">
+        <a class="nav-link offcanvas-link" href="#">
           <i class="bi bi-tag me-2"></i> Ofertas
         </a>
-        <a class="nav-link" href="#" style="color: #f5deb3; font-family: 'Raleway', sans-serif; font-size: 1.1rem; padding: 12px 15px; border-radius: 8px; transition: all 0.3s; text-decoration: none;">
+        <a class="nav-link offcanvas-link" href="#">
           <i class="bi bi-envelope me-2"></i> Contacto
         </a>
       </nav>
     </div>
   </div>
+
+  <style>
+    .offcanvas-link {
+      color: #f5deb3;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1rem;
+      padding: 12px 15px;
+      border-radius: 8px;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .offcanvas-link:hover {
+      background: rgba(184, 134, 11, 0.3) !important;
+      transform: translateX(5px);
+      color: #f5deb3;
+    }
+
+    .offcanvas-link.active-link {
+      background: rgba(184, 134, 11, 0.2);
+    }
+
+    .btn-volver {
+      background: transparent;
+      border: 2px solid #b8860b;
+      color: #b8860b;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      padding: 10px 30px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-volver:hover {
+      background: #b8860b;
+      color: white;
+    }
+  </style>
 
   <!-- Contenido del detalle -->
   <main class="container vinilo-detalle">
@@ -394,12 +434,67 @@ $resenas_result = $resenas_stmt->get_result();
   <!-- Footer -->
   <footer class="footer mt-5 pt-5 pb-4">
     <div class="container">
-      <div class="text-center">
-        <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="footer-logo mb-3" style="height: 60px;">
-        <p class="footer-text">El sonido del pasado, con la calidez del presente.</p>
-        <div class="text-center mt-4 small footer-copy">
-          &copy; 2025 Vinyl Lab — Todos los derechos reservados.
+      <div class="row gy-4">
+        <div class="col-md-3 text-center text-md-start">
+          <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="footer-logo mb-2">
+          <p class="footer-text">El sonido del pasado, con la calidez del presente.</p>
         </div>
+
+        <div class="col-md-3 text-center text-md-start">
+          <h5 class="footer-titulo">Enlaces</h5>
+          <ul class="list-unstyled footer-links">
+            <li><a href="https://vinyl-labs.vercel.app">Inicio</a></li>
+            <li><a href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a></li>
+            <li><a href="#">Ofertas</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </div>
+        
+     <div class="col-md-3 text-center text-md-start">
+          <h5 class="footer-titulo">Síguenos</h5>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.youtube.com/" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-3 text-center text-md-start">
+          <h5 class="footer-titulo">Contáctanos</h5>
+          <form class="footer-form">
+            <input type="text" class="form-control mb-2" placeholder="Tu nombre" required>
+            <input type="email" class="form-control mb-2" placeholder="Tu email" required>
+            <textarea class="form-control mb-2" rows="2" placeholder="Mensaje" required></textarea>
+            <button type="submit" class="btn btn-enviar w-100">Enviar</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-legal text-center mt-4 pt-3 border-top">
+        <h6 class="footer-titulo mb-2">Información Legal</h6>
+        <p class="footer-text small mb-2">
+          Vinyl Lab cumple con la normativa vigente sobre protección de datos personales (Reglamento (UE) 2016/679 -
+          RGPD, y la Ley Orgánica 3/2018 - LOPDGDD), así como con la Ley 34/2002 de Servicios de la Sociedad de la
+          Información y Comercio Electrónico (LSSI-CE).
+        </p>
+        <div class="footer-legal-links">
+          <a href="https://vinyl-labs.vercel.app/legal.html" class="footer-legal-link">Aviso Legal</a> |
+          <a href="https://vinyl-labs.vercel.app/priv.html" class="footer-legal-link">Política de Privacidad</a> |
+          <a href="https://vinyl-labs.vercel.app/cookies.html" class="footer-legal-link">Política de Cookies</a> |
+          <a href="https://vinyl-labs.vercel.app/condiciones.html" class="footer-legal-link">Condiciones de Uso</a>
+        </div>
+      </div>
+
+      <div id="cookie-banner" class="cookie-banner">
+        <p>Usamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia.
+          <a href="https://vinyl-labs.vercel.app/cookies.html">Más información</a>.
+        </p>
+        <button id="accept-cookies" class="btn btn-aceptar-cookies">Aceptar</button>
+      </div>
+
+      <div class="text-center mt-4 border-top pt-3 small footer-copy">
+        &copy; 2025 Vinyl Lab — Todos los derechos reservados.
       </div>
     </div>
   </footer>
