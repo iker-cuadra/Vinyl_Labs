@@ -467,6 +467,28 @@ if (isset($_GET['msg'])) {
         </div>
       </div>
 
+      <div class="footer-legal text-center mt-4 pt-3 border-top">
+        <h6 class="footer-titulo mb-2">Información Legal</h6>
+        <p class="footer-text small mb-2">
+          Vinyl Lab cumple con la normativa vigente sobre protección de datos personales (Reglamento (UE) 2016/679 -
+          RGPD, y la Ley Orgánica 3/2018 - LOPDGDD), así como con la Ley 34/2002 de Servicios de la Sociedad de la
+          Información y Comercio Electrónico (LSSI-CE).
+        </p>
+        <div class="footer-legal-links">
+          <a href="https://vinyl-labs.vercel.app/legal.html" class="footer-legal-link">Aviso Legal</a> |
+          <a href="https://vinyl-labs.vercel.app/priv.html" class="footer-legal-link">Política de Privacidad</a> |
+          <a href="https://vinyl-labs.vercel.app/cookies.html" class="footer-legal-link">Política de Cookies</a> |
+          <a href="https://vinyl-labs.vercel.app/condiciones.html" class="footer-legal-link">Condiciones de Uso</a>
+        </div>
+      </div>
+
+      <div id="cookie-banner" class="cookie-banner">
+        <p>Usamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia.
+          <a href="https://vinyl-labs.vercel.app/cookies.html">Más información</a>.
+        </p>
+        <button id="accept-cookies" class="btn btn-aceptar-cookies">Aceptar</button>
+      </div>
+
       <div class="text-center mt-4 border-top pt-3 small footer-copy">
         &copy; 2025 Vinyl Lab — Todos los derechos reservados.
       </div>
