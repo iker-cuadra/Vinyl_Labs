@@ -824,13 +824,6 @@ if (isset($_GET['error'])) {
       </div>
     </div>
 
-    <?php if (!empty($busqueda)): ?>
-      <div class="search-results-info">
-        Se encontraron <span class="highlight"><?= $total_vinilos ?></span> resultado<?= $total_vinilos != 1 ? 's' : '' ?> para 
-        "<span class="highlight"><?= htmlspecialchars($busqueda) ?></span>"
-      </div>
-    <?php endif; ?>
-
     <div class="row g-4" id="catalogoGrid">
       <!-- Los vinilos se cargarán aquí dinámicamente con AJAX -->
       <div class="col-12 text-center py-5">
@@ -996,10 +989,10 @@ if (isset($_GET['error'])) {
           Información y Comercio Electrónico (LSSI-CE).
         </p>
         <div class="footer-legal-links">
-          <a href="aviso-legal.html" class="footer-legal-link">Aviso Legal</a> |
-          <a href="politica-privacidad.html" class="footer-legal-link">Política de Privacidad</a> |
-          <a href="politica-cookies.html" class="footer-legal-link">Política de Cookies</a> |
-          <a href="condiciones-uso.html" class="footer-legal-link">Condiciones de Uso</a>
+          <a href="https://vinyl-labs.vercel.app/Avisos/legal.html" class="footer-legal-link">Aviso Legal</a> |
+          <a href="https://vinyl-labs.vercel.app/Avisos/priv.html" class="footer-legal-link">Política de Privacidad</a> |
+          <a href="https://vinyl-labs.vercel.app/Avisos/cookies.html" class="footer-legal-link">Política de Cookies</a> |
+          <a href="https://vinyl-labs.vercel.app/Avisos/condiciones.html" class="footer-legal-link">Condiciones de Uso</a>
         </div>
       </div>
 
@@ -1033,7 +1026,6 @@ if (isset($_GET['error'])) {
       const clearBtn = document.getElementById('clearSearch');
       const catalogoGrid = document.getElementById('catalogoGrid');
       const paginationWrapper = document.querySelector('.pagination-wrapper');
-      const searchResultsInfo = document.querySelector('.search-results-info');
       let searchTimeout;
       let currentPage = 1;
 
@@ -1064,17 +1056,22 @@ if (isset($_GET['error'])) {
             catalogoGrid.innerHTML = data.html;
 
             // Actualizar información de resultados
+            let infoElement = document.querySelector('.search-results-info');
+            
             if (searchTerm.length > 0 && data.total > 0) {
-              if (!searchResultsInfo) {
-                const info = document.createElement('div');
-                info.className = 'search-results-info';
-                searchInput.closest('.search-container').insertAdjacentElement('afterend', info);
+              // Si no existe el elemento, crearlo
+              if (!infoElement) {
+                infoElement = document.createElement('div');
+                infoElement.className = 'search-results-info';
+                searchInput.closest('.search-container').insertAdjacentElement('afterend', infoElement);
               }
-              const infoElement = document.querySelector('.search-results-info');
               infoElement.innerHTML = `Se encontraron <span class="highlight">${data.total}</span> resultado${data.total != 1 ? 's' : ''} para "<span class="highlight">${searchTerm}</span>"`;
               infoElement.style.display = 'block';
-            } else if (searchResultsInfo) {
-              searchResultsInfo.style.display = 'none';
+            } else {
+              // Ocultar o eliminar el mensaje si no hay búsqueda o no hay resultados
+              if (infoElement) {
+                infoElement.style.display = 'none';
+              }
             }
 
             // Actualizar paginación
