@@ -16,21 +16,17 @@ $offset = ($pagina_actual - 1) * $vinilos_por_pagina;
 // Búsqueda
 $busqueda = isset($_GET['buscar']) ? trim($_GET['buscar']) : '';
 $where_busqueda = '';
-$params = [];
-$types = '';
 
 if (!empty($busqueda)) {
     $where_busqueda = " AND (nombre LIKE ? OR descripcion LIKE ?)";
     $busqueda_param = "%{$busqueda}%";
-    $params = [$busqueda_param, $busqueda_param, $busqueda_param];
-    $types = 'sss';
 }
 
 // Contar total de vinilos visibles con búsqueda
 $count_sql = "SELECT COUNT(*) as total FROM vinilos WHERE visible = 1" . $where_busqueda;
 $stmt_count = $conn->prepare($count_sql);
 if (!empty($busqueda)) {
-    $stmt_count->bind_param($types, ...$params);
+    $stmt_count->bind_param('ss', $busqueda_param, $busqueda_param);
 }
 $stmt_count->execute();
 $total_row = $stmt_count->get_result()->fetch_assoc();
@@ -42,10 +38,7 @@ $sql = "SELECT * FROM vinilos WHERE visible = 1" . $where_busqueda . " ORDER BY 
 $stmt = $conn->prepare($sql);
 
 if (!empty($busqueda)) {
-    $params[] = $vinilos_por_pagina;
-    $params[] = $offset;
-    $types .= 'ii';
-    $stmt->bind_param($types, ...$params);
+    $stmt->bind_param('ssii', $busqueda_param, $busqueda_param, $vinilos_por_pagina, $offset);
 } else {
     $stmt->bind_param("ii", $vinilos_por_pagina, $offset);
 }
@@ -778,7 +771,7 @@ if (isset($_GET['error'])) {
         <a class="nav-link" href="#">Contacto</a>
 
         <?php if (isset($_SESSION['usuario'])): ?>
-          <a class="nav-link" href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php">Gestionar catálogo</a>
+          <a class="nav-link" href="gestionar_catalogo.php">Gestionar catálogo</a>
         <?php endif; ?>
       </nav>
     </div>
@@ -820,7 +813,7 @@ if (isset($_GET['error'])) {
           type="text" 
           id="searchInput" 
           class="search-input" 
-          placeholder="Buscar por nombre, artista o género..."
+          placeholder="Buscar por nombre o descripción..."
           value="<?= htmlspecialchars($busqueda) ?>"
           autocomplete="off"
         >
@@ -878,7 +871,7 @@ if (isset($_GET['error'])) {
                     <i class="bi bi-star"></i>
                   </a>
                 </div>
-                <a href="https://vinyllabs-production.up.railway.app/gestionar_carrito.php?accion=agregar&id=<?= $row['id'] ?>" 
+                <a href="gestionar_carrito.php?accion=agregar&id=<?= $row['id'] ?>" 
                    class="btn btn-add-cart btn-sm w-100"
                    onclick="event.stopPropagation();">
                   <i class="bi bi-cart-plus me-1"></i> Añadir al carrito
