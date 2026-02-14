@@ -116,6 +116,8 @@ a:hover,
   padding-left: 15px;
 }
  
+/* Solo reemplazo la sección del splash - líneas 119-280 aproximadamente */
+
 /* === CONTENEDOR DE BIENVENIDA / SPLASH === */
 .splash-full {
   min-height: 100vh;
@@ -129,152 +131,52 @@ a:hover,
   background-attachment: fixed;
   padding: 0 20px;
   color: #fff;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Vinilo de fondo con efecto */
-.splash-full::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
-  background: 
-    radial-gradient(circle at center, transparent 25%, rgba(0,0,0,0.9) 25.5%, rgba(0,0,0,0.9) 26%, transparent 26.5%),
-    radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 45%, #000 100%);
-  border-radius: 50%;
-  box-shadow: 
-    0 0 80px rgba(0,0,0,0.8),
-    inset 0 0 50px rgba(255,255,255,0.1),
-    inset 0 0 20px rgba(184,134,11,0.3);
-  animation: vinylSpin 20s linear infinite;
-  z-index: 0;
-  opacity: 0.6;
-}
-
-/* Círculo central del vinilo (etiqueta) */
-.splash-full::after {
-  content: '💿';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 180px;
-  height: 180px;
-  background: linear-gradient(135deg, #daa520 0%, #b8860b 50%, #8b6914 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 4rem;
-  box-shadow: 
-    0 0 40px rgba(218,165,32,0.5),
-    inset 0 0 30px rgba(0,0,0,0.5);
-  z-index: 1;
-  animation: vinylSpin 20s linear infinite;
-}
-
-@keyframes vinylSpin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* Contenido sobre el vinilo */
-.splash-full .titulo-splash,
-.splash-full .subtitulo-splash,
-.splash-full .btn-catalogo {
-  position: relative;
-  z-index: 2;
 }
 
 .splash-full .titulo-splash {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 5rem;
-  background: linear-gradient(135deg, #f5deb3 0%, #daa520 50%, #b8860b 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  margin: 0;
-  letter-spacing: 8px;
-  filter: drop-shadow(0 4px 20px rgba(218,165,32,0.6));
-  animation: titleGlow 3s ease-in-out infinite;
+  display: none;
 }
 
-@keyframes titleGlow {
-  0%, 100% { filter: drop-shadow(0 4px 20px rgba(218,165,32,0.6)); }
-  50% { filter: drop-shadow(0 4px 40px rgba(218,165,32,0.9)); }
+.splash-full img[src*="VinylLab"] {
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 8px 30px rgba(0,0,0,0.5));
 }
 
 .splash-full .subtitulo-splash {
   font-family: 'Raleway', sans-serif;
-  font-size: 1.6rem;
-  margin-top: 1rem;
+  font-size: 1.8rem;
+  margin: 0 0 2rem 0;
   color: #f5deb3;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
   font-weight: 300;
   letter-spacing: 2px;
+  max-width: 600px;
 }
 
 .splash-full .btn-catalogo {
-  background: linear-gradient(135deg, #daa520 0%, #b8860b 100%);
+  background-color: var(--boton);
   color: #fff;
   padding: 16px 40px;
-  border: 3px solid rgba(218,165,32,0.5);
+  border: none;
   border-radius: 50px;
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
   text-decoration: none;
-  margin-top: 3rem;
-  box-shadow: 
-    0 8px 30px rgba(218,165,32,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.3);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
   display: inline-block;
 }
 
 .splash-full .btn-catalogo:hover {
-  background: linear-gradient(135deg, #b8860b 0%, #8b6914 100%);
+  background-color: #3d2714;
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 
-    0 12px 40px rgba(218,165,32,0.6),
-    inset 0 1px 0 rgba(255,255,255,0.4);
-  border-color: #daa520;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
 }
 
-/* Partículas decorativas */
-.splash-full .titulo-splash::before,
-.splash-full .titulo-splash::after {
-  content: '♪';
-  position: absolute;
-  font-size: 2rem;
-  color: rgba(218,165,32,0.3);
-  animation: float 4s ease-in-out infinite;
-}
-
-.splash-full .titulo-splash::before {
-  left: -60px;
-  top: 0;
-}
-
-.splash-full .titulo-splash::after {
-  right: -60px;
-  top: 0;
-  animation-delay: 2s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-/* Ocultar botones por defecto hasta que se verifique la sesión */
 .sesion-required {
   display: none;
 }
