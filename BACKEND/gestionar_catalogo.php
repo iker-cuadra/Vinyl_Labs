@@ -62,6 +62,13 @@ require_once __DIR__ . '/conexion.php';
       <img src="imagenes/VinylLab.png" class="sidebar-logo">
     </div>
   </div>
+  <div class="offcanvas-body">
+      <nav class="nav flex-column">
+        <a class="nav-link" href="https://vinyl-labs.vercel.app">Inicio</a>
+        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
+        <a class="nav-link" href="#">Ofertas</a>
+        <a class="nav-link" href="#">Contacto</a>
+
 
   <!-- CONTENIDO -->
   <main class="container py-5" style="margin-top:130px;">
