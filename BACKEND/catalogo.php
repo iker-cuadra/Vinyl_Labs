@@ -831,61 +831,13 @@ if (isset($_GET['error'])) {
       </div>
     <?php endif; ?>
 
-    <div class="row g-4">
-      <?php 
-      if ($vinilos && $vinilos->num_rows > 0) {
-        while ($row = $vinilos->fetch_assoc()): 
-      ?>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-          <div class="card h-100 shadow-sm" style="background-color: rgba(255,255,255,0.9); border: none; cursor: pointer; transition: transform 0.3s ease;" onclick="window.location.href='detalle_vinilo.php?id=<?= $row['id'] ?>';" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-            <?php if (!empty($row['imagen'])): 
-              $ruta_imagen = htmlspecialchars($row['imagen']);
-              $existe_archivo = file_exists(__DIR__ . '/' . $row['imagen']) ? '✓' : '✗';
-            ?>
-              <img src="<?= $ruta_imagen ?>" 
-                   class="card-img-top"
-                   alt="<?= htmlspecialchars($row['nombre']) ?>" 
-                   style="object-fit: cover; height: 300px; width: 100%;"
-                   onerror="console.error('Error cargando imagen: <?= $ruta_imagen ?>'); this.onerror=null; this.parentElement.innerHTML='<div class=\'card-img-top bg-secondary d-flex align-items-center justify-content-center\' style=\'height: 300px;\'><i class=\'bi bi-music-note-beamed\' style=\'font-size: 4rem; color: rgba(255,255,255,0.5);\'></i></div>';">
-            <?php else: ?>
-              <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 300px;">
-                <i class="bi bi-music-note-beamed" style="font-size: 4rem; color: rgba(255,255,255,0.5);"></i>
-              </div>
-            <?php endif; ?>
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title" style="font-family: 'Bebas Neue', sans-serif;">
-                <?= htmlspecialchars($row['nombre']) ?>
-              </h5>
-              <p class="card-text mb-3"><?= number_format($row['precio'], 2, ',', '.') ?> €</p>
-              <div class="mt-auto d-flex flex-column gap-2">
-                <div class="d-flex gap-2">
-                  <a href="detalle_vinilo.php?id=<?= $row['id'] ?>" 
-                     class="btn btn-sm flex-grow-1"
-                     style="background: linear-gradient(135deg, #daa520, #b8860b); color: white; font-weight: 600; border: none;"
-                     onclick="event.stopPropagation();">
-                    <i class="bi bi-eye me-1"></i> Ver detalles
-                  </a>
-                  <a href="https://vinyl-labs.vercel.app/formulario.html?vinilo_id=<?= (int)$row['id'] ?>&vinilo_nombre=<?= urlencode($row['nombre']) ?>"
-                     class="btn btn-resena btn-sm"
-                     onclick="event.stopPropagation();">
-                    <i class="bi bi-star"></i>
-                  </a>
-                </div>
-                <a href="gestionar_carrito.php?accion=agregar&id=<?= $row['id'] ?>" 
-                   class="btn btn-add-cart btn-sm w-100"
-                   onclick="event.stopPropagation();">
-                  <i class="bi bi-cart-plus me-1"></i> Añadir al carrito
-                </a>
-              </div>
-            </div>
-          </div>
+    <div class="row g-4" id="catalogoGrid">
+      <!-- Los vinilos se cargarán aquí dinámicamente con AJAX -->
+      <div class="col-12 text-center py-5">
+        <div class="spinner-border text-warning" role="status">
+          <span class="visually-hidden">Cargando...</span>
         </div>
-      <?php 
-        endwhile;
-      } else {
-        echo '<div class="col-12 text-center"><p class="text-muted">No hay vinilos disponibles' . (!empty($busqueda) ? ' que coincidan con tu búsqueda' : ' en este momento') . '.</p></div>';
-      }
-      ?>
+      </div>
     </div>
 
     <?php if ($total_paginas > 1): ?>
@@ -1074,12 +1026,16 @@ if (isset($_GET['error'])) {
     offcanvasEl.addEventListener('hidden.bs.offcanvas', () => btnHamb.classList.remove('active'));
   </script>
 
-  <!-- Script de búsqueda en tiempo real -->
+  <!-- Script de búsqueda en tiempo real con AJAX -->
   <script>
     (function() {
       const searchInput = document.getElementById('searchInput');
       const clearBtn = document.getElementById('clearSearch');
+      const catalogoGrid = document.getElementById('catalogoGrid');
+      const paginationWrapper = document.querySelector('.pagination-wrapper');
+      const searchResultsInfo = document.querySelector('.search-results-info');
       let searchTimeout;
+      let currentPage = 1;
 
       // Mostrar/ocultar botón de limpiar
       function updateClearButton() {
@@ -1090,37 +1046,84 @@ if (isset($_GET['error'])) {
         }
       }
 
-      // Realizar búsqueda
-      function performSearch() {
+      // Realizar búsqueda con AJAX
+      function performSearch(page = 1) {
         const searchTerm = searchInput.value.trim();
-        const currentUrl = new URL(window.location.href);
+        currentPage = page;
+
+        // Mostrar indicador de carga
+        catalogoGrid.innerHTML = '<div class="col-12 text-center py-5"><div class="spinner-border text-warning" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
+
+        // Hacer petición AJAX
+        const url = `buscar_vinilos.php?buscar=${encodeURIComponent(searchTerm)}&pagina=${page}`;
         
-        if (searchTerm.length > 0) {
-          currentUrl.searchParams.set('buscar', searchTerm);
-        } else {
-          currentUrl.searchParams.delete('buscar');
-        }
-        
-        // Resetear a la primera página cuando se busca
-        currentUrl.searchParams.set('pagina', '1');
-        
-        window.location.href = currentUrl.toString();
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            // Actualizar grid de productos
+            catalogoGrid.innerHTML = data.html;
+
+            // Actualizar información de resultados
+            if (searchTerm.length > 0 && data.total > 0) {
+              if (!searchResultsInfo) {
+                const info = document.createElement('div');
+                info.className = 'search-results-info';
+                searchInput.closest('.search-container').insertAdjacentElement('afterend', info);
+              }
+              const infoElement = document.querySelector('.search-results-info');
+              infoElement.innerHTML = `Se encontraron <span class="highlight">${data.total}</span> resultado${data.total != 1 ? 's' : ''} para "<span class="highlight">${searchTerm}</span>"`;
+              infoElement.style.display = 'block';
+            } else if (searchResultsInfo) {
+              searchResultsInfo.style.display = 'none';
+            }
+
+            // Actualizar paginación
+            if (data.total_paginas > 1) {
+              paginationWrapper.innerHTML = data.paginacion;
+              paginationWrapper.style.display = 'flex';
+              
+              // Agregar event listeners a los botones de paginación
+              paginationWrapper.querySelectorAll('.page-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  const pageUrl = new URL(this.href);
+                  const pageNum = pageUrl.searchParams.get('pagina');
+                  if (pageNum) {
+                    performSearch(parseInt(pageNum));
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                });
+              });
+            } else {
+              paginationWrapper.style.display = 'none';
+            }
+
+            // Actualizar URL sin recargar
+            const newUrl = searchTerm.length > 0 
+              ? `?buscar=${encodeURIComponent(searchTerm)}&pagina=${page}`
+              : `?pagina=${page}`;
+            window.history.pushState({}, '', newUrl);
+          })
+          .catch(error => {
+            console.error('Error en la búsqueda:', error);
+            catalogoGrid.innerHTML = '<div class="col-12 text-center"><p class="text-danger">Error al cargar los resultados. Por favor, intenta de nuevo.</p></div>';
+          });
       }
 
-      // Event listener para el input
+      // Event listener para el input (búsqueda mientras escribes)
       searchInput.addEventListener('input', function() {
         updateClearButton();
         
-        // Debounce: esperar 500ms después de que el usuario deje de escribir
+        // Debounce: esperar 300ms después de que el usuario deje de escribir
         clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(performSearch, 500);
+        searchTimeout = setTimeout(() => performSearch(1), 300);
       });
 
       // Event listener para Enter
       searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
           clearTimeout(searchTimeout);
-          performSearch();
+          performSearch(1);
         }
       });
 
@@ -1128,16 +1131,23 @@ if (isset($_GET['error'])) {
       clearBtn.addEventListener('click', function() {
         searchInput.value = '';
         updateClearButton();
-        
-        // Redirigir sin parámetro de búsqueda
-        const currentUrl = new URL(window.location.href);
-        currentUrl.searchParams.delete('buscar');
-        currentUrl.searchParams.set('pagina', '1');
-        window.location.href = currentUrl.toString();
+        performSearch(1);
       });
 
-      // Inicializar el estado del botón
+      // Inicializar - cargar vinilos al inicio
       updateClearButton();
+      
+      // Obtener parámetros de URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialSearch = urlParams.get('buscar') || '';
+      const initialPage = parseInt(urlParams.get('pagina')) || 1;
+      
+      if (initialSearch) {
+        searchInput.value = initialSearch;
+        updateClearButton();
+      }
+      
+      performSearch(initialPage);
     })();
   </script>
 
