@@ -68,7 +68,7 @@ require_once __DIR__ . '/conexion.php';
         <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
         <a class="nav-link" href="#">Ofertas</a>
         <a class="nav-link" href="#">Contacto</a>
-
+</nav></div>
 
   <!-- CONTENIDO -->
   <main class="container py-5" style="margin-top:130px;">
