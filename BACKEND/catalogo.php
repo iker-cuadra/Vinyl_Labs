@@ -846,10 +846,10 @@ if (isset($_GET['error'])) {
           Información y Comercio Electrónico (LSSI-CE).
         </p>
         <div class="footer-legal-links">
-          <a href="../Avisos/legal.html" class="footer-legal-link">Aviso Legal</a> |
-          <a href="../Avisos/priv.html" class="footer-legal-link">Política de Privacidad</a> |
-          <a href="../Avisos/cookies.html" class="footer-legal-link">Política de Cookies</a> |
-          <a href="../Avisos/condiciones.html" class="footer-legal-link">Condiciones de Uso</a>
+          <a href="https://vinyl-labs.vercel.app/legal.html" class="footer-legal-link">Aviso Legal</a> |
+          <a href="https://vinyl-labs.vercel.app/priv.html" class="footer-legal-link">Política de Privacidad</a> |
+          <a href="https://vinyl-labs.vercel.app/cookies.html" class="footer-legal-link">Política de Cookies</a> |
+          <a href="https://vinyl-labs.vercel.app/condiciones.html" class="footer-legal-link">Condiciones de Uso</a>
         </div>
       </div>
 
