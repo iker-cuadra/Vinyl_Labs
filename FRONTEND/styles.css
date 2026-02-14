@@ -116,8 +116,6 @@ a:hover,
   padding-left: 15px;
 }
  
-/* Solo reemplazo la sección del splash - líneas 119-280 aproximadamente */
-
 /* === CONTENEDOR DE BIENVENIDA / SPLASH === */
 .splash-full {
   min-height: 100vh;
@@ -133,15 +131,21 @@ a:hover,
   color: #fff;
 }
 
+/* Ocultar el texto del título pero mostrar la imagen */
 .splash-full .titulo-splash {
-  display: none;
+  font-size: 0;
+  line-height: 0;
+  margin-bottom: 2rem;
 }
 
-.splash-full img[src*="VinylLab"] {
+/* Asegurarse de que la imagen del logo se vea */
+.splash-full .titulo-splash img,
+.splash-full img {
   max-width: 300px;
   height: auto;
-  margin-bottom: 2rem;
+  font-size: initial;
   filter: drop-shadow(0 8px 30px rgba(0,0,0,0.5));
+  display: inline-block;
 }
 
 .splash-full .subtitulo-splash {
@@ -178,6 +182,24 @@ a:hover,
 }
 
 .sesion-required {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .splash-full .titulo-splash img,
+  .splash-full img {
+    max-width: 200px;
+  }
+  
+  .splash-full .subtitulo-splash {
+    font-size: 1.3rem;
+  }
+  
+  .splash-full .btn-catalogo {
+    font-size: 1rem;
+    padding: 12px 30px;
+  }
+}
   display: none;
 }
  
