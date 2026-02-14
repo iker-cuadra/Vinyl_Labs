@@ -113,6 +113,14 @@
            class="btn-login-custom" 
            id="btnIniciarSesion">Iniciar sesión</a>
 
+        <!-- Botón del carrito -->
+        <a href="https://vinyllabs-production.up.railway.app/carrito.php" class="btn-login-custom position-relative" id="btnCarrito">
+          <i class="bi bi-cart3"></i> Carrito
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="carritoContador" style="display: none;">
+            0
+          </span>
+        </a>
+
         <button class="btn btn-hamburguesa" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
           aria-controls="menuLateral" aria-label="Abrir menú" id="btnHamburguesa">
           <span class="navbar-toggler-icon"></span>
@@ -176,7 +184,7 @@
 
         <h2 class="titulo-disco mt-3"></h2>
         <div class="precio my-3">
-          <span class="precio-texto">24,99 €</span>
+          <span class="precio-texto">34,00 €</span>
         </div>
       </div>
 
@@ -188,7 +196,9 @@
           Sumérgete en la experiencia del sonido auténtico. En Vinyl Lab te traemos vinilos cuidadosamente seleccionados
           para coleccionistas y amantes de la buena música.
         </p>
-        <button class="btn-catalogo" type="button">Comprar</button>
+        <button class="btn-catalogo" type="button" id="btnAñadirCarrito">
+          <i class="bi bi-cart-plus me-2"></i> Añadir al carrito
+        </button>
       </div>
     </section>
 
@@ -321,7 +331,7 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Script para verificar sesión -->
+  <!-- Script para verificar sesión y contador de carrito -->
   <script>
     // Verificar si hay sesión activa
     async function verificarSesion() {
@@ -354,6 +364,11 @@
             el.style.display = 'none';
           });
         }
+        
+        // Actualizar contador de carrito
+        if (data.carrito_items) {
+          actualizarContadorCarrito(data.carrito_items);
+        }
       } catch (error) {
         console.error('Error al verificar sesión:', error);
         // En caso de error, mostrar solo el botón de iniciar sesión
@@ -364,6 +379,23 @@
         });
       }
     }
+
+    // Actualizar contador de carrito
+    function actualizarContadorCarrito(cantidad) {
+      const contador = document.getElementById('carritoContador');
+      if (cantidad > 0) {
+        contador.textContent = cantidad;
+        contador.style.display = 'inline-block';
+      } else {
+        contador.style.display = 'none';
+      }
+    }
+
+    // Añadir al carrito el vinilo con ID 12 (Abbey Road)
+    document.getElementById('btnAñadirCarrito').addEventListener('click', function() {
+      // Redirigir a gestionar_carrito.php para añadir el vinilo con ID 12
+      window.location.href = 'https://vinyllabs-production.up.railway.app/gestionar_carrito.php?accion=agregar&id=12';
+    });
 
     // Verificar sesión al cargar la página
     verificarSesion();
