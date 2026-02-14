@@ -156,11 +156,6 @@ if ($total_paginas > 1):
 endif;
 $html_paginacion = ob_get_clean();
 
-// Limpiar cualquier output previo
-if (ob_get_level()) {
-    ob_end_clean();
-}
-
 // Devolver respuesta JSON
 header('Content-Type: application/json');
 echo json_encode([
@@ -169,10 +164,5 @@ echo json_encode([
     'total' => $total_vinilos,
     'total_paginas' => $total_paginas,
     'pagina_actual' => $pagina_actual
-], JSON_UNESCAPED_UNICODE);
-
-$stmt->close();
-$stmt_count->close();
-$conn->close();
-exit;
+]);
 ?>
