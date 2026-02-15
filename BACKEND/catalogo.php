@@ -676,21 +676,36 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
   </header>
 
   <!-- Menú lateral offcanvas -->
-  <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral" aria-labelledby="tituloMenu">
-    <div class="offcanvas-header flex-column align-items-start w-100">
-      <div class="logo-container">
-        <img src="imagenes/VinylLab.png" alt="Logo Vinyl Lab" class="sidebar-logo">
-      </div>
+   <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral">
+    <div class="offcanvas-header">
+      <img src="imagenes/VinylLab.png" class="sidebar-logo">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
       <nav class="nav flex-column">
-        <a class="nav-link" href="https://vinyl-labs.vercel.app">Inicio</a>
-        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
-        <a class="nav-link" href="#">Ofertas</a>
-        <a class="nav-link" href="#">Contacto</a>
-
+        <a class="nav-link" href="https://vinyl-labs.vercel.app">
+          <i class="bi bi-house-door me-2"></i> Inicio
+        </a>
+        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">
+          <i class="bi bi-music-note-list me-2"></i> Catálogo
+        </a>
+        </a>
+      </nav>
+    </div>
+  </div>
+          <?php if (isset($_SESSION['usuario'])): ?>
+                 <a class="nav-link" href="https://vinyllabs-production.up.railway.app/add_vinilos.php">
+          <i class="bi bi-plus-circle me-2"></i> Añadir vinilo
+        </a>
+        <?php endif; ?>
         <?php if (isset($_SESSION['usuario'])): ?>
-          <a class="nav-link" href="gestionar_catalogo.php">Gestionar catálogo</a>
+          <a class="nav-link" href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php"><i class="bi bi-gear me-2"></i> Gestionar catálogo
+        </a>
+        <?php endif; ?>
+           <?php if (isset($_SESSION['usuario'])): ?>
+        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/logout.php">
+          <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+        </a>
         <?php endif; ?>
       </nav>
     </div>

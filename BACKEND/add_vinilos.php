@@ -57,13 +57,27 @@ session_start();
 
   <!-- MENÚ LATERAL -->
   <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral">
-    <div class="offcanvas-header flex-column align-items-start w-100">
+    <div class="offcanvas-header">
       <img src="imagenes/VinylLab.png" class="sidebar-logo">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
       <nav class="nav flex-column">
-        <a class="nav-link" href="https://vinyl-labs.vercel.app">Inicio</a>
-        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">Catálogo</a>
+        <a class="nav-link" href="https://vinyl-labs.vercel.app">
+          <i class="bi bi-house-door me-2"></i> Inicio
+        </a>
+        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">
+          <i class="bi bi-music-note-list me-2"></i> Catálogo
+        </a>
+        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/add_vinilos.php">
+          <i class="bi bi-plus-circle me-2"></i> Añadir vinilo
+        </a>
+        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php">
+          <i class="bi bi-gear me-2"></i> Gestionar catálogo
+        </a>
+        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/logout.php">
+          <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+        </a>
       </nav>
     </div>
   </div>
