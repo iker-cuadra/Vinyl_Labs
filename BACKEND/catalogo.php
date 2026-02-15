@@ -4,7 +4,7 @@ require_once __DIR__ . '/conexion.php';
 
 // Inicializar carrito si no existe
 if (!isset($_SESSION['carrito'])) {
-    $_SESSION['carrito'] = [];
+  $_SESSION['carrito'] = [];
 }
 $carrito = $_SESSION['carrito'];
 
@@ -17,7 +17,7 @@ $resenas_sql = "
 ";
 $resenas = $conn->query($resenas_sql);
 if (!$resenas) {
-    die("Error en query de reseñas: " . $conn->error);
+  die("Error en query de reseñas: " . $conn->error);
 }
 
 // Mensajes de estado
@@ -181,19 +181,19 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
       position: relative;
       overflow: hidden;
     }
-    
+
     .resenas-section::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: 
-        radial-gradient(circle at 15% 30%, rgba(184,134,11,0.12) 0%, transparent 50%),
-        radial-gradient(circle at 85% 70%, rgba(218,165,32,0.08) 0%, transparent 60%),
-        radial-gradient(circle at 50% 50%, rgba(139,105,20,0.05) 0%, transparent 70%);
+      background-image:
+        radial-gradient(circle at 15% 30%, rgba(184, 134, 11, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 85% 70%, rgba(218, 165, 32, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, rgba(139, 105, 20, 0.05) 0%, transparent 70%);
       pointer-events: none;
       animation: pulseGlow 8s ease-in-out infinite;
     }
-    
+
     .resenas-section::after {
       content: '';
       position: absolute;
@@ -201,20 +201,27 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(184,134,11,0.5) 20%, 
-        rgba(218,165,32,0.8) 50%, 
-        rgba(184,134,11,0.5) 80%, 
-        transparent 100%);
-      box-shadow: 0 2px 20px rgba(184,134,11,0.3);
+      background: linear-gradient(90deg,
+          transparent 0%,
+          rgba(184, 134, 11, 0.5) 20%,
+          rgba(218, 165, 32, 0.8) 50%,
+          rgba(184, 134, 11, 0.5) 80%,
+          transparent 100%);
+      box-shadow: 0 2px 20px rgba(184, 134, 11, 0.3);
     }
-    
+
     @keyframes pulseGlow {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
     }
-    
+
     .resenas-titulo {
       font-family: 'Bebas Neue', cursive;
       font-size: clamp(2.5rem, 6vw, 4rem);
@@ -225,10 +232,10 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
       background-clip: text;
       text-align: center;
       margin-bottom: 8px;
-      text-shadow: 0 4px 12px rgba(184,134,11,0.3);
+      text-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
       position: relative;
     }
-    
+
     .resenas-titulo::after {
       content: '💿';
       position: absolute;
@@ -236,18 +243,23 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
       top: -10px;
       right: -15px;
       animation: spinSlow 20s linear infinite;
-      filter: drop-shadow(0 0 10px rgba(184,134,11,0.5));
+      filter: drop-shadow(0 0 10px rgba(184, 134, 11, 0.5));
     }
-    
+
     @keyframes spinSlow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
-    
+
     .resenas-subtitulo {
       font-family: 'Raleway', sans-serif;
       font-size: 0.9rem;
-      color: rgba(218,165,32,0.7);
+      color: rgba(218, 165, 32, 0.7);
       text-align: center;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -255,42 +267,42 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
       font-weight: 300;
       position: relative;
     }
-    
+
     .resenas-subtitulo::before,
     .resenas-subtitulo::after {
       content: '★';
-      color: rgba(184,134,11,0.4);
+      color: rgba(184, 134, 11, 0.4);
       margin: 0 12px;
       font-size: 0.7em;
     }
-    
-    .resenas-track-wrapper { 
-      position: relative; 
-      overflow: hidden; 
+
+    .resenas-track-wrapper {
+      position: relative;
+      overflow: hidden;
       padding: 10px 0;
     }
-    
+
     .resenas-track {
       display: flex;
       gap: 24px;
-      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       will-change: transform;
     }
-    
+
     .resena-card {
       flex: 0 0 calc(33.333% - 16px);
-      background: linear-gradient(145deg, rgba(255,248,235,0.08) 0%, rgba(255,248,235,0.04) 100%);
+      background: linear-gradient(145deg, rgba(255, 248, 235, 0.08) 0%, rgba(255, 248, 235, 0.04) 100%);
       backdrop-filter: blur(12px);
-      border: 1.5px solid rgba(184,134,11,0.3);
+      border: 1.5px solid rgba(184, 134, 11, 0.3);
       border-radius: 20px;
       padding: 32px 28px 28px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
-      box-shadow: 
-        0 4px 20px rgba(0,0,0,0.3),
-        inset 0 1px 0 rgba(255,255,255,0.1);
+      box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
-    
+
     .resena-card::before {
       content: '';
       position: absolute;
@@ -298,204 +310,213 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(218,165,32,0.6) 50%, 
-        transparent 100%);
+      background: linear-gradient(90deg,
+          transparent 0%,
+          rgba(218, 165, 32, 0.6) 50%,
+          transparent 100%);
       border-radius: 20px 20px 0 0;
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-    
-    @media (max-width: 991px) { .resena-card { flex: 0 0 calc(50% - 12px); } }
-    @media (max-width: 600px)  { .resena-card { flex: 0 0 100%; } }
-    
-    .resena-card:hover { 
-      transform: translateY(-8px) scale(1.02);
-      border-color: rgba(218,165,32,0.6);
-      box-shadow: 
-        0 12px 40px rgba(184,134,11,0.25),
-        0 0 0 1px rgba(218,165,32,0.2),
-        inset 0 1px 0 rgba(255,255,255,0.15);
+
+    @media (max-width: 991px) {
+      .resena-card {
+        flex: 0 0 calc(50% - 12px);
+      }
     }
-    
+
+    @media (max-width: 600px) {
+      .resena-card {
+        flex: 0 0 100%;
+      }
+    }
+
+    .resena-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(218, 165, 32, 0.6);
+      box-shadow:
+        0 12px 40px rgba(184, 134, 11, 0.25),
+        0 0 0 1px rgba(218, 165, 32, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
     .resena-card:hover::before {
       opacity: 1;
     }
-    
+
     .resena-comillas {
-      font-size: 4rem; 
+      font-size: 4rem;
       line-height: 0.5;
-      background: linear-gradient(135deg, rgba(184,134,11,0.5), rgba(218,165,32,0.3));
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.5), rgba(218, 165, 32, 0.3));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       font-family: Georgia, serif;
-      margin-bottom: 18px; 
+      margin-bottom: 18px;
       display: block;
       font-weight: bold;
-      filter: drop-shadow(0 2px 4px rgba(184,134,11,0.2));
+      filter: drop-shadow(0 2px 4px rgba(184, 134, 11, 0.2));
     }
-    
+
     .resena-comentario {
-      font-family: 'Raleway', sans-serif; 
-      font-size: 0.95rem; 
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.95rem;
       line-height: 1.75;
-      color: rgba(255,248,235,0.92); 
+      color: rgba(255, 248, 235, 0.92);
       margin-bottom: 24px;
-      display: -webkit-box; 
-      -webkit-line-clamp: 4; 
-      -webkit-box-orient: vertical; 
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
       overflow: hidden;
       font-weight: 300;
       letter-spacing: 0.01em;
     }
-    
+
     .resena-footer {
-      border-top: 1px solid rgba(184,134,11,0.25);
-      padding-top: 16px; 
-      display: flex; 
-      align-items: center; 
+      border-top: 1px solid rgba(184, 134, 11, 0.25);
+      padding-top: 16px;
+      display: flex;
+      align-items: center;
       gap: 12px;
     }
-    
+
     .resena-avatar {
-      width: 44px; 
-      height: 44px; 
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: linear-gradient(135deg, #daa520 0%, #b8860b 50%, #8b6914 100%);
-      display: flex; 
-      align-items: center; 
+      display: flex;
+      align-items: center;
       justify-content: center;
-      font-family: 'Bebas Neue', cursive; 
-      font-size: 1.15rem; 
-      color: #fff; 
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.15rem;
+      color: #fff;
       flex-shrink: 0;
-      box-shadow: 
-        0 4px 12px rgba(184,134,11,0.4),
-        inset 0 1px 2px rgba(255,255,255,0.3);
-      border: 2px solid rgba(255,248,235,0.2);
+      box-shadow:
+        0 4px 12px rgba(184, 134, 11, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+      border: 2px solid rgba(255, 248, 235, 0.2);
       position: relative;
     }
-    
+
     .resena-avatar::after {
       content: '';
       position: absolute;
       inset: -3px;
       border-radius: 50%;
-      background: linear-gradient(135deg, transparent 0%, rgba(218,165,32,0.3) 100%);
+      background: linear-gradient(135deg, transparent 0%, rgba(218, 165, 32, 0.3) 100%);
       z-index: -1;
       filter: blur(4px);
     }
-    
-    .resena-meta { 
-      display: flex; 
-      flex-direction: column; 
-      gap: 3px; 
-      min-width: 0; 
+
+    .resena-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
     }
-    
+
     .resena-nombre {
-      font-family: 'Raleway', sans-serif; 
-      font-weight: 700; 
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
       font-size: 0.92rem;
-      color: #f5deb3; 
-      white-space: nowrap; 
-      overflow: hidden; 
+      color: #f5deb3;
+      white-space: nowrap;
+      overflow: hidden;
       text-overflow: ellipsis;
       letter-spacing: 0.02em;
     }
-    
-    .resena-ciudad { 
-      font-family: 'Raleway', sans-serif; 
-      font-size: 0.78rem; 
-      color: rgba(218,165,32,0.6);
+
+    .resena-ciudad {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(218, 165, 32, 0.6);
       font-weight: 300;
     }
-    
+
     .resena-vinilo-tag {
       margin-left: auto;
-      background: linear-gradient(135deg, rgba(184,134,11,0.25) 0%, rgba(139,105,20,0.15) 100%);
-      border: 1px solid rgba(218,165,32,0.4);
-      border-radius: 999px; 
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.25) 0%, rgba(139, 105, 20, 0.15) 100%);
+      border: 1px solid rgba(218, 165, 32, 0.4);
+      border-radius: 999px;
       padding: 5px 12px;
-      font-family: 'Raleway', sans-serif; 
-      font-size: 0.74rem; 
-      font-weight: 600; 
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 600;
       color: #daa520;
-      white-space: nowrap; 
-      overflow: hidden; 
-      text-overflow: ellipsis; 
-      max-width: 130px; 
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 130px;
       flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(184,134,11,0.2);
+      box-shadow: 0 2px 8px rgba(184, 134, 11, 0.2);
       letter-spacing: 0.03em;
     }
-    
+
     .resenas-nav {
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      gap: 16px; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
       margin-top: 48px;
     }
-    
+
     .resenas-btn {
-      width: 50px; 
-      height: 50px; 
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background: rgba(255,248,235,0.05);
+      background: rgba(255, 248, 235, 0.05);
       backdrop-filter: blur(8px);
-      border: 2px solid rgba(184,134,11,0.5); 
+      border: 2px solid rgba(184, 134, 11, 0.5);
       color: #daa520;
-      font-size: 1.1rem; 
-      display: flex; 
-      align-items: center; 
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
       justify-content: center;
-      cursor: pointer; 
+      cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
-    
-    .resenas-btn:hover:not(:disabled) { 
-      background: rgba(184,134,11,0.3);
+
+    .resenas-btn:hover:not(:disabled) {
+      background: rgba(184, 134, 11, 0.3);
       border-color: #daa520;
       transform: scale(1.15);
-      box-shadow: 
-        0 6px 20px rgba(184,134,11,0.4),
-        0 0 20px rgba(218,165,32,0.3);
+      box-shadow:
+        0 6px 20px rgba(184, 134, 11, 0.4),
+        0 0 20px rgba(218, 165, 32, 0.3);
     }
-    
+
     .resenas-btn:active:not(:disabled) {
       transform: scale(1.05);
     }
-    
-    .resenas-btn:disabled { 
-      opacity: 0.25; 
-      cursor: not-allowed; 
-      transform: none; 
-      border-color: rgba(184,134,11,0.2);
+
+    .resenas-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+      transform: none;
+      border-color: rgba(184, 134, 11, 0.2);
     }
-    
-    .resenas-dots { 
-      display: flex; 
-      gap: 10px; 
-      align-items: center; 
+
+    .resenas-dots {
+      display: flex;
+      gap: 10px;
+      align-items: center;
     }
-    
+
     .resenas-dot {
-      width: 10px; 
-      height: 10px; 
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: rgba(184,134,11,0.35); 
+      background: rgba(184, 134, 11, 0.35);
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-      border: none; 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
       padding: 0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       position: relative;
     }
-    
+
     .resenas-dot::after {
       content: '';
       position: absolute;
@@ -504,37 +525,37 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
       border: 2px solid transparent;
       transition: border-color 0.3s ease;
     }
-    
+
     .resenas-dot:hover:not(.active) {
-      background: rgba(184,134,11,0.5);
+      background: rgba(184, 134, 11, 0.5);
       transform: scale(1.2);
     }
-    
-    .resenas-dot.active { 
+
+    .resenas-dot.active {
       background: linear-gradient(135deg, #daa520, #b8860b);
       transform: scale(1.5);
-      box-shadow: 
-        0 0 12px rgba(218,165,32,0.6),
-        0 4px 8px rgba(0,0,0,0.4);
+      box-shadow:
+        0 0 12px rgba(218, 165, 32, 0.6),
+        0 4px 8px rgba(0, 0, 0, 0.4);
     }
-    
+
     .resenas-dot.active::after {
-      border-color: rgba(218,165,32,0.4);
+      border-color: rgba(218, 165, 32, 0.4);
     }
-    
+
     .resenas-empty {
-      text-align: center; 
-      color: rgba(245,222,179,0.5);
-      font-family: 'Raleway', sans-serif; 
-      font-size: 1rem; 
+      text-align: center;
+      color: rgba(245, 222, 179, 0.5);
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
       padding: 48px 0;
       font-weight: 300;
       letter-spacing: 0.05em;
     }
-    
+
     .resenas-empty i {
       opacity: 0.6;
-      filter: drop-shadow(0 4px 8px rgba(184,134,11,0.3));
+      filter: drop-shadow(0 4px 8px rgba(184, 134, 11, 0.3));
     }
 
     /* ── Paginación del catálogo ─────────────────────────────── */
@@ -652,7 +673,8 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
 
       <div class="d-flex align-items-center gap-2">
         <?php if (isset($_SESSION['usuario'])): ?>
-          <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" class="btn-login-custom">Gestionar catálogo</a>
+          <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" class="btn-login-custom">Gestionar
+            catálogo</a>
         <?php endif; ?>
 
         <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
@@ -676,7 +698,7 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
   </header>
 
   <!-- Menú lateral offcanvas -->
-   <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral">
+  <div class="offcanvas offcanvas-start sidebar" tabindex="-1" id="menuLateral">
     <div class="offcanvas-header">
       <img src="imagenes/VinylLab.png" class="sidebar-logo">
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -689,26 +711,30 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
         <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">
           <i class="bi bi-music-note-list me-2"></i> Catálogo
         </a>
+        <a class="nav-link" href="login.html" id="btnIniciarSesionMenu">
+          <i class="bi bi-box-arrow-in-right me-2"></i> Iniciar sesión
+        </a>
         </a>
       </nav>
     </div>
   </div>
-          <?php if (isset($_SESSION['usuario'])): ?>
-                 <a class="nav-link" href="https://vinyllabs-production.up.railway.app/add_vinilos.php">
-          <i class="bi bi-plus-circle me-2"></i> Añadir vinilo
-        </a>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['usuario'])): ?>
-          <a class="nav-link" href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php"><i class="bi bi-gear me-2"></i> Gestionar catálogo
-        </a>
-        <?php endif; ?>
-           <?php if (isset($_SESSION['usuario'])): ?>
-        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/logout.php">
-          <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
-        </a>
-        <?php endif; ?>
-      </nav>
-    </div>
+  <?php if (isset($_SESSION['usuario'])): ?>
+    <a class="nav-link" href="https://vinyllabs-production.up.railway.app/add_vinilos.php">
+      <i class="bi bi-plus-circle me-2"></i> Añadir vinilo
+    </a>
+  <?php endif; ?>
+  <?php if (isset($_SESSION['usuario'])): ?>
+    <a class="nav-link" href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php"><i
+        class="bi bi-gear me-2"></i> Gestionar catálogo
+    </a>
+  <?php endif; ?>
+  <?php if (isset($_SESSION['usuario'])): ?>
+    <a class="nav-link" href="https://vinyllabs-production.up.railway.app/logout.php">
+      <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+    </a>
+  <?php endif; ?>
+  </nav>
+  </div>
   </div>
 
   <!-- Contenido del catálogo -->
@@ -735,13 +761,8 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
     <!-- Barra de búsqueda -->
     <div class="search-container">
       <div class="search-wrapper">
-        <input 
-          type="text" 
-          id="searchInput" 
-          class="search-input" 
-          placeholder="Buscar por nombre o descripción..."
-          autocomplete="off"
-        >
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre o descripción..."
+          autocomplete="off">
         <button type="button" class="clear-search" id="clearSearch" title="Limpiar búsqueda">
           <i class="bi bi-x-circle-fill"></i>
         </button>
@@ -768,9 +789,9 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
   <?php
   $resenas_arr = [];
   if ($resenas && $resenas->num_rows > 0) {
-      while ($r = $resenas->fetch_assoc()) {
-          $resenas_arr[] = $r;
-      }
+    while ($r = $resenas->fetch_assoc()) {
+      $resenas_arr[] = $r;
+    }
   }
   ?>
   <section class="resenas-section">
@@ -794,7 +815,8 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
                   <div class="resena-avatar"><?= mb_strtoupper(mb_substr($r['nombre'], 0, 1)) ?></div>
                   <div class="resena-meta">
                     <span class="resena-nombre"><?= htmlspecialchars($r['nombre']) ?></span>
-                    <span class="resena-ciudad"><i class="bi bi-geo-alt-fill me-1" style="font-size:0.65rem;"></i><?= htmlspecialchars($r['ciudad']) ?></span>
+                    <span class="resena-ciudad"><i class="bi bi-geo-alt-fill me-1"
+                        style="font-size:0.65rem;"></i><?= htmlspecialchars($r['ciudad']) ?></span>
                   </div>
                   <span class="resena-vinilo-tag">💿 <?= htmlspecialchars($r['vinilo_nombre']) ?></span>
                 </div>
@@ -865,9 +887,12 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
         </p>
         <div class="footer-legal-links">
           <a href="https://vinyl-labs.vercel.app/Avisos/legal.html" class="footer-legal-link">Aviso Legal</a> |
-          <a href="https://vinyl-labs.vercel.app/Avisos/priv.html" class="footer-legal-link">Política de Privacidad</a> |
-          <a href="https://vinyl-labs.vercel.app/Avisos/cookies.html" class="footer-legal-link">Política de Cookies</a> |
-          <a href="https://vinyl-labs.vercel.app/Avisos/condiciones.html" class="footer-legal-link">Condiciones de Uso</a>
+          <a href="https://vinyl-labs.vercel.app/Avisos/priv.html" class="footer-legal-link">Política de Privacidad</a>
+          |
+          <a href="https://vinyl-labs.vercel.app/Avisos/cookies.html" class="footer-legal-link">Política de Cookies</a>
+          |
+          <a href="https://vinyl-labs.vercel.app/Avisos/condiciones.html" class="footer-legal-link">Condiciones de
+            Uso</a>
         </div>
       </div>
 
@@ -896,7 +921,7 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
 
   <!-- Script de búsqueda en tiempo real con AJAX -->
   <script>
-    (function() {
+    (function () {
       const searchInput = document.getElementById('searchInput');
       const clearBtn = document.getElementById('clearSearch');
       const catalogoGrid = document.getElementById('catalogoGrid');
@@ -923,7 +948,7 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
 
         // Hacer petición AJAX
         const url = `buscar_vinilos.php?buscar=${encodeURIComponent(searchTerm)}&pagina=${page}`;
-        
+
         fetch(url)
           .then(response => response.json())
           .then(data => {
@@ -932,7 +957,7 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
 
             // Actualizar información de resultados
             let infoElement = document.querySelector('.search-results-info');
-            
+
             if (searchTerm.length > 0 && data.total > 0) {
               // Si no existe el elemento, crearlo
               if (!infoElement) {
@@ -953,10 +978,10 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
             if (data.total_paginas > 1) {
               paginationWrapper.innerHTML = data.paginacion;
               paginationWrapper.style.display = 'flex';
-              
+
               // Agregar event listeners a los botones de paginación
               paginationWrapper.querySelectorAll('.page-link').forEach(link => {
-                link.addEventListener('click', function(e) {
+                link.addEventListener('click', function (e) {
                   e.preventDefault();
                   const pageUrl = new URL(this.href);
                   const pageNum = pageUrl.searchParams.get('pagina');
@@ -971,7 +996,7 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
             }
 
             // Actualizar URL sin recargar
-            const newUrl = searchTerm.length > 0 
+            const newUrl = searchTerm.length > 0
               ? `?buscar=${encodeURIComponent(searchTerm)}&pagina=${page}`
               : `?pagina=${page}`;
             window.history.pushState({}, '', newUrl);
@@ -983,16 +1008,16 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
       }
 
       // Event listener para el input (búsqueda mientras escribes)
-      searchInput.addEventListener('input', function() {
+      searchInput.addEventListener('input', function () {
         updateClearButton();
-        
+
         // Debounce: esperar 300ms después de que el usuario deje de escribir
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => performSearch(1), 300);
       });
 
       // Event listener para Enter
-      searchInput.addEventListener('keypress', function(e) {
+      searchInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
           clearTimeout(searchTimeout);
           performSearch(1);
@@ -1000,7 +1025,7 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
       });
 
       // Event listener para el botón de limpiar
-      clearBtn.addEventListener('click', function() {
+      clearBtn.addEventListener('click', function () {
         searchInput.value = '';
         updateClearButton();
         performSearch(1);
@@ -1008,17 +1033,17 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
 
       // Inicializar - cargar vinilos al inicio
       updateClearButton();
-      
+
       // Obtener parámetros de URL
       const urlParams = new URLSearchParams(window.location.search);
       const initialSearch = urlParams.get('buscar') || '';
       const initialPage = parseInt(urlParams.get('pagina')) || 1;
-      
+
       if (initialSearch) {
         searchInput.value = initialSearch;
         updateClearButton();
       }
-      
+
       performSearch(initialPage);
     })();
   </script>
@@ -1026,22 +1051,22 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
   <!-- Carrusel de reseñas -->
   <script>
     (function () {
-      const track   = document.getElementById('resenasTrack');
+      const track = document.getElementById('resenasTrack');
       const wrapper = document.getElementById('resenasWrapper');
       const btnPrev = document.getElementById('resenaPrev');
       const btnNext = document.getElementById('resenaNext');
-      const dotsEl  = document.getElementById('resenasDots');
+      const dotsEl = document.getElementById('resenasDots');
 
       if (!track) return;
 
-      let current    = 0;
-      let perPage    = 3;
-      const cards    = Array.from(track.querySelectorAll('.resena-card'));
-      const total    = cards.length;
+      let current = 0;
+      let perPage = 3;
+      const cards = Array.from(track.querySelectorAll('.resena-card'));
+      const total = cards.length;
 
       function getPerPage() {
-        if (window.innerWidth <= 600)  return 1;
-        if (window.innerWidth <= 991)  return 2;
+        if (window.innerWidth <= 600) return 1;
+        if (window.innerWidth <= 991) return 2;
         return 3;
       }
 
@@ -1062,9 +1087,9 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
         const pages = totalPages();
         current = Math.max(0, Math.min(page, pages - 1));
 
-        const cardEl     = cards[0];
-        const cardWidth  = cardEl.offsetWidth + 24;
-        const offset     = current * perPage * cardWidth;
+        const cardEl = cards[0];
+        const cardWidth = cardEl.offsetWidth + 24;
+        const offset = current * perPage * cardWidth;
 
         track.style.transform = `translateX(-${offset}px)`;
 
@@ -1089,7 +1114,7 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
 
       let startX = 0;
       wrapper.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-      wrapper.addEventListener('touchend',   e => {
+      wrapper.addEventListener('touchend', e => {
         const diff = startX - e.changedTouches[0].clientX;
         if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
       });
