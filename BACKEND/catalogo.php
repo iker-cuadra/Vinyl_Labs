@@ -711,7 +711,7 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
         <a class="nav-link" href="https://vinyllabs-production.up.railway.app/catalogo.php">
           <i class="bi bi-music-note-list me-2"></i> Catálogo
         </a>
-        <a class="nav-link" href="login.html" id="btnIniciarSesionMenu">
+        <a class="nav-link" href="https://vinyl-labs.vercel.app/login.html" id="btnIniciarSesionMenu">
           <i class="bi bi-box-arrow-in-right me-2"></i> Iniciar sesión
         </a>
         </a>
