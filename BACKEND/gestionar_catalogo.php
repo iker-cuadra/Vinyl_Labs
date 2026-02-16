@@ -44,7 +44,6 @@ require_once __DIR__ . '/conexion.php';
       </div>
 
       <div class="d-flex align-items-center gap-2">
-        <a href="https://vinyllabs-production.up.railway.app/add_vinilos.php" class="btn-login-custom">Añadir vinilo</a>
         <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
         <a href="https://vinyllabs-production.up.railway.app/logout.php" class="btn-login-custom">Cerrar sesión</a>
 
@@ -86,7 +85,33 @@ require_once __DIR__ . '/conexion.php';
   <!-- CONTENIDO -->
   <main class="container py-5" style="margin-top:130px;">
     <div class="card shadow-lg mx-auto p-4"
-      style="max-width:1200px; background-color:rgba(255,243,230,0.97); border-radius:16px;">
+      style="max-width:1200px; background-color:rgba(255,243,230,0.97); border-radius:16px; position: relative;">
+
+      <!-- Flecha de regreso al catálogo -->
+      <a href="https://vinyllabs-production.up.railway.app/catalogo.php?pagina=1" 
+         class="btn-back-arrow"
+         style="position: absolute; 
+                top: 20px; 
+                left: 20px; 
+                background: linear-gradient(135deg, #daa520, #b8860b); 
+                color: white; 
+                border: none; 
+                width: 45px; 
+                height: 45px; 
+                border-radius: 50%; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                text-decoration: none; 
+                font-size: 1.3rem;
+                box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3);
+                transition: all 0.3s ease;
+                z-index: 10;"
+         onmouseover="this.style.transform='translateY(-2px) scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(184, 134, 11, 0.5)';"
+         onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 15px rgba(184, 134, 11, 0.3)';"
+         title="Volver al catálogo">
+        <i class="bi bi-arrow-left"></i>
+      </a>
 
       <h2 class="text-center mb-4" style="font-family:'Bebas Neue'; color:#5a2c0d;">
         Gestión del catálogo
