@@ -27,6 +27,41 @@ session_start();
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
 <text y='0.9em' font-size='400'>💿</text>
 </svg>">
+
+  <style>
+    /* Estilo para la flecha de regreso */
+    .btn-back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, #5a2c0d, #3d2714);
+      color: #f5deb3;
+      border: 2px solid rgba(184, 134, 11, 0.3);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 15px rgba(90, 44, 13, 0.4);
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .btn-back-arrow:hover {
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 6px 25px rgba(90, 44, 13, 0.6);
+      background: linear-gradient(135deg, #6d3610, #4a2e18);
+      color: #daa520;
+      border-color: rgba(218, 165, 32, 0.5);
+    }
+
+    .btn-back-arrow:active {
+      transform: translateY(-1px) scale(1.03);
+    }
+  </style>
 </head>
 
 <body>
@@ -40,10 +75,6 @@ session_start();
       </div>
 
       <div class="d-flex align-items-center gap-2">
-        <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" class="btn-login-custom">
-          Gestionar catálogo
-        </a>
-
         <a href="https://vinyl-labs.vercel.app" class="btn-login-custom">Inicio</a>
         <a href="https://vinyllabs-production.up.railway.app/logout.php" class="btn-login-custom">Cerrar sesión</a>
 
@@ -84,7 +115,14 @@ session_start();
 
   <!-- CONTENIDO -->
   <main class="container py-5" style="margin-top: 130px;">
-    <div class="card shadow-lg mx-auto p-4" style="max-width: 850px; border-radius: 14px; background-color: #fff3e6;">
+    <div class="card shadow-lg mx-auto p-4" style="max-width: 850px; border-radius: 14px; background-color: #fff3e6; position: relative;">
+
+      <!-- Flecha de regreso al catálogo -->
+      <a href="https://vinyllabs-production.up.railway.app/catalogo.php?pagina=1" 
+         class="btn-back-arrow"
+         title="Volver al catálogo">
+        <i class="bi bi-arrow-left"></i>
+      </a>
 
       <h2 class="mb-4 text-center" style="font-family: 'Bebas Neue', cursive; color: #5a2c0d;">
         Añadir nuevo vinilo
