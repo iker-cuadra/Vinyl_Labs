@@ -34,32 +34,30 @@ session_start();
       position: absolute;
       top: 20px;
       left: 20px;
-      background: linear-gradient(135deg, #5a2c0d, #3d2714);
-      color: #f5deb3;
-      border: 2px solid rgba(184, 134, 11, 0.3);
-      width: 50px;
-      height: 50px;
+      background: linear-gradient(135deg, #daa520, #b8860b);
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      font-size: 1.5rem;
-      box-shadow: 0 4px 15px rgba(90, 44, 13, 0.4);
+      font-size: 1.3rem;
+      box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3);
       transition: all 0.3s ease;
       z-index: 10;
     }
 
     .btn-back-arrow:hover {
-      transform: translateY(-3px) scale(1.08);
-      box-shadow: 0 6px 25px rgba(90, 44, 13, 0.6);
-      background: linear-gradient(135deg, #6d3610, #4a2e18);
-      color: #daa520;
-      border-color: rgba(218, 165, 32, 0.5);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(184, 134, 11, 0.5);
+      color: white;
     }
 
     .btn-back-arrow:active {
-      transform: translateY(-1px) scale(1.03);
+      transform: translateY(0) scale(1);
     }
   </style>
 </head>
