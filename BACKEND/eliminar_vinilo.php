@@ -1,15 +1,37 @@
 <?php
 session_start();
 require_once __DIR__ . '/conexion.php';
-$id = $_GET['id'];
 
-// Borrar imagen
+header('Content-Type: application/json; charset=utf-8');
+
+// Leer id desde POST (no GET)
+$id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+
+if (!$id) {
+    echo json_encode(['success' => false, 'message' => 'ID no válido']);
+    exit;
+}
+
+// Obtener ruta de imagen antes de borrar
 $res = $conn->query("SELECT imagen FROM vinilos WHERE id = $id");
+if (!$res || $res->num_rows === 0) {
+    echo json_encode(['success' => false, 'message' => 'Vinilo no encontrado']);
+    exit;
+}
+
 $img = $res->fetch_assoc()['imagen'];
-if (file_exists($img)) unlink($img);
 
-// Borrar registro
-$conn->query("DELETE FROM vinilos WHERE id = $id");
+// Borrar imagen del servidor si existe
+if (!empty($img) && file_exists($img)) {
+    unlink($img);
+}
 
-header("Location: https://vinyllabs-production.up.railway.app/gestionar_catalogo.php");
-exit();
+// Borrar registro de la base de datos
+$ok = $conn->query("DELETE FROM vinilos WHERE id = $id");
+
+if ($ok) {
+    echo json_encode(['success' => true]);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Error al eliminar: ' . $conn->error]);
+}
+exit;
