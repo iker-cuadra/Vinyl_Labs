@@ -30,9 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rutaDB = 'uploads/' . $safeName;
 
     $stmt = $conn->prepare("
-        INSERT INTO vinilos (nombre, descripcion, precio, anio, imagen)
-        VALUES (?, ?, ?, ?, ?)
-    ");
+    INSERT INTO vinilos (nombre, descripcion, precio, anio, imagen, visible)
+    VALUES (?, ?, ?, ?, ?, 1)
+");
 
     // ✅ AQUÍ ESTABA EL ERROR
     $stmt->bind_param("ssdis", $nombre, $descripcion, $precio, $anio, $rutaDB);
