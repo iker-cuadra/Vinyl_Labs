@@ -1046,7 +1046,7 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
         searchTimeout = setTimeout(() => performSearch(1), 300);
       });
 
-      // Event listener para Enter
+   
       searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
           clearTimeout(searchTimeout);
