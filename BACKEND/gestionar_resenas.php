@@ -559,7 +559,7 @@ $total_con_filtro = $resenas ? $resenas->num_rows : 0;
   <main class="container py-5" style="margin-top: 130px;">
     <div class="panel-card">
 
-      <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php"
+      <a href="https://vinyllabs-production.up.railway.app/catalogo.php"
          class="btn-back-arrow" title="Volver a gestionar catálogo">
         <i class="bi bi-arrow-left"></i>
       </a>
