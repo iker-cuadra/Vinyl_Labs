@@ -36,16 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // ✅ AQUÍ ESTABA EL ERROR
     $stmt->bind_param("ssdis", $nombre, $descripcion, $precio, $anio, $rutaDB);
+if (!$stmt->execute()) {
+    die("Error BD: " . $stmt->error . " | errno: " . $stmt->errno);
+}
 
-    if (!$stmt->execute()) {
-        die("Error BD: " . $stmt->error);
-    }
-
-    $stmt->close();
-    $conn->close();
-
-    header("Location: https://vinyllabs-production.up.railway.app/catalogo.php");
-    exit;
+$id_insertado = $conn->insert_id;
+die("✅ Vinilo insertado con ID: " . $id_insertado . " | Ruta imagen: " . $rutaDB);
 
 } else {
     http_response_code(405);
