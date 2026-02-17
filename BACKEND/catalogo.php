@@ -782,6 +782,9 @@ $carrito_msg = isset($_GET['carrito']) && $_GET['carrito'] === 'ok';
         <a href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php" class="btn-admin">
           <i class="bi bi-gear"></i> Gestionar catálogo
         </a>
+        <a href="https://vinyllabs-production.up.railway.app/gestionar_resenas.php" class="btn-admin">
+          <i class="bi bi-chat-square-text"></i> Reseñas
+        </a>
       </div>
     <?php endif; ?>
 

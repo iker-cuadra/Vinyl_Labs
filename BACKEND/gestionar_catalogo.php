@@ -75,6 +75,9 @@ require_once __DIR__ . '/conexion.php';
         <a class="nav-link" href="https://vinyllabs-production.up.railway.app/gestionar_catalogo.php">
           <i class="bi bi-gear me-2"></i> Gestionar catálogo
         </a>
+        <a class="nav-link" href="https://vinyllabs-production.up.railway.app/gestionar_resenas.php">
+          <i class="bi bi-chat-square-text me-2"></i> Gestionar reseñas
+        </a>
         <a class="nav-link" href="https://vinyllabs-production.up.railway.app/logout.php">
           <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
         </a>
